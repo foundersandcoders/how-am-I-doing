@@ -4,7 +4,8 @@
   "description": "Anna Freud Project for childrens mental health",
   "main": "index.js",
   "scripts": {
-    "test": "tape tests/runner.js"
+    "test": "tape tests/runner.js",
+    "start": "node server/index.js"
   },
   "repository": {
     "type": "git",
