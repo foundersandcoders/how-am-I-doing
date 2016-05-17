@@ -1,4 +1,4 @@
-"use strict"
+'use strict'
 
 const Hapi = require('hapi')
 const Inert = require('inert')
@@ -12,28 +12,22 @@ const server = new Hapi.Server()
 
 const plugins = [Inert, Vision, Home]
 
-
 server.connection({
-    port: process.env.PORT || 8000
+  port: process.env.PORT || 8000
 })
 
-server.register(plugins, function(err) {
-  if(err){
-    console.log('err--->', err)
-  }
+server.register(plugins, (err) => {
+  if (err) console.log('err--->', err)
   server.views({
-      engines: {
-        html: Handlebars
-      },
-      relativeTo: __dirname,
-      path: '../public/views',
-      layout: 'default',
-      layoutPath: '../public/views/layouts'
+    engines: {
+      html: Handlebars
+    },
+    relativeTo: __dirname,
+    path: '../public/views',
+    layout: 'default',
+    layoutPath: '../public/views/layouts',
+    partialsPath: '../public/views/partials'
   })
-
 })
 
-
-
-
-module.exports = server;
+module.exports = server
