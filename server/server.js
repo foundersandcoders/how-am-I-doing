@@ -5,9 +5,12 @@ const Inert = require('inert')
 const Vision = require('vision')
 const Handlebars = require('Handlebars')
 
+//Route plugins
+const Home = require('./routes/home')
+
 const server = new Hapi.Server()
 
-const plugins = [Inert, Vision]
+const plugins = [Inert, Vision, Home]
 
 
 server.connection({
@@ -18,7 +21,19 @@ server.register(plugins, function(err) {
   if(err){
     console.log('err--->', err)
   }
+  server.views({
+      engines: {
+        html: Handlebars
+      },
+      relativeTo: __dirname,
+      path: '../public/views',
+      layout: 'default',
+      layoutPath: '../public/views/layouts'
+  })
+
 })
+
+
 
 
 module.exports = server;
