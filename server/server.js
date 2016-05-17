@@ -5,9 +5,6 @@ const Inert = require('inert')
 const Vision = require('vision')
 const Handlebars = require('Handlebars')
 
-
-
-
 const server = new Hapi.Server()
 
 const plugins = [Inert, Vision]
