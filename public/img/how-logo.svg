@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="171px" height="263px" viewBox="0 0 171 263" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.7.2 (28276) - http://www.bohemiancoding.com/sketch -->
+    <title>how-logo</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#326FAD" offset="0%"></stop>
+            <stop stop-color="#173C75" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="52.9897837%" y2="218.379991%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.260048687" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.5" offset="100%"></stop>
+        </linearGradient>
+        <path d="M98,124.556768 C128.165921,119.116066 151,93.5411341 151,62.8125 C151,28.1221142 121.898509,0 86,0 C50.1014913,0 21,32.0175781 21,62.8125 C21,64.7975034 21.1209148,66.7875868 21.3567708,68.7738478 C28.0490462,71.288144 36.5727595,70.0123386 45.1322827,67.0677435 C45.0446535,65.9733074 45,64.866837 45,63.75 C45,40.9682541 63.5801829,22.5 86.5,22.5 C109.419817,22.5 128,40.9682541 128,63.75 C128,82.5658994 115.325643,98.4393769 98,103.395693 L98,103.125 C98,103.125 84.8565119,96.5371094 76,103.125 C66.3123227,110.331151 74.382192,166.721226 74.382192,166.721226 C75.233961,174.048659 81.9921917,180 89.3839347,180 L91.0088344,180 C94.8713003,180 98,176.862078 98,172.991256 L98,125.101562 L98,124.556768 Z" id="path-3"></path>
+        <ellipse id="path-4" cx="88" cy="198" rx="14" ry="13"></ellipse>
+        <rect id="path-5" x="41.2226562" y="198.628906" width="17" height="68" rx="100"></rect>
+        <rect id="path-6" x="25.502634" y="108.772186" width="17" height="68" rx="11"></rect>
+        <rect id="path-7" x="117.502634" y="198.772186" width="17" height="68" rx="100"></rect>
+        <rect id="path-8" x="127.502634" y="108.772186" width="17" height="68" rx="100"></rect>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Combined-Shape">
+            <use fill="url(#linearGradient-1)" xlink:href="#path-3"></use>
+            <use fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
+        </g>
+        <g id="Oval-3">
+            <use fill="url(#linearGradient-1)" xlink:href="#path-4"></use>
+            <use fill="url(#linearGradient-2)" xlink:href="#path-4"></use>
+        </g>
+        <g id="Rectangle-2" transform="translate(49.722656, 232.628906) rotate(46.000000) translate(-49.722656, -232.628906) ">
+            <use fill="url(#linearGradient-1)" xlink:href="#path-5"></use>
+            <use fill="url(#linearGradient-2)" xlink:href="#path-5"></use>
+        </g>
+        <g id="Rectangle-2" transform="translate(34.002634, 142.772186) rotate(90.000000) translate(-34.002634, -142.772186) ">
+            <use fill="url(#linearGradient-1)" xlink:href="#path-6"></use>
+            <use fill="url(#linearGradient-2)" xlink:href="#path-6"></use>
+        </g>
+        <g id="Rectangle-2" transform="translate(126.002634, 232.772186) rotate(-46.000000) translate(-126.002634, -232.772186) ">
+            <use fill="url(#linearGradient-1)" xlink:href="#path-7"></use>
+            <use fill="url(#linearGradient-2)" xlink:href="#path-7"></use>
+        </g>
+        <g id="Rectangle-2" transform="translate(136.002634, 142.772186) rotate(90.000000) translate(-136.002634, -142.772186) ">
+            <use fill="url(#linearGradient-1)" xlink:href="#path-8"></use>
+            <use fill="url(#linearGradient-2)" xlink:href="#path-8"></use>
+        </g>
+    </g>
+</svg>

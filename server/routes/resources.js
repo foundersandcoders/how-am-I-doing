@@ -6,7 +6,7 @@ exports.register = function (server, options, next) {
     method: 'GET',
     path: '/{param*}',
     handler: {
-      directory: {path: 'public'}
+      directory: { path: 'public' }
     }
   })
 
