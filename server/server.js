@@ -3,7 +3,7 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const Vision = require('vision')
-const Handlebars = require('Handlebars')
+const Handlebars = require('handlebars')
 
 //Route plugins
 const Home = require('./routes/home')
@@ -17,7 +17,8 @@ server.connection({
 })
 
 server.register(plugins, (err) => {
-  if (err) console.log('err--->', err)
+  if (err) throw err
+
   server.views({
     engines: {
       html: Handlebars
