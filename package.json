@@ -7,9 +7,9 @@
     "lint": "node_modules/.bin/eslint .",
     "lint-fix": "node_modules/.bin/eslint . --fix",
     "watch:js": "nodemon -e js,css,html server/index.js",
-    "watch:sass": "sass --watch client/scss/main.scss:public/css/main.css",
+    "watch:sass": "sass --watch sass/main.scss:public/css/main.css",
     "watch": "npm run watch:sass & npm run watch:js",
-    "build": "sass -scss -t compressed client/scss/main.scss public/css/main.css",
+    "build": "sass -t compressed sass/main.scss public/css/main.css",
     "prestart": "npm run build",
     "start": "node server/index.js",
     "test": "node_modules/.bin/tape tests/runner.js"
