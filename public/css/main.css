@@ -6225,4 +6225,25 @@ textarea:focus:not([readonly]) {
   border-bottom: 1px solid #8DA4BE;
   box-shadow: 0 1px 0 0 #CCCEDF; }
 
+.dashboard {
+  margin: 4em auto;
+  width: 90%; }
+  .dashboard .card {
+    background-color: #8DA4BE;
+    text-align: center;
+    box-shadow: 0 0 0 0;
+    margin: 0;
+    border: 1px solid #CCCEDF; }
+  .dashboard .row {
+    margin-bottom: 0; }
+  .dashboard .col {
+    padding-left: 0;
+    padding-right: 0; }
+  .dashboard .card, .dashboard .card-content {
+    border-radius: 0; }
+  .dashboard .card-content {
+    padding: 35px; }
+  .dashboard .card.waves-effect {
+    display: block; }
+
 /*# sourceMappingURL=main.css.map */

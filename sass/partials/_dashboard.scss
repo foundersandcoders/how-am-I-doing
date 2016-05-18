@@ -1,0 +1,33 @@
+.dashboard {
+  margin: 4em auto;
+  width: 90%;
+
+  .card {
+    background-color: $primary-light;
+    text-align: center;
+    box-shadow: 0 0 0 0;
+    margin: 0;
+    border: 1px solid $primary-lighter;
+  }
+
+  .row {
+    margin-bottom: 0;
+  }
+
+  .col {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .card, .card-content {
+    border-radius: 0;
+  }
+
+  .card-content {
+    padding: 35px;
+  }
+
+  .card.waves-effect {
+    display: block;
+  }
+}
