@@ -3,7 +3,7 @@
 const Hapi = require('hapi')
 const Inert = require('inert')
 const Vision = require('vision')
-const Handlebars = require('Handlebars')
+const Handlebars = require('handlebars')
 
 //Route plugins
 const Home = require('./routes/home')
