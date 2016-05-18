@@ -12,7 +12,7 @@
     "build": "sass -scss -t compressed client/scss/main.scss public/css/main.css",
     "prestart": "npm run build",
     "start": "node server/index.js",
-    "test": "tape tests/runner.js"
+    "test": "node_modules/.bin/tape tests/runner.js"
   },
   "repository": {
     "type": "git",
