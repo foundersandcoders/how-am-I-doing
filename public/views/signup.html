@@ -1,4 +1,4 @@
-<form>
+<!-- <form>
   Username:<br>
   <input type="text" name="username"><br>
   Password:<br>
@@ -9,4 +9,39 @@
   <input type="text" name="email">
   Clinician's Email:<br>
   <input type="text" name="cliniciansemail">
-</form>
+</form> -->
+<main>
+  <div class="row">
+    <form class="col s12">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="username" type="text" class="validate">
+          <label for="username">Username</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="password" type="text" class="validate">
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="confirm_password" type="text" class="validate">
+          <label for="confirm_password">Confirm Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate">
+          <label for="email">Clinician's Email</label>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+{{> footer}}
