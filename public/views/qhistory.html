@@ -1,0 +1,26 @@
+{{> header}}
+<main>
+  <div>
+    <button type="button" name="button">Visualise Results</button>
+  </div>
+
+  <div class="row">
+    <div class="col s12 m5">
+      <div class="card-panel red">
+        <ul>
+          <li>
+            {{#each questionnaire}}
+            <span class="white-text">
+              <span>Date: {{date}}</span>
+              <span>Score: {{score}}</span>
+              <span>Categories: {{categories}}</span>
+            </span>
+            {{/each}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+</main>
+{{> footer}}
