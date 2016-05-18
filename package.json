@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "tape tests/runner.js",
-    "start": "nodemon server/index.js",
+    "start": "nodemon -e js,css,html server/index.js",
     "lint": "node_modules/.bin/eslint .",
     "lint-fix": "node_modules/.bin/eslint . --fix"
   },
