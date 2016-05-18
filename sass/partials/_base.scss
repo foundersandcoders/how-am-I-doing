@@ -1,3 +1,8 @@
 body {
   font-family: $font-main;
+  background-color: $primary-dark;
+
+  a,span,h1,h2,h3,h4,h5,li {
+    color: $white;
+  }
 }
