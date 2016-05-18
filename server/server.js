@@ -27,7 +27,10 @@ server.register(plugins, (err) => {
     path: '../public/views',
     layout: 'default',
     layoutPath: '../public/views/layouts',
-    partialsPath: '../public/views/partials'
+    partialsPath: '../public/views/partials',
+    context: {
+      title: 'How Am I Doing?'
+    }
   })
 })
 
