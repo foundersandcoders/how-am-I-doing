@@ -12,7 +12,7 @@ tape('server exists', (t) => {
 })
 
 tape('server replies with status 200', (t) => {
-  server.inject({method: 'GET', url: '/'}, (response) => {
+  server.inject({ method: 'GET', url: '/' }, (response) => {
     const actual = response.statusCode
     const expected = 200
     t.equal(actual, expected, 'server replies')
@@ -21,7 +21,7 @@ tape('server replies with status 200', (t) => {
 })
 
 tape('server serves up html', (t) => {
-  server.inject({method: 'GET', url: '/'}, (response) => {
+  server.inject({ method: 'GET', url: '/' }, (response) => {
     const actual = response.payload.indexOf('<html>') > -1
     t.ok(actual, 'html tag found')
     t.end()
