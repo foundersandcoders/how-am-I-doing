@@ -4,27 +4,33 @@
   "description": "Anna Freud Project for childrens mental health",
   "main": "index.js",
   "scripts": {
-    "test": "node_modules/.bin/tape tests/runner.js",
-    "start": "node server/index.js",
     "lint": "node_modules/.bin/eslint .",
-    "lint-fix": "node_modules/.bin/eslint . --fix"
+    "lint-fix": "node_modules/.bin/eslint . --fix",
+    "watch:js": "nodemon -e js,css,html server/index.js",
+    "watch:sass": "sass --watch sass/main.scss:public/css/main.css",
+    "watch": "npm run watch:sass & npm run watch:js",
+    "build": "sass -t compressed sass/main.scss public/css/main.css",
+    "prestart": "npm run build",
+    "start": "node server/index.js",
+    "test": "node_modules/.bin/tape tests/runner.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/JackTierney/How-Am-I-Doing-.git"
+    "url": "git+https://github.com/JackTierney/How-Am-I-Doing.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/JackTierney/How-Am-I-Doing-/issues"
+    "url": "https://github.com/JackTierney/How-Am-I-Doing/issues"
   },
-  "homepage": "https://github.com/JackTierney/How-Am-I-Doing-#readme",
+  "homepage": "https://github.com/JackTierney/How-Am-I-Doing#readme",
   "dependencies": {
     "boom": "^3.1.3",
     "handlebars": "^4.0.5",
     "hapi": "^13.4.0",
     "inert": "^4.0.0",
     "joi": "^8.1.0",
+    "redis": "^2.6.0-2",
     "vision": "^4.1.0"
   },
   "devDependencies": {
