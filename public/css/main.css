@@ -6199,11 +6199,30 @@ table {
 
 body {
   font-family: "Ubuntu Mono", Arial;
-  background-color: #173C75; }
+  background-color: #173C75;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column; }
   body a, body span, body h1, body h2, body h3, body h4, body h5, body li {
     color: #FFF; }
 
+main {
+  flex: 1 0 auto; }
+
 #logo {
   background-image: url("/img/"); }
+
+footer {
+  background-color: #8DA4BE; }
+
+.footer-img {
+  padding: 0.5em; }
+
+.footer-copyright {
+  padding: 0.5em; }
+
+textarea:focus:not([readonly]) {
+  border-bottom: 1px solid #8DA4BE;
+  box-shadow: 0 1px 0 0 #CCCEDF; }
 
 /*# sourceMappingURL=main.css.map */
