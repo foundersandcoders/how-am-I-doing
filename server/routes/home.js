@@ -1,6 +1,7 @@
 'use strict'
 
 exports.register = (server, options, next) => {
+
   server.route({
     method: 'GET',
     path: '/',
@@ -8,9 +9,12 @@ exports.register = (server, options, next) => {
       reply.view('index')
     }
   })
+
   next()
 }
 
 exports.register.attributes = {
-  name: 'home'
+  pkg: {
+    name: 'home'
+  }
 }

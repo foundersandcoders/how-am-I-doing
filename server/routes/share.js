@@ -9,9 +9,12 @@ exports.register = function (server, options, next) {
       reply.view('share')
     }
   })
+
   next()
 }
 
 exports.register.attributes = {
-  name: 'share'
+  pkg: {
+    name: 'share'
+  }
 }

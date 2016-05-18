@@ -13,5 +13,7 @@ exports.register = function (server, options, next) {
 }
 
 exports.register.attributes = {
-  name: 'qhistory'
+  pkg: {
+    name: 'qhistory'
+  }
 }

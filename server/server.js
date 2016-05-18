@@ -6,12 +6,7 @@ const Vision = require('vision')
 const Handlebars = require('handlebars')
 const path = require('path')
 
-//Route plugins
-const Home = require('./routes/home')
-
 const server = new Hapi.Server()
-
-const plugins = [Inert, Vision, Home]
 
 const routes = [
   'dashboard',
@@ -25,6 +20,9 @@ const routes = [
   'signup',
   'visualise',
 ].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
+.map(require)
+
+const plugins = [Inert, Vision].concat(routes)
 
 server.connection({
   port: process.env.PORT || 8000
@@ -42,8 +40,6 @@ server.register(plugins, (err) => {
     layoutPath: '../public/views/layouts',
     partialsPath: '../public/views/partials'
   })
-
-  server.routes(routes.map(require))
 })
 
 module.exports = server

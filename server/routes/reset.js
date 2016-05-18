@@ -9,9 +9,12 @@ exports.register = function (server, options, next) {
       reply.view('reset')
     }
   })
+
   next()
 }
 
 exports.register.attributes = {
-  name: 'reset'
+  pkg: {
+    name: 'reset'
+  }
 }
