@@ -4,7 +4,7 @@
   "description": "Anna Freud Project for childrens mental health",
   "main": "index.js",
   "scripts": {
-    "test": "tape tests/runner.js",
+    "test": "node_modules/.bin/tape tests/runner.js",
     "start": "node server/index.js",
     "lint": "node_modules/.bin/eslint .",
     "lint-fix": "node_modules/.bin/eslint . --fix"
