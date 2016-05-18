@@ -31,8 +31,7 @@ server.connection({
 })
 
 server.register(plugins, (err) => {
-  if (err) throw err
-
+  if (err) console.log('err--->', err)
   server.views({
     engines: {
       html: Handlebars
@@ -40,10 +39,11 @@ server.register(plugins, (err) => {
     relativeTo: __dirname,
     path: '../public/views',
     layout: 'default',
-    layoutPath: '../public/views/layouts'
+    layoutPath: '../public/views/layouts',
+    partialsPath: '../public/views/partials'
   })
 
-  server.routes(routes)
+  server.routes(routes.map(require))
 })
 
 module.exports = server

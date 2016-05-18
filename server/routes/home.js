@@ -1,7 +1,6 @@
 'use strict'
 
-exports.register = function (server, options, next) {
-
+exports.register = (server, options, next) => {
   server.route({
     method: 'GET',
     path: '/',
