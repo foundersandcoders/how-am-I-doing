@@ -4,13 +4,25 @@ const Hapi = require('hapi')
 const Inert = require('inert')
 const Vision = require('vision')
 const Handlebars = require('handlebars')
-
-//Route plugins
-const Home = require('./routes/home')
+const path = require('path')
 
 const server = new Hapi.Server()
 
-const plugins = [Inert, Vision, Home]
+const routes = [
+  'dashboard',
+  'home',
+  'login',
+  'newq',
+  'qhistory',
+  'reset',
+  'resources',
+  'share',
+  'signup',
+  'visualise',
+].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
+.map(require)
+
+const plugins = [Inert, Vision].concat(routes)
 
 server.connection({
   port: process.env.PORT || 8000

@@ -1,12 +1,12 @@
 'use strict'
 
-exports.register = (server, options, next) => {
+exports.register = function (server, options, next) {
 
   server.route({
     method: 'GET',
-    path: '/',
+    path: '/reset',
     handler: (request, reply) => {
-      reply.view('index')
+      reply.view('reset')
     }
   })
 
@@ -15,6 +15,6 @@ exports.register = (server, options, next) => {
 
 exports.register.attributes = {
   pkg: {
-    name: 'home'
+    name: 'reset'
   }
 }

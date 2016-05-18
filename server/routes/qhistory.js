@@ -1,20 +1,19 @@
 'use strict'
 
-exports.register = (server, options, next) => {
+exports.register = function (server, options, next) {
 
   server.route({
     method: 'GET',
-    path: '/',
+    path: '/qhistory',
     handler: (request, reply) => {
-      reply.view('index')
+      reply.view('qhistory')
     }
   })
-
   next()
 }
 
 exports.register.attributes = {
   pkg: {
-    name: 'home'
+    name: 'qhistory'
   }
 }
