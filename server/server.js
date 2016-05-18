@@ -9,12 +9,12 @@ const path = require('path')
 const server = new Hapi.Server()
 
 const routes = [
+  'account',
   'dashboard',
   'home',
   'login',
   'newq',
   'qhistory',
-  'reset',
   'resources',
   'share',
   'signup',
