@@ -4,9 +4,9 @@ exports.register = function (server, options, next) {
 
   server.route({
     method: 'GET',
-    path: '/reset',
+    path: '/account',
     handler: (request, reply) => {
-      reply.view('reset')
+      reply.view('account')
     }
   })
 
@@ -15,6 +15,6 @@ exports.register = function (server, options, next) {
 
 exports.register.attributes = {
   pkg: {
-    name: 'reset'
+    name: 'account'
   }
 }
