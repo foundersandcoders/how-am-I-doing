@@ -1,8 +1,15 @@
 body {
   font-family: $font-main;
   background-color: $primary-dark;
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 
   a,span,h1,h2,h3,h4,h5,li {
     color: $white;
   }
+}
+
+main {
+  flex: 1 0 auto;
 }
