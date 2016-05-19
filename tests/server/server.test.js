@@ -8,14 +8,11 @@ const tape = wtape({
     t.end()
   },
   teardown: (t) => {
-    console.log('Connected >>>', server.app.Schema)
-    if (false) {
-      console.log('Flushing')
-      server.app.Schema.client.flushdb()
-      console.log('Flushed')
-    }
-
-    t.end()
+    setTimeout(() => {
+      if (server.app.Schema.client.connected)
+        server.app.Schema.client.flushdb()
+      t.end()
+    }, 100)
   }
 })
 
@@ -67,6 +64,7 @@ tape('payload from http request creates user as expected', (t) => {
 })
 
 tape('Final teardown', (t) => {
+  server.app.Schema.client.flushdb()
   server.app.Schema.client.quit()
   t.end()
 })
