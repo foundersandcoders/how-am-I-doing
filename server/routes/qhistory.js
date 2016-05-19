@@ -4,7 +4,7 @@ exports.register = function (server, options, next) {
 
   server.route({
     method: 'GET',
-    path: '/qhistory',
+    path: '/questionnaires/history',
     handler: (request, reply) => {
       reply.view('qhistory')
     }
@@ -14,6 +14,6 @@ exports.register = function (server, options, next) {
 
 exports.register.attributes = {
   pkg: {
-    name: 'qhistory'
+    name: 'questionnaireshistory'
   }
 }
