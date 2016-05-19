@@ -3,18 +3,17 @@
 exports.register = function (server, options, next) {
 
   server.route({
-    method: 'POST',
-    path: '/share',
+    method: 'GET',
+    path: ' /questionnaires/new',
     handler: (request, reply) => {
-      reply.view('share')
+      reply.view('newq')
     }
   })
-
   next()
 }
 
 exports.register.attributes = {
   pkg: {
-    name: 'share'
+    name: 'newquestionnaires'
   }
 }
