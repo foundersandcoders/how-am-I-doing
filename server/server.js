@@ -5,6 +5,7 @@ const Inert = require('inert')
 const Vision = require('vision')
 const Handlebars = require('handlebars')
 const path = require('path')
+const Models = require('./models/index.js')
 
 const server = new Hapi.Server()
 
@@ -22,7 +23,7 @@ const routes = [
 ].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
 .map(require)
 
-const plugins = [Inert, Vision].concat(routes)
+const plugins = [Inert, Vision, Models].concat(routes)
 
 server.connection({
   port: process.env.PORT || 8000
