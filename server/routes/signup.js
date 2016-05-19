@@ -39,10 +39,11 @@ exports.register = function (server, options, next) {
         payload: {
           username: Joi.string().alphanum().min(3).max(30).required(),
           password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
-          confirm_pasword: Joi.any().valid(Joi.ref('password')).required(),
+          confirm_password: Joi.any().valid(Joi.ref('password')).required(),
           user_email: Joi.string().email().required(),
           clinic_email: Joi.string().email().required(),
-          clinic_number: Joi.string().alphanum().required()
+          clinic_number: Joi.string().alphanum().required(),
+          action: Joi.any()
         }
       }
     }

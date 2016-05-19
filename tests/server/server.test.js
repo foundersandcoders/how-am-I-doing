@@ -43,7 +43,7 @@ tape('payload from http request creates user as expected', (t) => {
   server.inject({ method: 'POST', url: '/api/signup', payload: {
     username: 'tom',
     password: 'apples',
-    confirm_pasword: 'apples',
+    confirm_password: 'apples',
     user_email: 'tomupton@gmail.com',
     clinic_email: 'roger@gmail.com',
     clinic_number: '07986534562'
@@ -53,9 +53,9 @@ tape('payload from http request creates user as expected', (t) => {
     let expected = 302
     t.equal(actual, expected, 'server redirects')
 
-    server.app.User.findById(1, (err, users) => {
+    server.app.User.findById(1, (err, user) => {
       if (err) throw err
-      actual = users.user_name
+      actual = user.user_name
       expected = 'tom'
       t.equal(actual, expected, 'number of users is correct')
       t.end()
