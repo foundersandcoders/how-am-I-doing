@@ -7,7 +7,8 @@ exports.register = (server, options, next) => {
     path: '/',
     handler: (request, reply) => {
       reply.view('index')
-    }
+    },
+    config: { auth: false }
   })
 
   next()
