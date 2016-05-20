@@ -7,7 +7,8 @@ exports.register = function (server, options, next) {
     path: '/login',
     handler: (request, reply) => {
       reply.view('login')
-    }
+    },
+    config: { auth: false }
   })
   next()
 }
