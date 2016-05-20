@@ -2,6 +2,7 @@
 
 const wtape = require('wrapping-tape')
 const server = require('../../server/server.js')
+const Bcrypt = require('bcrypt')
 
 const tape = wtape({
   setup: (t) => {
@@ -58,6 +59,34 @@ tape('payload from http request creates user as expected', (t) => {
       actual = user.user_name
       expected = 'tom'
       t.equal(actual, expected, 'number of users is correct')
+      t.end()
+    })
+  })
+})
+
+tape('username and password entered by user match database resulting in redirected user', (t) => {
+  function encrypt (pw) {
+    return Bcrypt.hashSync(pw, 10)
+  }
+  const user = {
+    user_name: 'tu6619',
+    user_email: 'user.test@test.com',
+    user_secret: encrypt('password'),
+    clinic_email: 'clinic.test@test.com',
+    clinic_number: '07654321456'
+  }
+  server.app.User.create(user, (err) => {
+    if (err) throw err
+    server.inject({ method: 'POST', url: '/api/login', payload: {
+      username: 'tu6619',
+      password: 'password'
+    } }, (response) => {
+      let actual = response.statusCode
+      let expected = 302
+      t.equal(actual, expected, 'server redirects')
+      actual = response.headers.location
+      expected = '/dashboard'
+      t.equal(actual, expected, 'dashboard is hit')
       t.end()
     })
   })
