@@ -86,6 +86,7 @@ tape('username and password entered by user match database resulting in redirect
       t.equal(actual, expected, 'server redirects')
       actual = response.headers.location
       expected = '/dashboard'
+
       t.equal(actual, expected, 'dashboard is hit')
       t.end()
     })
