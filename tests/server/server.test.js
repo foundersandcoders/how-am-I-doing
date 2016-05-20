@@ -86,8 +86,35 @@ tape('username and password entered by user match database resulting in redirect
       t.equal(actual, expected, 'server redirects')
       actual = response.headers.location
       expected = '/dashboard'
-
       t.equal(actual, expected, 'dashboard is hit')
+      t.end()
+    })
+  })
+})
+
+tape('username and password entered by user do not match database resulting in redirected user', (t) => {
+  function encrypt (pw) {
+    return Bcrypt.hashSync(pw, 10)
+  }
+  const user = {
+    user_name: 'tu6619',
+    user_email: 'user.test@test.com',
+    user_secret: encrypt('password'),
+    clinic_email: 'clinic.test@test.com',
+    clinic_number: '07654321456'
+  }
+  server.app.User.create(user, (err) => {
+    if (err) throw err
+    server.inject({ method: 'POST', url: '/api/login', payload: {
+      username: 'tu6619',
+      password: 'passwort'
+    } }, (response) => {
+      let actual = response.statusCode
+      let expected = 302
+      t.equal(actual, expected, 'server redirects')
+      actual = response.headers.location
+      expected = '/login'
+      t.equal(actual, expected, 'login is hit')
       t.end()
     })
   })
