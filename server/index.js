@@ -1,6 +1,8 @@
 'use strict'
 
+require('env2')('./config.env')
 const server = require('./server.js')
+
 
 server.start((err) => {
   if (err) throw err
