@@ -7,7 +7,8 @@ exports.register = function (server, options, next) {
     path: '/{param*}',
     handler: {
       directory: { path: 'public' }
-    }
+    },
+    config: { auth: false }
   })
 
   next()

@@ -1,5 +1,10 @@
 'use strict'
 
+const validator = require('../plugins/auth/validate.js')
+const Jwt = require('jsonwebtoken')
+const Joi = require('joi')
+
+
 exports.register = function (server, options, next) {
 
   server.route({
@@ -7,7 +12,41 @@ exports.register = function (server, options, next) {
     path: '/login',
     handler: (request, reply) => {
       reply.view('login')
-    }
+    },
+    config: { auth: false }
+  })
+  server.route({
+    method: 'POST',
+    path: '/api/login',
+    handler: (request, reply) => {
+      const validate = validator(server)
+
+      validate({
+        username: request.payload.username,
+        password: request.payload.password,
+      }, request, (err, isValid) => {
+        if (err) return reply.redirect('/login')
+        if (!isValid) return reply.redirect('/login')
+
+        const token = Jwt.sign({
+          username: request.payload.username,
+          password: request.payload.password
+        }, process.env.JWT_KEY)
+
+        reply.redirect('/dashboard').state('token', token, {
+          encoding: 'none',
+          path: '/'
+        })
+      })
+    },
+    config: { auth: false,
+      validate: {
+        payload: {
+          username: Joi.string().alphanum().min(3).max(30).required(),
+          password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+          action: Joi.any()
+        }
+      } }
   })
   next()
 }
