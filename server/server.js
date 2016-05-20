@@ -1,4 +1,5 @@
 'use strict'
+require('env2')('./config.env')
 
 const Hapi = require('hapi')
 const Inert = require('inert')
@@ -7,7 +8,7 @@ const Handlebars = require('handlebars')
 const Jwt2 = require('hapi-auth-jwt2')
 const path = require('path')
 const Models = require('./models/index.js')
-const Auth = require('./plugins/auth.js')
+const Auth = require('./plugins/auth/index.js')
 
 const server = new Hapi.Server()
 
