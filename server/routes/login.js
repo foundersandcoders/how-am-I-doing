@@ -33,10 +33,7 @@ exports.register = function (server, options, next) {
           password: request.payload.password
         }, process.env.JWT_KEY)
 
-        reply.redirect('/dashboard').state('token', token, {
-          encoding: 'none',
-          path: '/'
-        })
+        reply.redirect('/dashboard').state('token', token)
       })
     },
     config: { auth: false,
