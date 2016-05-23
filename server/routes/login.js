@@ -7,15 +7,14 @@ const Joi = require('joi')
 
 exports.register = function (server, options, next) {
 
-  server.route({
+  server.route([{
     method: 'GET',
     path: '/login',
     handler: (request, reply) => {
       reply.view('login')
     },
     config: { auth: false }
-  })
-  server.route({
+  }, {
     method: 'POST',
     path: '/api/login',
     handler: (request, reply) => {
@@ -36,15 +35,24 @@ exports.register = function (server, options, next) {
         reply.redirect('/dashboard').state('token', token)
       })
     },
-    config: { auth: false,
+    config: {
+      auth: false,
       validate: {
         payload: {
           username: Joi.string().alphanum().min(3).max(30).required(),
           password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
           action: Joi.any()
         }
-      } }
-  })
+      }
+    }
+  }, {
+    method: 'GET',
+    path: '/api/logout',
+    handler: (request, reply) => {
+      return reply.redirect('/').state('token', '')
+    }
+  }])
+
   next()
 }
 

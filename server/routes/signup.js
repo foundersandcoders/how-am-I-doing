@@ -11,15 +11,14 @@ function encrypt (pw) {
 
 exports.register = function (server, options, next) {
 
-  server.route({
+  server.route([{
     method: 'GET',
     path: '/signup',
     handler: (request, reply) => {
       reply.view('signup')
     },
     config: { auth: false }
-  })
-  server.route({
+  }, {
     method: 'POST',
     path: '/api/signup',
     handler: function (request, reply) {
@@ -55,7 +54,8 @@ exports.register = function (server, options, next) {
         }
       }
     }
-  })
+  }])
+
   next()
 }
 
