@@ -25,8 +25,8 @@ exports.register = function (server, options, next) {
         username: request.payload.username,
         password: request.payload.password,
       }, request, (err, isValid) => {
-        if (err) return reply.redirect('/login')
-        if (!isValid) return reply.redirect('/login')
+        if (err || !isValid)
+          return reply.redirect('/login')
 
         const token = Jwt.sign({
           username: request.payload.username,
