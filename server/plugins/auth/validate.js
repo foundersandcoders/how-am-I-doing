@@ -7,9 +7,11 @@ module.exports = (server) => {
       where: { user_name: decoded.username },
       order: 'user_name' },
       (err, user) => {
-        if (!user) return callback(null, false)
+        if (err)
+          return callback(err)
 
-        if (err) return callback(err)
+        if (!user)
+          return callback(null, false)
 
         Bcrypt.compare(decoded.password, user.user_secret, (error, isValid) => {
           callback(error, isValid, { id: user.user_id, name: user.user_name })
