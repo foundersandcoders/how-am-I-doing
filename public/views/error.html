@@ -1,0 +1,18 @@
+<h1>Oops! Something went wrong</h1>
+
+{{#if toLogin}}
+  <h3>Try logging in</h3>
+  <a href="/login" class="waves-effect waves-light btn-large waves-#8DA4BE login">Login</a>
+{{else if notFound}}
+  <h3>We couldn't find the page you requested</h3>
+  {{#if isLoggedIn}}
+    <p>Back to dashboard</p>
+    <a href="/dashboard" class="waves-effect waves-light btn-large waves-#8DA4BE login">Dashboard</a>
+  {{else}}
+    <p>Back home</p>
+    <a href="/" class="waves-effect waves-light btn-large waves-#8DA4BE login">Dashboard</a>
+  {{/if}}
+{{else}}
+  <h3>Error: {{errorName}}</h3>
+  <h3>HTTP Code: {{statusCode}}</h3>
+{{/if}}
