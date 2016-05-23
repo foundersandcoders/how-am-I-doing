@@ -1,10 +1,13 @@
 'use strict'
 
 const Caminte = require('caminte')
-const Schema = new Caminte.Schema('redis', {
-  host: process.env.db_host,
-  port: process.env.db_port,
-  pool: true
+const Schema = new Caminte.Schema(process.env.DB_DRIVER, {
+  password: process.env.DB_PASSWORD,
+  username: process.env.DB_USERNAME,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  pool: true,
+  database: process.env.DB_NUMBER
 })
 
 exports.register = (server, options, next) => {
