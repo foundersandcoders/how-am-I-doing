@@ -13,7 +13,8 @@
     "prestart": "npm run build",
     "start": "node server/index.js",
     "test": "node_modules/.bin/tape tests/runner.js",
-    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/tape tests/runner.js"
+    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/tape tests/runner.js",
+    "heroku": "bash build.sh && node server/index.js"
   },
   "repository": {
     "type": "git",
