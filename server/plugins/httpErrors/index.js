@@ -4,10 +4,8 @@ exports.register = (server, options, next) => {
 
   server.ext('onPreResponse', (request, reply) => {
 
-    if (request.response.isBoom) {
-      console.log('Error detected: ', request.response, 'Redirecting to /error')
+    if (request.response.isBoom)
       return reply.redirect('/error/' + request.response.output.statusCode)
-    }
 
     reply.continue()
 
