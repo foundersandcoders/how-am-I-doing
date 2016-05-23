@@ -65,7 +65,7 @@ exports.register = function (server, options, next) {
         method: 'GET',
         path: '/api/logout',
         handler: (request, reply) => {
-          return reply.redirect('/').state('token', '')
+          return reply.redirect('/').unstate('token')
         }
       }
     ]
