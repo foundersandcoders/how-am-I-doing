@@ -3,7 +3,7 @@ export GEM_HOME=$PWD/gems
 mkdir -p $GEM_HOME
 gem install sass
 
-touch $PWD/public/css/main.css
+mkdir -p $PWD/public/css
 $GEM_HOME/bin/sass $PWD/sass/main.scss $PWD/public/css/main.css --trace
 
 FILE=$PWD/public/css/main.css
