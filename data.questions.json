@@ -36,155 +36,155 @@
     "question_text": "I worry about being away from my parents ",
     "category_id": 2
   }, {
-    "question_id": "10",
+    "question_id": 10,
     "question_text": "I get bothered by bad or silly thoughts or pictures in my mind.......",
     "category_id": 4
   }, {
-    "question_id": "11",
+    "question_id": 11,
     "question_text": "I have trouble sleeping......",
     "category_id": 5
   }, {
-    "question_id": "12",
+    "question_id": 12,
     "question_text": "I worry that I will do badly at my school work",
     "category_id": 0
   }, {
-    "question_id": "13",
+    "question_id": 13,
     "question_text": "I worry that something awful will happen to someone in my family.....",
     "category_id": 3
   }, {
-    "question_id": "14",
+    "question_id": 14,
     "question_text": "I suddenly feel as if I can't breathe when there is no reason for this...........",
     "category_id": 1
   }, {
-    "question_id": "15",
+    "question_id": 15,
     "question_text": "I have problems with my appetite....",
     "category_id": 5
   }, {
-    "quid": "16",
-    "teestion_xt": " I have to keep checking that I have done things right (like the switch is off, or the door is locked)........",
+    "question_id": 16,
+    "question_text": " I have to keep checking that I have done things right (like the switch is off, or the door is locked)........",
     "category_id": 4
   }, {
-    "question_id": "17",
+    "question_id": 17,
     "question_text": "I feel scared if I have to sleep on my own.. ",
     "category_id": 2
   }, {
-    "quid": "18",
-    "teestion_xt": "I have trouble going to school in the mornings because I feel nervous or afraid........",
+    "question_id": 18,
+    "question_text": "I have trouble going to school in the mornings because I feel nervous or afraid........",
     "category_id": 2
   }, {
-    "question_id": "19",
+    "question_id": 19,
     "question_text": "I have no energy for things..... ",
     "category_id": 5
   }, {
-    "question_id": "20",
+    "question_id": 20,
     "question_text": "I worry I might look foolish.....",
     "category_id": 0
   }, {
-    "question_id": "21",
+    "question_id": 21,
     "question_text": "I am tired a lot......",
     "category_id": 5
   }, {
-    "question_id": "22",
+    "question_id": 22,
     "question_text": "I worry that bad things will happen to me",
     "category_id": 3
   }, {
-    "question_id": "23",
+    "question_id": 23,
     "question_text": "I can't seem to get bad or silly thoughts out of my head........... ",
     "category_id": 4
   },  {
-    "question_id": "24",
+    "question_id": 24,
     "question_text": "When I have a problem, my heart beats really fast........",
     "category_id": 1
   }, {
-    "question_id": "25",
+    "question_id": 25,
     "question_text": "I cannot think clearly....... ",
     "category_id": 5
   }, {
-    "question_id": "26",
+    "question_id": 26,
     "question_text": "I suddenly start to tremble or shake when there is no reason for this....... ",
     "category_id": 1
   }, {
-    "question_id": "27",
+    "question_id": 27,
     "question_text": "I worry that something bad will happen to me",
     "category_id": 3
   }, {
-    "question_id": "28",
+    "question_id": 28,
     "question_text": "When I have a problem, I feel shaky...",
     "category_id": 1
   }, {
-    "question_id": "29",
+    "question_id": 29,
     "question_text": "I feel worthless........",
     "category_id": 5
   }, {
-    "question_id": "30",
+    "question_id": 30,
     "question_text": "I worry about making mistakes.... ",
     "category_id": 0
   }, {
-    "quid": "31",
-    "teestion_xt": "I have to think of special thoughts (like numbers or words) to stop bad things from happening.......",
+    "question_id": 31,
+    "question_text": "I have to think of special thoughts (like numbers or words) to stop bad things from happening.......",
     "category_id": 4
   }, {
-    "question_id": "32",
+    "question_id": 32,
     "question_text": "I worry what other people think of me...",
     "category_id": 0
   }, {
-    "quid": "33",
-    "teestion_xt": "I am afraid of being in crowded places (like shopping centers, the movies, buses, busy playgrounds)......... ",
+    "question_id": 33,
+    "question_text": "I am afraid of being in crowded places (like shopping centers, the movies, buses, busy playgrounds)......... ",
     "category_id": 2
   }, {
-    "question_id": "34",
+    "question_id": 34,
     "question_text": "All of a sudden I feel really scared for no reason at all........... ",
     "category_id": 1
   }, {
-    "question_id": "35",
+    "question_id": 35,
     "question_text": "I worry about what is going to happen...",
     "category_id": 3
   }, {
-    "question_id": "36",
+    "question_id": 36,
     "question_text": "I suddenly become dizzy or faint when there is no reason for this........ ",
     "category_id": 1
   }, {
-    "question_id": "37",
+    "question_id": 37,
     "question_text": "I think about death.......",
     "category_id": 3
   }, {
-    "question_id": "38",
+    "question_id": 38,
     "question_text": "I feel afraid if I have to talk in front of my class....",
     "category_id": 0
   }, {
-    "question_id": "39",
+    "question_id": 39,
     "question_text": "My heart suddenly starts to beat too quickly for no reason.......... ",
     "category_id": 1
   }, {
-    "question_id": "40",
+    "question_id": 40,
     "question_text": "I feel like I don’t want to move....",
     "category_id": 5
   }, {
-    "quid": "41",
-    "teestion_xt": "I worry that I will suddenly get a scared feeling when there is nothing to be afraid of... ",
+    "question_id": 41,
+    "question_text": "I worry that I will suddenly get a scared feeling when there is nothing to be afraid of... ",
     "category_id": 1
   }, {
-    "quid": "42",
-    "teestion_xt": "I have to do some things over and over again (like washing my hands, cleaning or putting things in a certain order)...... ",
+    "question_id": 42,
+    "question_text": "I have to do some things over and over again (like washing my hands, cleaning or putting things in a certain order)...... ",
     "category_id": 4
   }, {
-    "question_id": "43",
+    "question_id": 43,
     "question_text": "I feel afraid that I will make a fool of myself in front of people......",
     "category_id": 0
   }, {
-    "question_id": "44",
+    "question_id": 44,
     "question_text": "I have to do some things in just the right way to stop bad things from happening.... ",
     "category_id": 4
   }, {
-    "question_id": "45",
+    "question_id": 45,
     "question_text": "I worry when I go to bed at night.... ",
     "category_id": 2
   }, {
-    "question_id": "46",
+    "question_id": 46,
     "question_text": "I would feel scared if I had to stay away from home overnight......",
     "category_id": 2
   }, {
-    "question_id": "47",
+    "question_id": 47,
     "question_text": "I feel restless.......",
     "category_id": 5
   }
