@@ -7,14 +7,17 @@ const Vision = require('vision')
 const Handlebars = require('handlebars')
 const Jwt2 = require('hapi-auth-jwt2')
 const path = require('path')
+
 const Models = require('./models/index.js')
 const Auth = require('./plugins/auth/index.js')
+const httpErrors = require('./plugins/httpErrors/index.js')
 
 const server = new Hapi.Server()
 
 const routes = [
   'account',
   'dashboard',
+  'error',
   'home',
   'login',
   'newq',
@@ -26,7 +29,7 @@ const routes = [
 ].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
 .map(require)
 
-const plugins = [Inert, Vision, Models, Jwt2, Auth].concat(routes)
+const plugins = [Inert, Vision, Models, Jwt2, Auth, httpErrors].concat(routes)
 
 server.connection({
   port: process.env.PORT || 8000

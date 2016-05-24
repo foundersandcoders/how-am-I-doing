@@ -40,6 +40,7 @@ jspm_packages
 *.css.map
 *.css
 
+config.env
 dump.rdb
 
 gems

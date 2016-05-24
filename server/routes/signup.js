@@ -11,15 +11,14 @@ function encrypt (pw) {
 
 exports.register = function (server, options, next) {
 
-  server.route({
+  server.route([{
     method: 'GET',
     path: '/signup',
     handler: (request, reply) => {
       reply.view('signup')
     },
     config: { auth: false }
-  })
-  server.route({
+  }, {
     method: 'POST',
     path: '/api/signup',
     handler: function (request, reply) {
@@ -38,10 +37,7 @@ exports.register = function (server, options, next) {
           password: request.payload.password
         }, process.env.JWT_KEY)
 
-        reply.redirect('/dashboard').state('token', token, {
-          encoding: 'none',
-          path: '/'
-        })
+        reply.redirect('/dashboard').state('token', token)
       })
     },
     config: {
@@ -58,7 +54,8 @@ exports.register = function (server, options, next) {
         }
       }
     }
-  })
+  }])
+
   next()
 }
 
