@@ -1,0 +1,27 @@
+[
+  {
+    "cat_id": 0,
+    "cat_name": "Social Phobia",
+    "cat_long_name": "Anxious in social situations"
+  }, {
+    "cat_id": 1,
+    "cat_name": "Panic Disorder",
+    "cat_long_name": "Panic Disorder"
+  }, {
+    "cat_id": 2,
+    "cat_name": "Separation Anxiety",
+    "cat_long_name": "Anxious away from home"
+  }, {
+    "cat_id": 3,
+    "cat_name": "Generalized Anxiety",
+    "cat_long_name": "Anxious generally"
+  }, {
+    "cat_id": 4,
+    "cat_name": "Obsessive Compulsive",
+    "cat_long_name": "Compelled to do or think things"
+  }, {
+    "cat_id": 5,
+    "cat_name": "Major Depression",
+    "cat_long_name": "Low Mood"
+  }
+]
