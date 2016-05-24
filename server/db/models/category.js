@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (schema) => {
-  return schema.define('category', {
+  return schema.define('Category', {
     cat_id: { type: schema.Number, unique: true },
     cat_name: { type: schema.String },
     cat_long_name: { type: schema.String },
