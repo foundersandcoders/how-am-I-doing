@@ -48,7 +48,7 @@ module.exports = Promise.all(categories.map((cat) => {
             const q = Object.assign({}, question)
             delete q.category_id
             return new Promise((resolve, reject) => {
-              cat.question.create(question, (error) => {
+              cat.question.create(q, (error) => {
                 return error ? reject(error) : resolve(cat)
               })
             })
