@@ -25,7 +25,7 @@ const categories = raw.categories.map((cat) => {
   return c
 })
 
-Promise.all(categories.map((cat) => {
+module.exports = Promise.all(categories.map((cat) => {
   return new Promise((resolve, reject) => {
     cat.save((err) => {
       if (err) {
@@ -60,6 +60,7 @@ Promise.all(categories.map((cat) => {
   .then(() => {
     console.log('Successfully created all categories')
     Schema.client.quit()
+    return Promise.resolve(null)
   })
   .catch((err) => {
     console.log('ERROR', err)
