@@ -71,7 +71,7 @@ The travis build is [here](https://travis-ci.org/JackTierney/How-Am-I-Doing). Do
 
 ### Style Guide
 #### Colours
-<img alt="Colours" src="./assets/colours.png" width="400" />
+<img alt="Colours" src="./assets/img/colours.png" width="400" />
 
 #### Font
 Ubuntu Mono
