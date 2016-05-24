@@ -78,61 +78,34 @@ Ubuntu Mono
 
 ### Data Model
 
-### User model
+#### User model
+##### Basic user information
+* User id: PK, Number
+* Username: String
+* Email: Email
+* Secret: String
+* ClinicEmail: Email
+* ClinicNumber: String
 
-#### Basic user information
+#### Question model
+##### All RCADS questions
+* Question id: PK, Number
+* Text: String
 
-User id: PK, Number
+#### Questionnaire model
+##### All completed questionnaires from all users
+* Questionnaire id: PK, Number
+* Date: Date obj / String
+* Answers: Array of numbers (0-3) for each question
 
+#### Category Model
+* Cat id: PK, Number
+* Catname: String
 
-Username: String
-
-
-Email: Email
-
-
-Secret: String
-
-ClinicEmail: Email
-
-ClinicNumber: String
-
-### Question model
-
- All RCADS questions
-
-Question id: PK, Number
-
-Text: String
-
-### Questionnaire model
-
-All completed questionnaires from all users
-
-Questionnaire id: PK, Number
-
-
-Date: Date obj / String
-
-
-Answers: Array of numbers (0-3) for each question
-
-### Category Model
-
-Cat id: PK, Number
-
-
-Catname: String
-
-### Relationships
-
-User has many questionnaires.
-
-
-Question has 1 category.
-
-
-Questionnaire potentially has many categories.
+#### Relationships
+* User has many questionnaires.
+* Question has 1 category.
+* Questionnaire potentially has many categories.
 
 ### Dependencies
 This project uses **caminte** for ORM. Read the documentation [here](http://www.camintejs.com/en/guide).
