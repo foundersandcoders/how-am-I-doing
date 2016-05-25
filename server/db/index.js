@@ -12,6 +12,7 @@ exports.register = (server, options, next) => {
 
   require('./relations.js')(Schema)
 
+  Schema.adapter.autoupdate()
   next()
 }
 
