@@ -10,8 +10,8 @@ const Schema = require('../../../server/db/schema.js')()
 require('../../../server/db/relations.js')(Schema)
 
 const raw = {
-  questions: require('../../../data.questions.json'),
-  categories: require('../../../data.categories.json'),
+  questions: require('../../data.questions.json'),
+  categories: require('../../data.categories.json'),
 }
 
 console.log('Starting Migration')
