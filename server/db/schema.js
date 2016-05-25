@@ -39,5 +39,27 @@ module.exports = () => {
     })
   }
 
+  Schema.adapter.flushAll = function (cb) {
+    let wait = 0
+
+    Object.keys(this._models).forEach((model) => {
+      wait++
+      this.destroyAll(model, (err) => {
+        if (err)
+          throw err
+
+        done()
+      })
+
+      if (wait === 0 && cb)
+        cb()
+
+      const done = () => {
+        if (--wait === 0 && cb)
+          cb()
+      }
+    })
+  }
+
   return Schema
 }
