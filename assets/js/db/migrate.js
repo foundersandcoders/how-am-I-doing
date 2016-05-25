@@ -14,60 +14,44 @@ const raw = {
   categories: require('../../../data.categories.json'),
 }
 
-console.log('Categories: -----------------')
+console.log('Starting Migration')
 
-const categories = raw.categories.map((cat) => {
-  const c = new Schema.models.Category()
-  c.cat_id = cat.cat_id
-  c.cat_name = cat.cat_name
-  c.cat_long_name = cat.cat_long_name
-  console.log('Creating category:', cat.cat_name)
-  return c
-})
+Schema.adapter.automigrate(() => {
+  console.log('Initialisation complete')
 
-module.exports = Promise.all(categories.map((cat) => {
-  return new Promise((resolve, reject) => {
-    cat.save((err) => {
-      if (err) {
-        console.log('There was an error')
-        return reject(err)
-      }
+  console.log('Inserting Categories: -----------------')
 
-      return resolve(cat)
+  const cats = raw.categories.map((cat) => {
+    return new Promise((resolve, reject) => {
+      Schema.models.Category.create(cat, (err) => {
+        if (err)
+          return reject(err)
+
+        console.log('Created category ' + cat.cat_name)
+        resolve()
+      })
     })
   })
-}))
-  .then((cats) => {
-    return Promise.all(
-      cats.map((cat) => {
-        const qs4ct = getQuestionsByCatId(cat.cat_id)
-        console.log('Got', qs4ct.length, 'questions for', cat.cat_name)
 
-        return Promise.all(
-          qs4ct.map((question) => {
-            const q = Object.assign({}, question)
-            delete q.category_id
-            return new Promise((resolve, reject) => {
-              cat.question.create(q, (error) => {
-                return error ? reject(error) : resolve(cat)
-              })
-            })
-          })
-        )
+  console.log('Inserting Questions: -----------------')
+
+  const quests = raw.questions.map((question) => {
+    return new Promise((resolve, reject) => {
+      Schema.models.Question.create(question, (err) => {
+        if (err)
+          return reject(err)
+
+        console.log('Created question ' + question.question_id)
+        resolve()
       })
-    )
-  })
-  .then(() => {
-    console.log('Successfully created all categories')
-    Schema.client.quit()
-    return Promise.resolve(null)
-  })
-  .catch((err) => {
-    console.log('ERROR', err)
-    Schema.client.quit()
+    })
   })
 
-
-function getQuestionsByCatId (id) {
-  return raw.questions.filter((question) => question.category_id === id)
-}
+  Promise.all(cats.concat(quests))
+    .then(() => {
+      console.log('Migration completed successfully')
+      console.log('Disconnecting')
+      Schema.client.end()
+    })
+    .catch((err) => {throw err})
+})
