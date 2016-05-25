@@ -7,7 +7,7 @@ exports.register = (server, options, next) => {
   server.app.Schema = Schema
   server.app.User = server.app.Schema.models.User
   server.app.Question = server.app.Schema.models.Question
-  // server.app.Questionnaire = server.app.Schema.models.Questionnaire
+  server.app.Questionnaire = server.app.Schema.models.Questionnaire
   server.app.Category = server.app.Schema.models.Category
 
   require('./relations.js')(Schema)
