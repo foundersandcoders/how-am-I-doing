@@ -9,7 +9,7 @@ module.exports = () => {
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     pool: true,
-    database: process.env.DB_NUMBER
+    database: process.env.DB_NAME
   })
 
   require('./models/user.js')(Schema)
