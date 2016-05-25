@@ -24,7 +24,7 @@ module.exports = () => {
       wait++
       this.dropTable(model, (err) => {
         if (err)
-          throw err
+          console.log(err)
 
         done()
       })
@@ -46,7 +46,7 @@ module.exports = () => {
       wait++
       this.destroyAll(model, (err) => {
         if (err)
-          throw err
+          console.log(err)
 
         done()
       })
