@@ -11,10 +11,6 @@ describe('Simple server tests', () => {
     done()
   })
 
-  afterEach((done) => {
-    done()
-  })
-
   it('Server actually exists', (done) => {
     Object.keys(server).length.should.be.at.least(1)
     done()
