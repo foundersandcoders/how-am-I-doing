@@ -14,7 +14,7 @@ module.exports = () => {
 
   require('./models/user.js')(Schema)
   require('./models/question.js')(Schema)
-  require('./models/questionnaire.js')(Schema)
+  // require('./models/questionnaire.js')(Schema)
   require('./models/category.js')(Schema)
 
   Schema.adapter.dropAllTables = function (cb) {
