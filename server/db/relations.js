@@ -13,7 +13,4 @@ module.exports = (Schema) => {
   Schema.models.Question.belongsTo(
     Schema.models.Category, { as: 'category', foreignKey: 'question_id' }
   )
-  Schema.models.Questionnaire.hasMany(
-    Schema.models.Category, { as: 'category', foreignKey: 'questionnaire_id' }
-  )
 }
