@@ -9,10 +9,10 @@ const Schema = require('../../../server/db/schema.js')()
 
 const s = Schema.settings
 
-console.log('Flushing all table rows from ', s.host + ':' + s.port + '/' + s.database)
+console.log('Dropping all tables from ', s.host + ':' + s.port + '/' + s.database)
 
-Schema.adapter.flushAll(() => {
-  console.log('Tables rows flushed successfully')
+Schema.adapter.dropAllTables(() => {
+  console.log('Tables dropped successfully')
   console.log('Disconnecting')
   Schema.client.end()
 })
