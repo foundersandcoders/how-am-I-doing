@@ -17,5 +17,27 @@ module.exports = () => {
   require('./models/questionnaire.js')(Schema)
   require('./models/category.js')(Schema)
 
+  Schema.adapter.dropAllTables = function (cb) {
+    let wait = 0
+
+    Object.keys(this._models).forEach((model) => {
+      wait++
+      this.dropTable(model, (err) => {
+        if (err)
+          console.log(err)
+
+        done()
+      })
+
+      if (wait === 0 && cb)
+        cb()
+
+      const done = () => {
+        if (--wait === 0 && cb)
+          cb()
+      }
+    })
+  }
+
   return Schema
 }
