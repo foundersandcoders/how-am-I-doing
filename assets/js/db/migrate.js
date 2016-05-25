@@ -14,44 +14,54 @@ const raw = {
   categories: require('../../data.categories.json'),
 }
 
+const insertData = process.argv.slice(2).indexOf('-p') === -1
+
+console.log('Arguments: ', process.argv.slice(2))
+
 console.log('Starting Migration')
 
 Schema.adapter.automigrate(() => {
   console.log('Initialisation complete')
 
-  console.log('Inserting Categories: -----------------')
+  if (insertData) {
+    console.log('Inserting Categories: -----------------')
 
-  const cats = raw.categories.map((cat) => {
-    return new Promise((resolve, reject) => {
-      Schema.models.Category.create(cat, (err) => {
-        if (err)
-          return reject(err)
+    const cats = raw.categories.map((cat) => {
+      return new Promise((resolve, reject) => {
+        Schema.models.Category.create(cat, (err) => {
+          if (err)
+            return reject(err)
 
-        console.log('Created category ' + cat.cat_name)
-        resolve()
+          console.log('Created category ' + cat.cat_name)
+          resolve()
+        })
       })
     })
-  })
 
-  console.log('Inserting Questions: -----------------')
+    console.log('Inserting Questions: -----------------')
 
-  const quests = raw.questions.map((question) => {
-    return new Promise((resolve, reject) => {
-      Schema.models.Question.create(question, (err) => {
-        if (err)
-          return reject(err)
+    const quests = raw.questions.map((question) => {
+      return new Promise((resolve, reject) => {
+        Schema.models.Question.create(question, (err) => {
+          if (err)
+            return reject(err)
 
-        console.log('Created question ' + question.question_id)
-        resolve()
+          console.log('Created question ' + question.question_id)
+          resolve()
+        })
       })
     })
-  })
 
-  Promise.all(cats.concat(quests))
-    .then(() => {
-      console.log('Migration completed successfully')
-      console.log('Disconnecting')
-      Schema.client.end()
-    })
-    .catch((err) => {throw err})
+    Promise.all(cats.concat(quests))
+      .then(() => {
+        console.log('Migration completed successfully')
+        console.log('Disconnecting')
+        Schema.client.end()
+      })
+      .catch((err) => {throw err})
+  } else {
+
+    Schema.client.end()
+
+  }
 })

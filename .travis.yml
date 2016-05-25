@@ -7,6 +7,7 @@ services:
   - postgresql
 before_script:
   - psql -c 'create database test_db;' -U postgres
+  - "npm run db:migrate -- -p"
 script:
   - "npm run lint"
   - "npm test"
