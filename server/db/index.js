@@ -12,7 +12,7 @@ exports.register = (server, options, next) => {
 
   require('./relations.js')(Schema)
 
-  next()
+  Schema.adapter.autoupdate(next)
 }
 
 exports.register.attributes = {
