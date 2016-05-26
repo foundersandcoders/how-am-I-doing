@@ -61,35 +61,72 @@ QUnit.test('bars can be created', (assert) => {
     return d3.selectAll('rect.bar')[0]
   }
   assert.equal(getBars().length, 4, 'should render the correct number of bars')
-  assert.equal(d3.select(getBars()[0]).attr('x'), c.x(
-    testData[0].questionnaire_answers.reduce((a, b) => {
+
+  getBars().forEach((bar, i) => {
+    const result = +d3.select(bar).attr('y')
+    const expected = c.y(testData[i].questionnaire_answers.reduce((a, b) => {
       return a + b
-    })),
-  'should render the bars with correct x value')
-  console.log(c.x)
-  assert.equal(d3.select(getBars()[0]).attr('y'), 0,
-  'should render the bars with correct y value')
+    }))
+    console.log(i, result)
+    assert.equal(result, expected, 'should render the bars with correct y value')
+  })
 })
 
-// describe('create bars', function () {
-//   it('should render the correct number of bars', function () {
-//     expect(getBars().length).toBe(3)
-//   })
-//
-//   it('should render the bars with correct height', function () {
-//     expect(d3.select(getBars()[0]).attr('height')).toBeCloseTo(420)
-//   })
-//
-//   it('should render the bars with correct x', function () {
-//     expect(d3.select(getBars()[0]).attr('x')).toBeCloseTo(9)
-//   })
-//
-//   it('should render the bars with correct y', function () {
-//     expect(d3.select(getBars()[0]).attr('y')).toBeCloseTo(0)
-//   })
-// })
+QUnit.test('axes are created', (assert) => {
+  function getXAxis () {
+    return d3.selectAll('g.x.axis')[0]
+  }
+  let axis = getXAxis()
+  console.log(axis)
+  assert.equal(axis.length, 1, 'x axis is created')
 
+  function getYAxis () {
+    return d3.selectAll('g.y.axis')[0]
+  }
+  axis = getYAxis()
+  assert.equal(axis.length, 1, 'y axis is created')
+})
 
-QUnit.test('the createData function should return an object', (assert) => {
-  assert.ok(typeof createData(qDates, sum) === 'object', 'An object indeed!')
+QUnit.module('line chart', {
+
+  beforeEach: function () {
+    d3.selectAll('#target').append('svg').attr('class', 'chart')
+    c = createLineChart(testData)
+    c.render()
+  },
+  afterEach: function () {
+    d3.selectAll('.chart').remove()    // clean up after each test
+  }
+})
+
+QUnit.test('a line created', (assert) => {
+  function getPoints () {
+    return d3.selectAll('path.line')[0]
+  }
+
+  const yVals = d3.select(getPoints()[0]).attr('d')
+    .split(/[A-Z]/)
+    .map((pair) => pair.split(',')[1])
+    .filter((e) => e).map((e) => +e)
+
+  const expected = testData.map((data) => {
+    return c.y(data.questionnaire_answers.reduce((a, b) => a + b))
+  })
+  assert.deepEqual(yVals, expected, 'should render a line with correct y values')
+  assert.equal(yVals.length, 4, 'should render the correct number of points on the line')
+})
+
+QUnit.test('axes are created', (assert) => {
+  function getXAxis () {
+    return d3.selectAll('g.x.axis')[0]
+  }
+  let axis = getXAxis()
+  console.log(axis)
+  assert.equal(axis.length, 1, 'x axis is created')
+
+  function getYAxis () {
+    return d3.selectAll('g.y.axis')[0]
+  }
+  axis = getYAxis()
+  assert.equal(axis.length, 1, 'y axis is created')
 })
