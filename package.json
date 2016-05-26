@@ -41,6 +41,7 @@
     "joi": "^8.1.0",
     "jsonwebtoken": "^7.0.0",
     "pg": "^4.5.5",
+    "pg-native": "^1.10.0",
     "vision": "^4.1.0"
   },
   "devDependencies": {
