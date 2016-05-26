@@ -5,7 +5,9 @@ const Caminte = require('caminte')
 let connection
 
 if (process.env.ENV_PRODUCTION === 'true') {
-  connection = process.env.DATABASE_URL + '?ssl=require'
+  connection = {
+    url: process.env.DATABASE_URL + '?ssl=true'
+  }
 
 } else {
   connection = {
