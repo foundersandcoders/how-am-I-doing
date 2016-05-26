@@ -7,37 +7,38 @@ QUnit.test('hello test', (assert) => {
 
 let c
 
+const testData = [
+  {
+    questionnaire_id: 1,
+    questionnaire_date: 1462111758000,
+    questionnaire_answers: [
+      0, 1, 2, 1, 3, 0, 0, 0, 1, 1
+    ]
+  }, {
+    questionnaire_id: 2,
+    questionnaire_date: 1462630158000,
+    questionnaire_answers: [
+      1, 1, 3, 0, 2, 1, 0, 0, 1, 1
+    ]
+  }, {
+    questionnaire_id: 3,
+    questionnaire_date: 1463321358000,
+    questionnaire_answers: [
+      0, 2, 2, 0, 1, 1, 0, 0, 0, 1
+    ]
+  }, {
+    questionnaire_id: 4,
+    questionnaire_date: 1463839758000,
+    questionnaire_answers: [
+      0, 1, 1, 0, 2, 1, 0, 0, 0, 1
+    ]
+  }
+]
+
 QUnit.module('bar chart', {
 
   beforeEach: function () {
     d3.selectAll('#target').append('svg').attr('class', 'chart')
-    const testData = [
-      {
-        questionnaire_id: 1,
-        questionnaire_date: 1462111758000,
-        questionnaire_answers: [
-          0, 1, 2, 1, 3, 0, 0, 0, 1, 1
-        ]
-      }, {
-        questionnaire_id: 2,
-        questionnaire_date: 1462630158000,
-        questionnaire_answers: [
-          1, 1, 3, 0, 2, 1, 0, 0, 1, 1
-        ]
-      }, {
-        questionnaire_id: 3,
-        questionnaire_date: 1463321358000,
-        questionnaire_answers: [
-          0, 2, 2, 0, 1, 1, 0, 0, 0, 1
-        ]
-      }, {
-        questionnaire_id: 4,
-        questionnaire_date: 1463839758000,
-        questionnaire_answers: [
-          0, 1, 1, 0, 2, 1, 0, 0, 0, 1
-        ]
-      }
-    ]
     c = createBarChart(testData)
     c.render()
   },
@@ -60,12 +61,12 @@ QUnit.test('bars can be created', (assert) => {
     return d3.selectAll('rect.bar')[0]
   }
   assert.equal(getBars().length, 4, 'should render the correct number of bars')
-
   assert.equal(d3.select(getBars()[0]).attr('x'), c.x(
     testData[0].questionnaire_answers.reduce((a, b) => {
       return a + b
     })),
   'should render the bars with correct x value')
+  console.log(c.x)
   assert.equal(d3.select(getBars()[0]).attr('y'), 0,
   'should render the bars with correct y value')
 })
