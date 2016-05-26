@@ -2,15 +2,23 @@
 
 const Caminte = require('caminte')
 
-module.exports = () => {
-  const Schema = new Caminte.Schema(process.env.DB_DRIVER, {
-    password: process.env.DB_PASSWORD,
-    username: process.env.DB_USERNAME,
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
+let connection
+
+if (process.env.ENV_PRODUCTION === 'true') {
+  connection = process.env.DATABASE_URL + '?ssl=require'
+
+} else {
+  connection = {
+    host: 'localhost',
+    port: 5432,
     pool: true,
-    database: process.env.DB_NAME
-  })
+    database: 'test'
+  }
+
+}
+
+module.exports = () => {
+  const Schema = new Caminte.Schema(process.env.DB_DRIVER, connection)
 
   require('./models/user.js')(Schema)
   require('./models/question.js')(Schema)
