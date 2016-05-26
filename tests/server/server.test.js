@@ -1,155 +1,158 @@
 'use strict'
 
-const wtape = require('wrapping-tape')
-const server = require('../../server/server.js')
+require('chai').should()
 const Bcrypt = require('bcrypt')
 
-const tape = wtape({
-  setup: (t) => {
-    t.end()
-  },
-  teardown: (t) => {
-    setTimeout(() => {
-      if (server.app.Schema.client.connected)
-        server.app.Schema.client.flushdb()
-      t.end()
-    }, 100)
-  }
-})
+describe('Simple server tests', () => {
+  let server
 
-tape('server exists', (t) => {
-  const actual = Object.keys(server).length > 0
-  t.ok(actual, 'server exists')
-  t.end()
-})
+  beforeEach((done) => {
+    server = require('../../server/server.js')
+    done()
+  })
 
-tape('server replies with status 200', (t) => {
-  server.inject({ method: 'GET', url: '/' }, (response) => {
-    const actual = response.statusCode
-    const expected = 200
-    t.equal(actual, expected, 'server replies')
-    t.end()
+  it('Server actually exists', (done) => {
+    Object.keys(server).length.should.be.at.least(1)
+    done()
+  })
+
+  it('Server replies with 200 statusCode and HTML', (done) => {
+    server.inject({ method: 'GET', url: '/' }, (response) => {
+      response.statusCode.should.equal(200)
+      response.payload.indexOf('<html>').should.be.at.least(0)
+      done()
+    })
   })
 })
 
-tape('server serves up html', (t) => {
-  server.inject({ method: 'GET', url: '/' }, (response) => {
-    const actual = response.payload.indexOf('<html>') > -1
-    t.ok(actual, 'html tag found')
-    t.end()
-  })
-})
+describe('E2E Auth Tests', () => {
+  let server
 
-tape('payload from http request creates user as expected', (t) => {
-  server.inject({ method: 'POST', url: '/api/signup', payload: {
-    username: 'tom',
-    password: 'apples',
-    confirm_password: 'apples',
-    user_email: 'tomupton@gmail.com',
-    clinic_email: 'roger@gmail.com',
-    clinic_number: '07986534562'
-  }
+  beforeEach((done) => {
+    server = require('../../server/server.js')
+    server.app.Schema.adapter.automigrate(done)
+  })
+
+  afterEach((done) => {
+    server.app.Schema.adapter.flushAll(() => {
+      done()
+    })
+  })
+
+  it('Should be able to create user by posting to signup endpoint', (done) => {
+    server.inject({
+      method: 'POST',
+      url: '/api/signup',
+      payload: {
+        username: 'tom',
+        password: 'apples',
+        confirm_password: 'apples',
+        user_email: 'tomupton@gmail.com',
+        clinic_email: 'roger@gmail.com',
+        clinic_number: '07986534562'
+      }
     }, (response) => {
-    let actual = response.statusCode
-    let expected = 302
-    t.equal(actual, expected, 'server redirects')
+      response.statusCode.should.equal(302)
 
-    server.app.User.findById(1, (err, user) => {
+      server.app.User.findById(1, (err, user) => {
+        if (err)
+          throw err
+
+        user.user_name.should.equal('tom')
+        done()
+      })
+    })
+  })
+
+  it('Should be able to login', (done) => {
+    function encrypt (pw) {
+      return Bcrypt.hashSync(pw, 10)
+    }
+
+    const user = {
+      user_name: 'tu6619',
+      user_email: 'user.test@test.com',
+      user_secret: encrypt('password'),
+      clinic_email: 'clinic.test@test.com',
+      clinic_number: '07654321456'
+    }
+
+    server.app.User.create(user, (err) => {
+      if (err)
+        throw err
+
+      server.inject({
+        method: 'POST',
+        url: '/api/login',
+        payload: {
+          username: 'tu6619',
+          password: 'password'
+        }
+      }, (response) => {
+        response.statusCode.should.equal(302)
+        response.headers.location.should.equal('/dashboard')
+        done()
+      })
+    })
+  })
+
+  it('Should not be able to login with wrong password', (done) => {
+    function encrypt (pw) {
+      return Bcrypt.hashSync(pw, 10)
+    }
+
+    const user = {
+      user_name: 'tu6619',
+      user_email: 'user.test@test.com',
+      user_secret: encrypt('password'),
+      clinic_email: 'clinic.test@test.com',
+      clinic_number: '07654321456'
+    }
+
+    server.app.User.create(user, (err) => {
       if (err) throw err
-      actual = user.user_name
-      expected = 'tom'
-      t.equal(actual, expected, 'number of users is correct')
-      t.end()
+      server.inject({
+        method: 'POST',
+        url: '/api/login',
+        payload: {
+          username: 'tu6619',
+          password: 'passwort'
+        }
+      }, (response) => {
+        response.statusCode.should.equal(302)
+        response.headers.location.should.equal('/login')
+        done()
+      })
     })
   })
-})
 
-tape('username and password entered by user match database resulting in redirected user', (t) => {
-  function encrypt (pw) {
-    return Bcrypt.hashSync(pw, 10)
-  }
-  const user = {
-    user_name: 'tu6619',
-    user_email: 'user.test@test.com',
-    user_secret: encrypt('password'),
-    clinic_email: 'clinic.test@test.com',
-    clinic_number: '07654321456'
-  }
-  server.app.User.create(user, (err) => {
-    if (err) throw err
-    server.inject({ method: 'POST', url: '/api/login', payload: {
-      username: 'tu6619',
-      password: 'password'
-    } }, (response) => {
-      let actual = response.statusCode
-      let expected = 302
-      t.equal(actual, expected, 'server redirects')
-      actual = response.headers.location
-      expected = '/dashboard'
-      t.equal(actual, expected, 'dashboard is hit')
-      t.end()
+  it('Should not be able to login with wrong username', (done) => {
+    function encrypt (pw) {
+      return Bcrypt.hashSync(pw, 10)
+    }
+
+    const user = {
+      user_name: 'tu6619',
+      user_email: 'user.test@test.com',
+      user_secret: encrypt('password'),
+      clinic_email: 'clinic.test@test.com',
+      clinic_number: '07654321456'
+    }
+
+    server.app.User.create(user, (err) => {
+      if (err) throw err
+      server.inject({
+        method: 'POST',
+        url: '/api/login',
+        payload: {
+          username: 'tu6618',
+          password: 'password'
+        }
+      }, (response) => {
+        response.statusCode.should.equal(302)
+        response.headers.location.should.equal('/login')
+        done()
+      })
     })
   })
-})
-
-tape('password entered by user do not match database resulting in redirected user', (t) => {
-  function encrypt (pw) {
-    return Bcrypt.hashSync(pw, 10)
-  }
-  const user = {
-    user_name: 'tu6619',
-    user_email: 'user.test@test.com',
-    user_secret: encrypt('password'),
-    clinic_email: 'clinic.test@test.com',
-    clinic_number: '07654321456'
-  }
-  server.app.User.create(user, (err) => {
-    if (err) throw err
-    server.inject({ method: 'POST', url: '/api/login', payload: {
-      username: 'tu6619',
-      password: 'passwort'
-    } }, (response) => {
-      let actual = response.statusCode
-      let expected = 302
-      t.equal(actual, expected, 'server redirects')
-      actual = response.headers.location
-      expected = '/login'
-      t.equal(actual, expected, 'login is hit')
-      t.end()
-    })
-  })
-})
-
-tape('username entered by user do not match database resulting in redirected user', (t) => {
-  function encrypt (pw) {
-    return Bcrypt.hashSync(pw, 10)
-  }
-  const user = {
-    user_name: 'tu6619',
-    user_email: 'user.test@test.com',
-    user_secret: encrypt('password'),
-    clinic_email: 'clinic.test@test.com',
-    clinic_number: '07654321456'
-  }
-  server.app.User.create(user, (err) => {
-    if (err) throw err
-    server.inject({ method: 'POST', url: '/api/login', payload: {
-      username: 'tu6618',
-      password: 'password'
-    } }, (response) => {
-      let actual = response.statusCode
-      let expected = 302
-      t.equal(actual, expected, 'server redirects')
-      actual = response.headers.location
-      expected = '/login'
-      t.equal(actual, expected, 'login is hit')
-      t.end()
-    })
-  })
-})
-
-tape('Final teardown', (t) => {
-  server.app.Schema.client.flushdb()
-  server.app.Schema.client.quit()
-  t.end()
 })

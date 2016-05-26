@@ -12,9 +12,12 @@
     "build": "sass -t compressed sass/main.scss public/css/main.css",
     "prestart": "npm run build",
     "start": "node server/index.js",
-    "test": "node_modules/.bin/tape tests/runner.js",
-    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/tape tests/runner.js",
-    "heroku": "bash build.sh && node server/index.js"
+    "test": "node_modules/.bin/mocha tests/runner.js",
+    "cover": "node_modules/.bin/istanbul cover node_modules/.bin/mocha tests/runner.js",
+    "heroku": "bash build.sh && node server/index.js",
+    "db:migrate": "node ./assets/js/db/migrate.js",
+    "db:flush": "node ./assets/js/db/flush.js",
+    "db:drop": "node ./assets/js/db/drop.js"
   },
   "repository": {
     "type": "git",
@@ -37,13 +40,14 @@
     "inert": "^4.0.0",
     "joi": "^8.1.0",
     "jsonwebtoken": "^7.0.0",
-    "redis": "^2.6.0-2",
+    "pg": "^4.5.5",
     "vision": "^4.1.0"
   },
   "devDependencies": {
+    "chai": "^3.5.0",
     "eslint": "^2.10.2",
     "istanbul": "^0.4.3",
-    "qunit": "^0.9.1",
-    "wrapping-tape": "0.0.3"
+    "mocha": "^2.5.2",
+    "qunit": "^0.9.1"
   }
 }
