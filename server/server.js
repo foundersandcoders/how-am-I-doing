@@ -43,10 +43,10 @@ server.register(plugins, (err) => {
       html: Handlebars
     },
     relativeTo: __dirname,
-    path: '../public/views',
+    path: '../views',
     layout: 'default',
-    layoutPath: '../public/views/layouts',
-    partialsPath: '../public/views/partials',
+    layoutPath: '../views/layouts',
+    partialsPath: '../views/partials',
     context: {
       title: 'How Am I Doing?'
     }
