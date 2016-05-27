@@ -12,25 +12,23 @@ exports.register = function (server, options, next) {
       method: 'GET',
       path: '/login',
       handler: (request, reply) => {
+        if (! request.state.token)
+          return reply.view('login')
+
         const validate = validator(server)
+        const isVerified = Jwt.verify(request.state.token, process.env.JWT_KEY)
 
-        if (request.state.token) {
-          const isVerified = Jwt.verify(request.state.token, process.env.JWT_KEY)
+        if (isVerified) {
+          const decoded = Jwt.decode(request.state.token)
+          validate(decoded, request, (err, isValid) => {
+            if (err || !isValid)
+              return reply.view('login').unstate('token')
 
-          if (isVerified) {
-            const decoded = Jwt.decode(request.state.token)
-            validate(decoded, request, (err, isValid) => {
-              if (err || !isValid)
-                return reply.view('login').unstate('token')
-
-              return reply.redirect('/dashboard')
-            })
-          }
-
+            return reply.redirect('/dashboard')
+          })
+        } else {
           return reply.view('login').unstate('token')
         }
-
-        reply.view('login')
       },
       config: { auth: false }
     }, {
