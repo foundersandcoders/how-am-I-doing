@@ -14,7 +14,7 @@ module.exports = (server) => {
           return callback(null, false)
 
         Bcrypt.compare(decoded.password, user.user_secret, (error, isValid) => {
-          callback(error, isValid, { id: user.user_id, name: user.user_name })
+          callback(error, isValid, { id: user.id, name: user.user_name })
         })
       })
   }
