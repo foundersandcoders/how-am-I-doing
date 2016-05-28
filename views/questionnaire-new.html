@@ -1,0 +1,19 @@
+{{> header}}
+<main>
+  <h1>New RCADS Questionnaire</h1>
+  <p>
+    Please select which category of questions you wish to answer in your questionnaire, then click proceed to begin the questionnaire.
+  </p>
+  <form id="rcads-categories" class="container" action="/questionnaires/new" method="POST">
+    <ul>
+      {{#each categories}}
+        <li>
+          <input id="{{this.cat_id}}" class="filled-in" type="checkbox" name="category" value="{{this.cat_id}}" />
+          <label for="{{this.cat_id}}">{{this.cat_name}}</label>
+        </li>
+      {{/each}}
+    </ul>
+    <input type="submit" class="btn" name="submit" value="Proceed" />
+  </form>
+</main>
+{{> footer}}

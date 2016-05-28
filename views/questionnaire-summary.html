@@ -1,0 +1,15 @@
+{{> header}}
+<main>
+  <form id="rcads-question" class="container" action="/questionnaires/new/summary" method="post">
+    <ul>
+      {{#each answers}}
+        <li>
+          {{> answer this}}
+        </li>
+      {{/each}}
+    </ul>
+    <a href="#">Back</a>
+    <button type="submit" class="btn" name="submit" value="Complete Questionnaire" />
+  </form>
+</main>
+{{> footer}}

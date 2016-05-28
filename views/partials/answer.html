@@ -1,0 +1,23 @@
+<section class="answer">
+  <p class="question-text">{{question_text}}</p>
+
+  <p>You answered:</p>
+
+  {{#if never}}
+    <p>Never</p>
+
+  {{else if sometimes}}
+    <p>Sometimes</p>
+
+  {{else if often}}
+    <p>Often</p>
+
+  {{else if always}}
+    <p>Always</p>
+
+  {{else}}
+    <p>Unrecognised</p>
+
+  {{/if}}
+
+</section>

@@ -1,0 +1,15 @@
+{{> header}}
+<main>
+  <form id="rcads-question" class="container" action="/questionnaires/new/summary" method="post">
+    <ul>
+      {{#each questions}}
+        <li>
+          {{> question this}}
+        </li>
+      {{/each}}
+    </ul>
+    <input type="submit" class="btn" name="submit" value="Save Answers" />
+  </form>
+</main>
+{{> footer}}
+<script type="text/javascript" src="/js/question.js"></script>
