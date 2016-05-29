@@ -3,7 +3,7 @@
 const validate = require('./validate.js')
 
 exports.register = (server, options, next) => {
-  const validator = validate(server)
+  const validator = validate(server.app.Schema)
 
   server.auth.strategy('strategy-jwt', 'jwt', {
     key: process.env.JWT_KEY,

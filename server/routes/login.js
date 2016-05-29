@@ -15,7 +15,7 @@ exports.register = function (server, options, next) {
         if (! request.state.token)
           return reply.view('login')
 
-        const validate = validator(server)
+        const validate = validator(server.app.Schema)
         const isVerified = Jwt.verify(request.state.token, process.env.JWT_KEY)
 
         if (isVerified) {
@@ -35,7 +35,7 @@ exports.register = function (server, options, next) {
       method: 'POST',
       path: '/api/login',
       handler: (request, reply) => {
-        const validate = validator(server)
+        const validate = validator(server.app.Schema)
 
         validate({
           username: request.payload.username,
