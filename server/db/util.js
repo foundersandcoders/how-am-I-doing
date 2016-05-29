@@ -66,7 +66,7 @@ exports.getQuestionsById = function (Schema, qIDs) {
 }
 
 exports.upsertAnswersByQuestionnaire = function (Schema, quID, answers) {
-  promisifyQuery(
+  return promisifyQuery(
     Schema,
     'Questionnaire',
     'findById',
