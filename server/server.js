@@ -11,11 +11,11 @@ const path = require('path')
 const DB = require('./db/index.js')
 const Auth = require('./plugins/auth/index.js')
 const httpErrors = require('./plugins/httpErrors/index.js')
+const questionnaires = require('./questionnaire/index.js')
 
 const server = new Hapi.Server()
 
 const routes = [
-  'account',
   'dashboard',
   'error',
   'home',
@@ -29,7 +29,7 @@ const routes = [
 ].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
 .map(require)
 
-const plugins = [Inert, Vision, Jwt2, DB, Auth, httpErrors].concat(routes)
+const plugins = [Inert, Vision, Jwt2, DB, Auth, httpErrors, questionnaires].concat(routes)
 
 server.connection({
   port: process.env.PORT || 8000
