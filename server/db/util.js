@@ -102,7 +102,7 @@ const promisifyQuery = exports.promisifyQuery = function (Schema, model, method,
   })
 }
 
-const promisifyAllQueries = exports.promisifyAllQueries = function (Schema, model, method, data) {
+exports.promisifyAllQueries = function (Schema, model, method, data) {
   return Promise.all(
     data.map((datum) => {
       return new Promise((resolve, reject) => {
