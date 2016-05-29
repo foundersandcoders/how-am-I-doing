@@ -4,10 +4,15 @@
 'use strict'
 
 require('env2')('./config.env')
+const Bcrypt = require('bcrypt')
 
 const Schema = require('../../../server/db/schema.js')()
 
 require('../../../server/db/relations.js')(Schema)
+
+function encrypt (pw) {
+  return Bcrypt.hashSync(pw, 10)
+}
 
 const raw = {
   questions: require('../../data.questions.json'),
@@ -52,7 +57,25 @@ Schema.adapter.automigrate(() => {
       })
     })
 
-    Promise.all(cats.concat(quests))
+    console.log('Inserting test user: -----------------')
+
+    const users = new Promise((resolve, reject) => {
+      Schema.models.User.create({
+        user_name: 'test',
+        user_email: 'a@a.com',
+        user_secret: encrypt('password'),
+        clinic_email: 'b@b.com',
+        clinic_number: '12345678901'
+      }, (err, user) => {
+        if (err || !user)
+          return reject(err)
+
+        console.log('Created user: ' + user.user_name)
+        resolve()
+      })
+    })
+
+    Promise.all(cats.concat(quests).concat(users))
       .then(() => {
         console.log('Migration completed successfully')
         console.log('Disconnecting')
