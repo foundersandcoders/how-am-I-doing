@@ -29,21 +29,7 @@ module.exports = (Schema) => {
     handler: (request, reply) => {
       let answers
 
-      util.isQuestionnaireCompleted(Schema, request.params.QUID)
-        .then((isCompleted) => {
-          if (isCompleted)
-            return reply.redirect('/questionnaires/new')
-
-          return util.isQuestionnaireCreatedByUser(
-            Schema, request.params.QUID, request.auth.credentials.id
-          )
-        })
-        .then((isAuthorised) => {
-          if (!isAuthorised)
-            return reply.redirect('/questionnaires/new')
-
-          return util.getAnswersByQuestionnaire(Schema, request.params.QUID)
-        })
+      util.getAnswersByQuestionnaire(Schema, request.params.QUID)
         .then((results) => {
           answers = results
           const qIDs = answers.map((answer) => answer.question_id)
@@ -61,7 +47,10 @@ module.exports = (Schema) => {
             }
           })
 
-          reply.view('questionnaire-summary', { answers: fullAnswers, QUID: request.params.QUID })
+          reply.view('questionnaire-summary', {
+            answers: fullAnswers,
+            QUID: request.params.QUID
+          })
         })
         .catch((err) => {
           reply(Boom.badImplementation('Oops', err))
