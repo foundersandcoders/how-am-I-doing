@@ -5,10 +5,10 @@ const util = require('../db/util.js')
 
 /*
 
-2. POST /questionnaires/new/register
-  2.1 Create new uncompleted questionnaire for logged in user
-  2.2 Fill in categories for newly created questionnaire
-  2.3 POST /questionnaires/{QUID}/questions
+POST /questionnaires/new/register
+  1 Create new uncompleted questionnaire for logged in user
+  2 Fill in categories for newly created questionnaire
+  3 GET /questionnaires/{QUID}/questions
 
 */
 

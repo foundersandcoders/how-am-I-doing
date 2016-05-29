@@ -3,6 +3,18 @@
 const Boom = require('boom')
 const util = require('../db/util.js')
 
+/*
+
+POST /questionnaires/{QUID}/answers
+  0 Preliminary checks
+    0.1 Check if QUID is marked as completed
+    0.2 Check if user owns QUID
+    0.3 If either check fails, GET /questionnaires/new
+  1 Upsert all answers into the DB
+  2 GET /questionnaires/{QUID}/summary
+
+*/
+
 module.exports = (Schema) => {
   return {
     method: 'POST',

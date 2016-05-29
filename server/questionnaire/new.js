@@ -4,9 +4,10 @@ const Boom = require('boom')
 
 /*
 
-1. GET /questionnaires/new
-  1.1 User selects which categories for the questionnaire
-  1.2 User submits the form
+GET /questionnaires/new
+  1 Get list of categories
+  2 Render view
+  3 User selects categories then POST /questionnaires/new/register
 
 */
 
