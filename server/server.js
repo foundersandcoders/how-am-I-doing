@@ -13,7 +13,13 @@ const Auth = require('./plugins/auth/index.js')
 const httpErrors = require('./plugins/httpErrors/index.js')
 const questionnaires = require('./questionnaire/index.js')
 
-const server = new Hapi.Server()
+const server = new Hapi.Server({
+  connections: {
+    router: {
+      stripTrailingSlash: true
+    }
+  }
+})
 
 const routes = [
   'dashboard',
