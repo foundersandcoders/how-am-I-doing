@@ -1,6 +1,6 @@
 {{> header}}
 <main>
-  <form id="rcads-question" class="container" action="/questionnaires/new/summary" method="post">
+  <form id="rcads-question" class="container" action="/questionnaires/{{QUID}}/answers" method="post">
     <ul>
       {{#each questions}}
         <li>
@@ -12,4 +12,3 @@
   </form>
 </main>
 {{> footer}}
-<script type="text/javascript" src="/js/question.js"></script>
