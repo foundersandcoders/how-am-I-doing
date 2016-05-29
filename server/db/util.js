@@ -16,7 +16,7 @@ exports.isQuestionnaireCreatedByUser = function (Schema, quID, uID) {
     'Questionnaire',
     'find',
     { where: { id: quID, user_id: uID } },
-    (questionnaire) => !questionnaire || questionnaire.length < 1
+    (questionnaire) => questionnaire && questionnaire.length > 0
   )
 }
 
