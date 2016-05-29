@@ -75,12 +75,16 @@ exports.upsertAnswersByQuestionnaire = function (Schema, quID, answers) {
     return Promise.all(
       answers.map((answer) => {
         return new Promise((resolve, reject) => {
-          questionnaire.answer.updateOrCreate(
-            { where: { question_id: answer.question_id } },
-            answer,
-            (err, result) => {
-              return err || !result ? reject(err) : resolve(result)
-            })
+          Schema.models.QuestionnaireAnswers.updateOrCreate({
+            question_id: answer.question_id,
+            questionnaire_id: +questionnaire.id
+          }, {
+            answer: answer.answer,
+            question_id: answer.question_id,
+            questionnaire_id: +questionnaire.id
+          }, (err, result) => {
+            return err || !result ? reject(err) : resolve(result)
+          })
         })
       })
     )
