@@ -1,20 +1,29 @@
+#splash {
+  text-align: center;
+  margin-top: 5em;
+}
+
 #logo-background {
   background-color: $primary-lighter;
-  border-radius: 5px;
-  display: inline-block;
-  padding: 1em;
-  margin-bottom: 2em;
+  border-radius: 50%;
+  width: 15em;
+  height: 15em;
+  margin-bottom: 3em;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 
   #logo {
     background-image: url('/img/how-logo-86x132.png');
     height: 132px;
     width: 86px;
+    display: inline-block;
+    margin-top: 33px;
   }
 }
 
 .splash-buttons {
-  position: relative;
-  top: 10em;
+  margin-top: 3.5em;
 }
 
 .login {
