@@ -26,8 +26,6 @@ const routes = [
   'error',
   'home',
   'login',
-  'newq',
-  'qhistory',
   'resources',
   'share',
   'signup',
