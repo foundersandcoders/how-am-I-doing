@@ -1,3 +1,17 @@
 header {
-  padding: 2em;
+  h4 {
+    display: inline-block;
+    font-size: 2em;
+    margin-top: 0;
+    margin-bottom: 0;
+    line-height: 2.2em;
+  }
+
+  a {
+    float: right;
+  }
+
+  .container {
+    margin-top: 0.5em;
+  }
 }
