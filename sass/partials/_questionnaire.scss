@@ -56,6 +56,22 @@ p.body {
   }
 }
 
-.answer {
+.answer, .history {
   background-color: $primary-light;
+}
+
+.history {
+  .action {
+    & :first-child {
+      padding-right: 3em;
+    }
+
+    & :last-child {
+      padding-left: 3em;
+    }
+  }
+
+  &.waves-effect {
+    display: block;
+  }
 }

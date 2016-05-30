@@ -91,6 +91,17 @@ exports.upsertAnswersByQuestionnaire = function (Schema, quID, answers) {
   })
 }
 
+exports.getScoreByQuestionnaire = function (Schema, quID) {
+  return exports.getAnswersByQuestionnaire(Schema, quID)
+    .then((answers) => {
+      return Promise.resolve(
+        answers
+          .map((answer) => answer.answer)
+          .reduce((a, b) => a + b)
+      )
+    })
+}
+
 const promisifyQuery = exports.promisifyQuery = function (Schema, model, method, query, cb) {
   return new Promise((resolve, reject) => {
     Schema.models[model][method](query, (err, result) => {
