@@ -15,6 +15,7 @@ p.body {
 
 #rcads-questions {
   margin-bottom: 2em;
+  text-align: center;
 
   li {
     height: 80vh;
@@ -73,5 +74,11 @@ p.body {
 
   &.waves-effect {
     display: block;
+  }
+}
+
+.arrow {
+  i {
+    font-size: 3em;
   }
 }
