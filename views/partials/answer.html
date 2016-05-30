@@ -1,23 +1,24 @@
-<section class="answer">
-  <p class="question-text">{{question_text}}</p>
+<section class="answer card">
+  <div class="card-content">
+    <p class="question-text">{{question_text}}</p>
 
-  <p>You answered:</p>
+    <span>You answered:</span>
 
-  {{#if never}}
-    <p>Never</p>
+    {{#if never}}
+      <span>Never</span>
 
-  {{else if sometimes}}
-    <p>Sometimes</p>
+    {{else if sometimes}}
+      <span>Sometimes</span>
 
-  {{else if often}}
-    <p>Often</p>
+    {{else if often}}
+      <span>Often</span>
 
-  {{else if always}}
-    <p>Always</p>
+    {{else if always}}
+      <span>Always</span>
 
-  {{else}}
-    <p>Unrecognised</p>
+    {{else}}
+      <span>Unrecognised</span>
 
-  {{/if}}
-
+    {{/if}}
+  </div>
 </section>

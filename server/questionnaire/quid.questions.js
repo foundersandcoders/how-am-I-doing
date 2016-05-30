@@ -27,7 +27,11 @@ module.exports = (Schema) => {
     handler: (request, reply) => {
       util.getQuestionsByQuestionnaire(Schema, request.params.QUID)
         .then((questions) => {
-          reply.view('questionnaire-question', { questions, QUID: request.params.QUID })
+          reply.view('questionnaire-question', {
+            questions,
+            QUID: request.params.QUID,
+            heading: 'Questionnaire ' + request.params.QUID
+          })
         })
         .catch((err) => {
           reply(Boom.notFound('Oops', err))

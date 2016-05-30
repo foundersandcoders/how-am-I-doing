@@ -1,10 +1,9 @@
 {{> header}}
-<main>
-  <h1>New RCADS Questionnaire</h1>
-  <p>
+<main class="container">
+  <p class="body">
     Please select which category of questions you wish to answer in your questionnaire, then click proceed to begin the questionnaire.
   </p>
-  <form id="rcads-categories" class="container" action="/questionnaires/new/register" method="POST">
+  <form id="rcads-categories" action="/questionnaires/new/register" method="POST">
     <ul>
       {{#each categories}}
         <li>
@@ -13,7 +12,7 @@
         </li>
       {{/each}}
     </ul>
-    <input type="submit" class="btn" name="submit" value="Proceed" />
+    <input type="submit" class="btn-large" name="submit" value="Proceed" />
   </form>
 </main>
 {{> footer}}

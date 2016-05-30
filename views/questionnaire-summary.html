@@ -1,6 +1,12 @@
 {{> header}}
 <main>
-  <form id="rcads-question" class="container" action="/questionnaires/{{QUID}}/complete" method="post">
+
+  <form id="rcads-answers" class="container" action="/questionnaires/{{QUID}}/complete" method="post">
+
+    <p>
+      Please review your answers, then either save them, or click 'back' to change your answers.
+    </p>
+
     <ul>
       {{#each answers}}
         <li>
@@ -8,8 +14,13 @@
         </li>
       {{/each}}
     </ul>
-    <a href="/questionnaires/{{QUID}}/questions">Back</a>
-    <button type="submit" class="btn" name="submit" value="Complete Questionnaire" />
+
+    <div class="center">
+      <a href="/questionnaires/{{QUID}}/questions" class="btn">Back</a>
+      <input type="submit" class="btn" name="submit" value="Save" />
+    </div>
+
   </form>
+
 </main>
 {{> footer}}

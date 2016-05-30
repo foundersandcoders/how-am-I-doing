@@ -49,7 +49,8 @@ module.exports = (Schema) => {
 
           reply.view('questionnaire-summary', {
             answers: fullAnswers,
-            QUID: request.params.QUID
+            QUID: request.params.QUID,
+            heading: 'Summary ' + request.params.QUID,
           })
         })
         .catch((err) => {

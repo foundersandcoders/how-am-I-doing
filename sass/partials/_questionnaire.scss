@@ -1,0 +1,61 @@
+p.body {
+  font-size: 1.25em;
+}
+
+#rcads-categories {
+  ul {
+    margin: 2em auto;
+    width: 70%;
+  }
+
+  [type="checkbox"] + label {
+    font-size: 1.2rem;
+  }
+}
+
+#rcads-questions {
+  margin-bottom: 2em;
+
+  li {
+    height: 80vh;
+  }
+}
+
+#rcads-answers {
+  margin-bottom: 2em;
+}
+
+
+.question {
+  background-color: $primary-light;
+  margin: 25vh 0;
+  .radio {
+    display: inline-block;
+  }
+
+  input[type="radio"] + label {
+    padding: 0 0.4em;
+    border-radius: 2px;
+    background-color: $primary-lighter;
+    color: $primary-dark;
+  }
+
+  input[type="radio"] + label:before,
+  input[type="radio"] + label:after {
+    display: none;
+  }
+
+  input[type="radio"]:checked + label {
+    background-color: $primary-dark;
+    color: $primary-light;
+  }
+
+  .answers {
+    text-align: center;
+    margin: 2em 0 1.5em 0;
+  }
+}
+
+.answer {
+  background-color: $primary-light;
+}
