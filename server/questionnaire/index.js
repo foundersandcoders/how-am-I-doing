@@ -5,6 +5,7 @@ const util = require('../db/util.js')
 exports.register = function (server, options, next) {
 
   const routes = [
+    'api',
     'history',
     'new',
     'new.register',
