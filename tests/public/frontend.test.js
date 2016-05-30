@@ -1,9 +1,5 @@
-/* global d3, QUnit, createData */
+/* global d3, QUnit, createBarChart, createLineChart */
 'use strict'
-
-QUnit.test('hello test', (assert) => {
-  assert.ok(1 == '1', 'Passed!')
-})
 
 let c
 
