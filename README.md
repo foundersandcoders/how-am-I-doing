@@ -25,7 +25,7 @@ Young People and their families using Mental Health Services should be in contro
 
 ##### Benefits for Users
 * Clear intelligible feedback
-* Access to control of and personal data
+* Access to and control of personal data
 * Share clear information instantly with clinicians
 
 ##### Benefits for Clinicians
