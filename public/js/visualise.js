@@ -64,9 +64,9 @@ const margin = { top: 20, right: 30, bottom: 30, left: 40 },
   width = window.innerWidth - margin.left - margin.right,
   height = window.innerHeight / 2 - margin.top - margin.bottom
 
-const inFunc = {}
 
 const createBarChart = (data) => {
+  const inFunc = {}
 
   const sum = answerCreator(data)
 
@@ -126,6 +126,7 @@ const createBarChart = (data) => {
 }
 
 const createLineChart = (data) => {
+  const inFunc = {}
 
   const sum = answerCreator(data)
 
