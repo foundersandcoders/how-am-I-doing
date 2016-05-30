@@ -1,7 +1,6 @@
 'use strict'
 
 const Boom = require('boom')
-const util = require('../db/util.js')
 
 /*
 
