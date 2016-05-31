@@ -37,21 +37,26 @@ exports.register = function (server, options, next) {
           }
         })
 
-        fs.readFile(path.join(__dirname, '..', '..', 'views', 'mail.html'), (err, contents) => {
-          if (err) throw err
-          const template = Handlebars.compile(contents.toString())
-          const result = template(fullAnswers)
-          const data = {
-            from: 'Excited User <me@samples.mailgun.org>',
-            to: 'tom@foundersandcoders.com',
-            subject: 'RCADs',
-            text: 'something',
-            html: result
-          }
-          mailgun.messages().send(data, (error, body) => {
-            reply({
-              success: !error,
-              data: body
+        Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
+          if (errDB || !user)
+            return reply({ success: false, data: 'User not found' })
+
+          if (!user.clinic_email)
+            return reply({ success: false, data: 'No clinician email found' })
+
+          fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
+            if (err || !contents)
+              return reply({ success: false, data: 'Couldn\'t read e-mail template' })
+
+            const template = Handlebars.compile(contents.toString('utf8'))
+            const data = {
+              from: user.user_name + ' <' + user.user_email + '>',
+              to: user.clinic_email,
+              subject: 'RCADS data for ' + user.user_name,
+              html: template({ answers: fullAnswers })
+            }
+            mailgun.messages().send(data, (error, body) => {
+              reply({ success: !error, data: body })
             })
           })
         })
