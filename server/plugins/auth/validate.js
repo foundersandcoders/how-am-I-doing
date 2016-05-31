@@ -1,9 +1,9 @@
 'use strict'
 const Bcrypt = require('bcrypt')
 
-module.exports = (server) => {
+module.exports = (Schema) => {
   return (decoded, request, callback) => {
-    server.app.User.findOne({
+    Schema.models.User.findOne({
       where: { user_name: decoded.username },
       order: 'user_name' },
       (err, user) => {
@@ -14,7 +14,7 @@ module.exports = (server) => {
           return callback(null, false)
 
         Bcrypt.compare(decoded.password, user.user_secret, (error, isValid) => {
-          callback(error, isValid, { id: user.user_id, name: user.user_name })
+          callback(error, isValid, { id: user.id, name: user.user_name })
         })
       })
   }

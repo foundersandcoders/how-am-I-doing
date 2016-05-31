@@ -11,17 +11,21 @@ const path = require('path')
 const DB = require('./db/index.js')
 const Auth = require('./plugins/auth/index.js')
 const httpErrors = require('./plugins/httpErrors/index.js')
+const questionnaires = require('./questionnaire/index.js')
 
-const server = new Hapi.Server()
+const server = new Hapi.Server({
+  connections: {
+    router: {
+      stripTrailingSlash: true
+    }
+  }
+})
 
 const routes = [
-  'account',
   'dashboard',
   'error',
   'home',
   'login',
-  'newq',
-  'qhistory',
   'resources',
   'share',
   'signup',
@@ -29,7 +33,7 @@ const routes = [
 ].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
 .map(require)
 
-const plugins = [Inert, Vision, Jwt2, DB, Auth, httpErrors].concat(routes)
+const plugins = [Inert, Vision, Jwt2, DB, Auth, httpErrors, questionnaires].concat(routes)
 
 server.connection({
   port: process.env.PORT || 8000
@@ -43,10 +47,10 @@ server.register(plugins, (err) => {
       html: Handlebars
     },
     relativeTo: __dirname,
-    path: '../public/views',
+    path: '../views',
     layout: 'default',
-    layoutPath: '../public/views/layouts',
-    partialsPath: '../public/views/partials',
+    layoutPath: '../views/layouts',
+    partialsPath: '../views/partials',
     context: {
       title: 'How Am I Doing?'
     }

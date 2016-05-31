@@ -1,0 +1,14 @@
+{{> header}}
+<main>
+  <form id="rcads-questions" class="container" action="/questionnaires/{{QUID}}/answers" method="post">
+    <ul>
+      {{#each questions}}
+        <li>
+          {{> question this}}
+        </li>
+      {{/each}}
+    </ul>
+    <input type="submit" class="btn" name="submit" value="Save Answers" />
+  </form>
+</main>
+{{> footer}}

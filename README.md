@@ -25,7 +25,7 @@ Young People and their families using Mental Health Services should be in contro
 
 ##### Benefits for Users
 * Clear intelligible feedback
-* Access to control of and personal data
+* Access to and control of personal data
 * Share clear information instantly with clinicians
 
 ##### Benefits for Clinicians
@@ -77,35 +77,7 @@ The travis build is [here](https://travis-ci.org/JackTierney/How-Am-I-Doing). Do
 Ubuntu Mono
 
 ### Data Model
-
-#### User model
-##### Basic user information
-* User id: PK, Number
-* Username: String
-* Email: Email
-* Secret: String
-* ClinicEmail: Email
-* ClinicNumber: String
-
-#### Question model
-##### All RCADS questions
-* Question id: PK, Number
-* Text: String
-
-#### Questionnaire model
-##### All completed questionnaires from all users
-* Questionnaire id: PK, Number
-* Date: Date obj / String
-* Answers: Array of numbers (0-3) for each question
-
-#### Category Model
-* Cat id: PK, Number
-* Catname: String
-
-#### Relationships
-* User has many questionnaires.
-* Question has 1 category.
-* Questionnaire potentially has many categories.
+In flux. TBD.
 
 ### Dependencies
 This project uses **caminte** for ORM. Read the documentation [here](http://www.camintejs.com/en/guide).

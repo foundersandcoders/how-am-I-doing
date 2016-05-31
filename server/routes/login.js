@@ -12,32 +12,30 @@ exports.register = function (server, options, next) {
       method: 'GET',
       path: '/login',
       handler: (request, reply) => {
-        const validate = validator(server)
+        if (! request.state.token)
+          return reply.view('login')
 
-        if (request.state.token) {
-          const isVerified = Jwt.verify(request.state.token, process.env.JWT_KEY)
+        const validate = validator(server.app.Schema)
+        const isVerified = Jwt.verify(request.state.token, process.env.JWT_KEY)
 
-          if (isVerified) {
-            const decoded = Jwt.decode(request.state.token)
-            validate(decoded, request, (err, isValid) => {
-              if (err || !isValid)
-                return reply.view('login').unstate('token')
+        if (isVerified) {
+          const decoded = Jwt.decode(request.state.token)
+          validate(decoded, request, (err, isValid) => {
+            if (err || !isValid)
+              return reply.view('login').unstate('token')
 
-              return reply.redirect('/dashboard')
-            })
-          }
-
+            return reply.redirect('/dashboard')
+          })
+        } else {
           return reply.view('login').unstate('token')
         }
-
-        reply.view('login')
       },
       config: { auth: false }
     }, {
       method: 'POST',
       path: '/api/login',
       handler: (request, reply) => {
-        const validate = validator(server)
+        const validate = validator(server.app.Schema)
 
         validate({
           username: request.payload.username,

@@ -26,6 +26,8 @@ module.exports = () => {
   require('./models/question.js')(Schema)
   require('./models/questionnaire.js')(Schema)
   require('./models/category.js')(Schema)
+  require('./models/questionnaireAnswers.js')(Schema)
+  require('./models/questionnaireCategories.js')(Schema)
 
   Schema.adapter.dropAllTables = function (cb) {
     let wait = 0

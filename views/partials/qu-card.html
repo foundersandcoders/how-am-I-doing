@@ -1,0 +1,17 @@
+<section id="{{id}}" class="history card waves-effect">
+  <div class="card-content white-text">
+    <p class="card-title">{{questionnaire_date}}</p>
+
+    <div class="center action">
+      <span>
+        {{#if completed}}
+          Complete
+        {{else}}
+          Incomplete
+        {{/if}}
+      </span>
+
+      <span>Total: {{score}}</span>
+    </div>
+  </div>
+</section>
