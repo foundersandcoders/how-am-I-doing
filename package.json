@@ -14,7 +14,7 @@
     "start": "node server/index.js",
     "test": "node_modules/.bin/mocha tests/runner.js",
     "cover": "node_modules/.bin/istanbul cover node_modules/.bin/_mocha tests/runner.js",
-    "heroku": "bash build.sh && node server/index.js",
+    "heroku": "bash build.sh && npm run db:migrate && node server/index.js",
     "db:migrate": "node ./assets/js/db/migrate.js",
     "db:flush": "node ./assets/js/db/flush.js",
     "db:drop": "node ./assets/js/db/drop.js"
