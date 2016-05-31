@@ -67,7 +67,7 @@ $ npm test
 ```
 
 ### Travis
-The travis build is [here](https://travis-ci.org/JackTierney/How-Am-I-Doing). Don't break it! It runs tests and checks for linter errors.
+The travis build is [here](https://travis-ci.org/foundersandcoders/How-Am-I-Doing). Don't break it! It runs tests and checks for linter errors.
 
 ### Style Guide
 #### Colours
