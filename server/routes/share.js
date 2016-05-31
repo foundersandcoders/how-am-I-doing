@@ -14,7 +14,7 @@ exports.register = function (server, options, next) {
   const Schema = server.app.Schema
 
   server.route({
-    method: 'GET',
+    method: 'POST',
     path: '/share/{QUID}',
     handler: (request, reply) => {
       let answers
