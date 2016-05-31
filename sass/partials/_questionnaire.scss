@@ -62,18 +62,21 @@ p.body {
 }
 
 .history {
-  .action {
-    & :first-child {
-      padding-right: 3em;
-    }
-
-    & :last-child {
-      padding-left: 3em;
-    }
-  }
-
   &.waves-effect {
     display: block;
+  }
+
+  .share {
+    margin-right: 0 !important;
+  }
+
+  .card-action {
+    border-top: 1px solid $primary-lighter;
+    padding-bottom: 0;
+  }
+
+  .card-action:hover {
+    cursor: pointer;
   }
 }
 
