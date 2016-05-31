@@ -30,6 +30,9 @@ module.exports = (Schema) => {
               scripts: ['/js/questionnaires.history.js']
             })
           })
+          .catch((error) => {
+            reply(Boom.badImplementation('DB error', error))
+          })
       })
     }
   }
