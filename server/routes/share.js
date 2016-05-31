@@ -63,16 +63,25 @@ exports.register = function (server, options, next) {
     if (/\/share\/\d+/.test(request.path)) {
       util.isQuestionnaireCompleted(server.app.Schema, request.params.QUID)
         .then((isCompleted) => {
-          if (!isCompleted)
-            return reply({ success: false })
+          if (!isCompleted) {
+            return reply({
+              success: false,
+              data: 'Questionnaire' + request.params.QUID + 'marked completed'
+            })
+          }
 
           return util.isQuestionnaireCreatedByUser(
             server.app.Schema, request.params.QUID, request.auth.credentials.id
           )
         })
         .then((isAuthorised) => {
-          if (!isAuthorised)
-            return reply.redirect('/questionnaires/history')
+          if (!isAuthorised) {
+            return reply({
+              success: false,
+              data: 'User ' + request.auth.credentials.name +
+                    ' does not own questionnaire ' + request.params.QUID
+            })
+          }
 
           return reply.continue()
         })
