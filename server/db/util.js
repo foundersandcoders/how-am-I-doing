@@ -97,7 +97,7 @@ exports.getScoreByQuestionnaire = function (Schema, quID) {
       return Promise.resolve(
         answers
           .map((answer) => answer.answer)
-          .reduce((a, b) => a + b)
+          .reduce((a, b) => a + b, 0)
       )
     })
 }
