@@ -1,26 +1,29 @@
 /* global $ */
 'use strict'
 
-const xhttp = new XMLHttpRequest()
-
 ;(function () {
   $('.history').each((i, el) => {
     $(el).click((e) => {
-      if (!e.target.disabled && e.target.classList.contains('share')) {
-        xhttp.onreadystatechange = function () {
-          if (xhttp.readyState === 4 && xhttp.status === 200
-            && JSON.parse(xhttp.responseText).success === true) {
-            console.log('Done')
-            e.target.classList.add('disabled')
-            e.target.disabled = true
-            e.target.innerHTML = 'Sent'
-          }
+      const QUID = e.target.closest('.history').id
+
+      if (e.target.classList.contains('share')) {
+        if (!e.target.disabled) {
+          $.post('/share/' + QUID)
+            .done((result) => {
+              e.target.innerHTML = result.success ? 'Sent' : 'Failed'
+            })
+            .fail(() => {
+              e.target.innerHTML = 'Failed'
+            })
+            .always(() => {
+              e.target.style.opacity = 0.5
+              e.target.disabled = true
+            })
         }
-        xhttp.open('GET', '/share/' + e.target.closest('.history').id)
-        xhttp.send()
+
       } else {
-        const QUID = e.target.closest('.history').id
         location.href = '/questionnaires/' + QUID + '/summary'
+
       }
     })
   })
