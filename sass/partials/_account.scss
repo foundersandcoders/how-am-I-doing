@@ -1,0 +1,20 @@
+.account-item{
+  .card-action {
+    padding-bottom: 0;
+  }
+  &.card {
+    background-color: $primary-light;
+  }
+
+  input:not([type=submit]) {
+    border-bottom: 1px solid $white;
+    margin-bottom: 0;
+    & + label {
+      color: $white;
+    }
+  }
+
+  .card-content {
+    color: $white;
+  }
+}

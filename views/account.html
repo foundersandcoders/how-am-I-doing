@@ -1,57 +1,102 @@
 {{> header}}
 <main class="container">
 
-  <section id="username">
-    <p>
-      Username: {{user.user_name}}
-    </p>
-    <form action="/api/user" method="post">
-      <input type="text" name="user_name" value="" placeholder="New username" required>
-      <input type="text" name="confirm_username" value="" placeholder="Confirm username" required>
-      <input type="submit" name="submit" value="Submit">
+  <section id="username" class="card account-item">
+    <form action="/api/user" method="post" class="card-content">
+      <p>
+        Username: {{user.user_name}}
+      </p>
+
+      <div class="input-field">
+        <input id="user_name" type="text" name="user_name" required>
+        <label for="user_name">New username</label>
+      </div>
+
+      <div class="input-field">
+        <input id="confirm_username" type="text" name="confirm_username" required>
+        <label for="confirm_username">Confirm new username</label>
+      </div>
+
+      <div class="card-action center">
+        <input type="submit" name="submit" value="Submit">
+      </div>
     </form>
   </section>
 
-  <section id="user-email">
-    <p>
-      E-mail: {{user.user_email}}
-    </p>
-    <form action="/api/user" method="post">
-      <input type="text" name="user_email" value="" placeholder="New email" required>
-      <input type="text" name="confirm_user_email" value="" placeholder="Confirm email" required>
-      <input type="submit" name="submit" value="Submit">
+  <section id="user-email" class="card account-item">
+    <form action="/api/user" method="post" class="card-content">
+      <p>
+        E-mail: {{user.user_email}}
+      </p>
+      <div class="input-field">
+        <input id="user_email" type="text" name="user_email" required>
+        <label for="user_email">New e-mail</label>
+      </div>
+
+      <div class="input-field">
+        <input id="confirm_user_email" type="text" name="confirm_user_email" required>
+        <label for="confirm_user_email">Confirm new e-mail</label>
+      </div>
+
+      <div class="card-action center">
+        <input type="submit" name="submit" value="Submit">
+      </div>
     </form>
   </section>
 
-  <section id="clinic-email">
-    <p>
-      Clinician E-mail: {{user.clinic_email}}
-    </p>
-    <form action="/api/user" method="post">
-      <input type="text" name="clinic_email" value="" placeholder="New clinician email" required>
-      <input type="text" name="confirm_clinic_email" value="" placeholder="Confirm clinician email" required>
-      <input type="submit" name="submit" value="Submit">
+  <section id="clinic-email" class="card account-item">
+    <form action="/api/user" method="post" class="card-content">
+      <p>
+        Clinician E-mail: {{user.clinic_email}}
+      </p>
+
+      <div class="input-field">
+        <input id="clinic_email" type="text" name="clinic_email" required>
+        <label for="clinic_email">New clinician e-mail</label>
+      </div>
+
+      <div class="input-field">
+        <input id="confirm_clinic_email" type="text" name="confirm_clinic_email" required>
+        <label for="confirm_clinic_email">Confirm clinician e-mail</label>
+      </div>
+
+      <div class="card-action center">
+        <input type="submit" name="submit" value="Submit">
+      </div>
     </form>
   </section>
 
-  <section id="clinic-number">
-    <p>
-      Clinician Number: {{user.clinic_number}}
-    </p>
-    <form action="/api/user" method="post">
-      <input type="text" name="clinic_number" value="" placeholder="New clinician number" required>
-      <input type="text" name="confirm_clinic_number" value="" placeholder="Confirm clinician number" required>
-      <input type="submit" name="submit" value="Submit">
+  <section id="clinic-number" class="card account-item">
+    <form action="/api/user" method="post" class="card-content">
+      <p>
+        Clinician Number: {{user.clinic_number}}
+      </p>
+
+      <div class="input-field">
+        <input id="clinic_number" type="text" name="clinic_number" required>
+        <label for="clinic_number">New clinician number</label>
+      </div>
+
+      <div class="input-field">
+        <input id="confirm_clinic_number" type="text" name="confirm_clinic_number" required>
+        <label for="confirm_clinic_number">Confirm clinician number</label>
+      </div>
+
+      <div class="card-action center">
+        <input type="submit" name="submit" value="Submit">
+      </div>
     </form>
   </section>
 
-  <section id="delete account">
-    <p>
-      Delete your account
-    </p>
-    <form action="/api/user" method="post">
+  <section id="delete account" class="card account-item">
+    <form action="/api/user" method="post" class="card-content">
+      <p class="center">
+        Delete your account?
+      </p>
       <input type="hidden" name="delete" value="true">
-      <input type="submit" name="submit" value="Delete">
+      <div class="card-action center">
+        <input type="submit" name="submit" value="Delete">
+      </div>
     </form>
   </section>
 
