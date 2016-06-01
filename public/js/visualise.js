@@ -1,7 +1,5 @@
 /* global d3 */
 
-(function () {
-  'use strict'
 
   var dummyData = [
     {
@@ -32,6 +30,7 @@
   ]
 
   var answerCreator = function (data) {
+    'use strict'
     var qAnswers = data.map(function (el) {
       return el.questionnaire_answers
     })
@@ -44,6 +43,7 @@
   }
 
   var dateCreator = function (data) {
+    'use strict'
     var qDates = data.map(function (el) {
       return new Date(el.questionnaire_date)
     })
@@ -51,6 +51,7 @@
   }
 
   var createData = function (dateArr, sumArr) {
+    'use strict'
     var a = dateArr.map(function (date) {
       return { date: date }
     })
@@ -68,6 +69,7 @@
 
 
   var createBarChart = function (data) {
+    'use strict'
     var inFunc = {}
 
     var sum = answerCreator(data)
@@ -128,6 +130,7 @@
   }
 
   var createLineChart = function (data) {
+    'use strict'
     var inFunc = {}
 
     var sum = answerCreator(data)
@@ -194,6 +197,7 @@
   var isDisplayingBar = true
 
   document.getElementsByClassName('chart')[0].addEventListener('click', function () {
+    'use strict'
     document.getElementsByClassName('chart')[0].innerHTML = ''
     if (isDisplayingBar) {
       createLineChart(dummyData).render()
@@ -203,4 +207,3 @@
       isDisplayingBar = true
     }
   })
-})()
