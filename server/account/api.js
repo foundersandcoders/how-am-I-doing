@@ -21,6 +21,8 @@ module.exports = (Schema) => {
         return acc
       }, {})
 
+// code below to be altered in the future to prevent complete deletion of user account
+
       if (data.delete) {
         Schema.models.User.remove({
           where: { id: request.auth.credentials.id }
