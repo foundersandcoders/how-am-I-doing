@@ -29,30 +29,30 @@ const dummyData = [
   }
 ]
 
-const answerCreator = (data) => {
-  const qAnswers = data.map((el) => {
+const answerCreator = function (data) {
+  const qAnswers = data.map( function (el) {
     return el.questionnaire_answers
   })
-  const sum = qAnswers.map((el) => {
-    return el.reduce((a, b) => {
+  const sum = qAnswers.map(function (el) {
+    return el.reduce(function (a, b) {
       return a + b
     })
   })
   return sum
 }
 
-const dateCreator = (data) => {
-  const qDates = data.map((el) => {
+const dateCreator = function (data) {
+  const qDates = data.map(function (el) {
     return new Date(el.questionnaire_date)
   })
   return qDates
 }
 
-const createData = (dateArr, sumArr) => {
-  const a = dateArr.map((date) => {
+const createData = function (dateArr, sumArr) {
+  const a = dateArr.map(function (date) {
     return { date }
   })
-  sumArr.forEach((val, i) => {
+  sumArr.forEach(function (val, i) {
     a[i].val = val
   })
   return a
@@ -65,7 +65,7 @@ const margin = { top: 20, right: 30, bottom: 30, left: 40 },
   height = window.innerHeight / 2 - margin.top - margin.bottom
 
 
-const createBarChart = (data) => {
+const createBarChart = function (data) {
   const inFunc = {}
 
   const sum = answerCreator(data)
@@ -80,11 +80,11 @@ const createBarChart = (data) => {
   .range([height, 0])
   .domain([0, d3.max(sum)])
 
-  inFunc.render = () => {
+  inFunc.render = function () {
     const xAxis = d3.svg.axis()
     .scale(inFunc.x)
     .orient('bottom')
-    .tickFormat((d) => formatDate(new Date(d)))
+    .tickFormat(function (d) formatDate(new Date(d)))
     .ticks(4)
 
     const yAxis = d3.svg.axis()
@@ -116,16 +116,16 @@ const createBarChart = (data) => {
     .data(createData(qDates, sum))
     .enter().append('rect')
     .attr('class', 'bar')
-    .attr('x', (d) => {return inFunc.x(d.date)})
-    .attr('y', (d) => {return inFunc.y(d.val)})
-    .attr('height', (d) => {return height - inFunc.y(d.val)})
+    .attr('x', function (d) {return inFunc.x(d.date)})
+    .attr('y', function (d) {return inFunc.y(d.val)})
+    .attr('height', function (d) {return height - inFunc.y(d.val)})
     .attr('width', inFunc.x.rangeBand())
 
   }
   return inFunc
 }
 
-const createLineChart = (data) => {
+const createLineChart = function (data) {
   const inFunc = {}
 
   const sum = answerCreator(data)
@@ -136,19 +136,19 @@ const createLineChart = (data) => {
   console.log(datei)
 
   inFunc.x = d3.time.scale()
-      .domain(d3.extent(datei, (d) => d.date))
+      .domain(d3.extent(datei, function (d) d.date))
       .range([0, width])
       .nice()
 
   inFunc.y = d3.scale.linear()
-      .domain([0, d3.max(datei, (d) => d.val)])
+      .domain([0, d3.max(datei, function (d) d.val)])
       .range([height, 0])
 
-  inFunc.render = () => {
+  inFunc.render = function () {
     const xAxis = d3.svg.axis()
       .scale(inFunc.x)
       .orient('bottom')
-      .tickFormat((d) => formatDate(new Date(d)))
+      .tickFormat(function (d) formatDate(new Date(d)))
       .ticks(4)
 
     const yAxis = d3.svg.axis()
@@ -156,8 +156,8 @@ const createLineChart = (data) => {
       .orient('left')
 
     const line = d3.svg.line()
-      .x((d) => inFunc.x(d.date))
-      .y((d) => inFunc.y(d.val))
+      .x(function (d) inFunc.x(d.date))
+      .y(function (d)inFunc.y(d.val))
 
     const chart = d3.select('.chart')
       .attr('width', width + margin.left + margin.right)
@@ -191,7 +191,7 @@ createBarChart(dummyData).render()
 
 let isDisplayingBar = true
 
-document.getElementsByClassName('chart')[0].addEventListener('click', () => {
+document.getElementsByClassName('chart')[0].addEventListener('click', function () {
   document.getElementsByClassName('chart')[0].innerHTML = ''
   if (isDisplayingBar) {
     createLineChart(dummyData).render()
