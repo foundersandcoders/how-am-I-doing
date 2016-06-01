@@ -13,7 +13,7 @@ exports.register = function (server, options, next) {
       path: '/login',
       handler: (request, reply) => {
         if (! request.state.token)
-          return reply.view('login')
+          return reply.view('login', { heading: 'Login' })
 
         const validate = validator(server.app.Schema)
         const isVerified = Jwt.verify(request.state.token, process.env.JWT_KEY)
@@ -22,12 +22,12 @@ exports.register = function (server, options, next) {
           const decoded = Jwt.decode(request.state.token)
           validate(decoded, request, (err, isValid) => {
             if (err || !isValid)
-              return reply.view('login').unstate('token')
+              return reply.view('login', { heading: 'Login' }).unstate('token')
 
             return reply.redirect('/dashboard')
           })
         } else {
-          return reply.view('login').unstate('token')
+          return reply.view('login', { heading: 'Login' }).unstate('token')
         }
       },
       config: { auth: false }

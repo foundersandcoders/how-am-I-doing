@@ -15,7 +15,7 @@ exports.register = function (server, options, next) {
     method: 'GET',
     path: '/signup',
     handler: (request, reply) => {
-      reply.view('signup')
+      reply.view('signup', { heading: 'Sign up' })
     },
     config: { auth: false }
   }, {
