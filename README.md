@@ -67,7 +67,31 @@ $ npm test
 ```
 
 ### Travis
-The travis build is [here](https://travis-ci.org/JackTierney/How-Am-I-Doing). Don't break it! It runs tests and checks for linter errors.
+The travis build is [here](https://travis-ci.org/foundersandcoders/How-Am-I-Doing). Don't break it! It runs tests and checks for linter errors.
+
+### Getting Started
+Make sure you have the following installed:
+* SASS
+* PostgreSQL
+
+Install the npm modules
+```
+$ npm i
+```
+
+Migrate the database:
+```
+$ npm run db:migrate
+```
+
+Then run either:
+```
+$ npm start
+```
+or
+```
+$ npm run watch
+```
 
 ### Style Guide
 #### Colours
