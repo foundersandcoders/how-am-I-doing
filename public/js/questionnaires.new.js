@@ -13,8 +13,6 @@
       .attr('value', JSON.stringify(cat_ids))
       .appendTo(form)
 
-    $('input[name=category]').remove()
-
     return true
   })
 })()
