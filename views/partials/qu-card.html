@@ -1,17 +1,33 @@
 <section id="{{id}}" class="history card waves-effect">
   <div class="card-content white-text">
-    <p class="card-title">{{questionnaire_date}}</p>
 
-    <div class="center action">
-      <span>
-        {{#if completed}}
-          Complete
-        {{else}}
-          Incomplete
-        {{/if}}
-      </span>
+    <div class="row center">
+      <div class="col s12 m4">
+        <span>
+          {{questionnaire_date}}
+        </span>
+      </div>
 
-      <span>Total: {{score}}</span>
+      <div class="col s12 m4">
+        <span>
+          {{#if completed}}
+            Complete
+          {{else}}
+            Incomplete
+          {{/if}}
+        </span>
+      </div>
+
+      <div class="col s12 m4">
+        <span>
+          Total: {{score}}
+        </span>
+      </div>
     </div>
+
+    <div class="card-action center share">
+      Share
+    </div>
+
   </div>
 </section>

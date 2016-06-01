@@ -1,0 +1,32 @@
+<h1>Hi there. Here are my results!</h1>
+
+<ul>
+  {{#each answers}}
+    <li>
+      <section class="answer card">
+        <div class="card-content">
+          <p class="question-text">{{question_text}}</p>
+
+          <span>You answered:</span>
+
+          {{#if never}}
+            <span>Never</span>
+
+          {{else if sometimes}}
+            <span>Sometimes</span>
+
+          {{else if often}}
+            <span>Often</span>
+
+          {{else if always}}
+            <span>Always</span>
+
+          {{else}}
+            <span>Unrecognised</span>
+
+          {{/if}}
+        </div>
+      </section>
+    </li>
+  {{/each}}
+</ul>

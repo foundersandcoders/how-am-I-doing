@@ -22,6 +22,11 @@ const server = new Hapi.Server({
   }
 })
 
+server.app.DIR_ROOT = path.resolve(__dirname, '..')
+server.app.DIR_SERVER = __dirname
+server.app.DIR_VIEWS = path.resolve(__dirname, '..', 'views')
+server.app.DIR_PUBLIC = path.resolve(__dirname, '..', 'public')
+
 const routes = [
   'dashboard',
   'error',
@@ -47,11 +52,11 @@ server.register(plugins, (err) => {
     engines: {
       html: Handlebars
     },
-    relativeTo: __dirname,
-    path: '../views',
+    relativeTo: server.app.DIR_ROOT,
+    path: 'views',
     layout: 'default',
-    layoutPath: '../views/layouts',
-    partialsPath: '../views/partials',
+    layoutPath: path.join(server.app.DIR_VIEWS, 'layouts'),
+    partialsPath: path.join(server.app.DIR_VIEWS, 'partials'),
     context: {
       title: 'How Am I Doing?'
     }

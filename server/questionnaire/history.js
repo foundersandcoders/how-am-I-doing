@@ -31,7 +31,7 @@ module.exports = (Schema) => {
             })
           })
           .catch((error) => {
-            reply(Boom.badImplementation('Unknown error', error))
+            reply(Boom.badImplementation('DB error', error))
           })
       })
     }
