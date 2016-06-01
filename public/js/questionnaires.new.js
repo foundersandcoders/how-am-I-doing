@@ -1,11 +1,11 @@
 /* global $ */
-'use strict'
 
-;(function () {
+(function () {
+  'use strict'
   $('#rcads-categories').submit(function (e) {
-    const form = $(e.target)
-    const checked = $('input[type=checkbox]:checked')
-    const cat_ids = Array.prototype.map.call(checked, function (n) {return +n.id})
+    var form = $(e.target)
+    var checked = $('input[type=checkbox]:checked')
+    var cat_ids = Array.prototype.map.call(checked, function (n) {return +n.id})
 
     $('<input />')
       .attr('type', 'hidden')
