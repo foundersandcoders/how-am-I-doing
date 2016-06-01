@@ -2,10 +2,10 @@
 'use strict'
 
 ;(function () {
-  $('#rcads-categories').submit((e) => {
+  $('#rcads-categories').submit(function (e) {
     const form = $(e.target)
     const checked = $('input[type=checkbox]:checked')
-    const cat_ids = Array.prototype.map.call(checked, (n) => +n.id)
+    const cat_ids = Array.prototype.map.call(checked, function (n) {return +n.id})
 
     $('<input />')
       .attr('type', 'hidden')
