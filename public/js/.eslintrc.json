@@ -1,19 +1,15 @@
 {
   "parseOptions": {
-    "ecmaVersion": 6,
-    "sourceType": "module",
+    "ecmaVersion": 5,
+    "sourceType": "script",
     "ecmaFeatures": {
-      "impliedStrict": true,
-      "jsx": true,
-      "experimentalObjectRestSpread": true
+      "impliedStrict": true
     }
   },
   "env": {
     "browser": true,
-    "node": true,
-    "es6": true,
-    "mocha": true,
-    "jasmine": true
+    "node": false,
+    "es6": false
   },
   "rules": {
     "comma-dangle": ["error", "only-multiline"],
@@ -132,7 +128,7 @@
     "no-unneeded-ternary": "error",
     "no-whitespace-before-property": "error",
     "object-curly-spacing": ["error", "always"],
-    "prefer-arrow-callback": "error",
+    "prefer-arrow-callback": "off",
     "quote-props": ["error", "consistent-as-needed"],
     "quotes": ["error", "single"],
     "semi": ["error", "never"],
@@ -143,9 +139,8 @@
     "arrow-spacing": "error",
     "constructor-super": "error",
     "no-class-assign": "error",
+    "no-var": "off",
     "no-useless-constructor": "error",
-    "no-var": "error",
-    "prefer-const": "error",
     "require-yield": "error"
   }
 }
