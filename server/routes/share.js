@@ -5,7 +5,7 @@ const util = require('../db/util.js')
 const fs = require('fs')
 const path = require('path')
 const mailgun = require('mailgun-js')({
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.MAILGUN_API_KEY,
   domain: process.env.MAILGUN_DOMAIN
 })
 
@@ -39,14 +39,14 @@ exports.register = function (server, options, next) {
 
         Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
           if (errDB || !user)
-            return reply({ success: false, data: 'User not found' })
+            return reply({ success: false, error: null, body: 'User not found' })
 
           if (!user.clinic_email)
-            return reply({ success: false, data: 'No clinician email found' })
+            return reply({ success: false, error: null, body: 'No clinician email found' })
 
           fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
             if (err || !contents)
-              return reply({ success: false, data: 'Couldn\'t read e-mail template' })
+              return reply({ success: false, error: null, body: 'Couldn\'t read e-mail template' })
 
             const template = Handlebars.compile(contents.toString('utf8'))
             const data = {
@@ -56,7 +56,7 @@ exports.register = function (server, options, next) {
               html: template({ answers: fullAnswers })
             }
             mailgun.messages().send(data, (error, body) => {
-              reply({ success: !error, data: body })
+              reply({ success: !error, error, body })
             })
           })
         })
@@ -71,7 +71,8 @@ exports.register = function (server, options, next) {
           if (!isCompleted) {
             return reply({
               success: false,
-              data: 'Questionnaire' + request.params.QUID + 'marked completed'
+              error: null,
+              body: 'Questionnaire' + request.params.QUID + 'marked completed'
             })
           }
 
@@ -83,7 +84,8 @@ exports.register = function (server, options, next) {
           if (!isAuthorised) {
             return reply({
               success: false,
-              data: 'User ' + request.auth.credentials.name +
+              error: null,
+              body: 'User ' + request.auth.credentials.name +
                     ' does not own questionnaire ' + request.params.QUID
             })
           }

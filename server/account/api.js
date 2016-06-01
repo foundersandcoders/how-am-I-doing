@@ -17,7 +17,8 @@ module.exports = (Schema) => {
       ]
 
       const data = fields.reduce((acc, f) => {
-        acc[f] = request.payload[f]
+        if (request.payload[f])
+          acc[f] = request.payload[f]
         return acc
       }, {})
 
@@ -34,7 +35,7 @@ module.exports = (Schema) => {
         })
       } else {
         Schema.models.User.update({
-          id: request.auth.credentials.id
+          where: { id: request.auth.credentials.id }
         }, data, (err, user) => {
           if (err || !user)
             return reply(Boom.badImplementation('DB Error', err))
