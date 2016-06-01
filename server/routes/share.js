@@ -38,16 +38,17 @@ exports.register = function (server, options, next) {
         })
 
         Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
+          console.log('User model callback', errDB, user)
           if (errDB || !user)
             return reply({ success: false, data: 'User not found' })
-
+          console.log('No DB error')
           if (!user.clinic_email)
             return reply({ success: false, data: 'No clinician email found' })
-
+          console.log('No clinician email error')
           fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
             if (err || !contents)
               return reply({ success: false, data: 'Couldn\'t read e-mail template' })
-
+            console.log('No file read error')
             const template = Handlebars.compile(contents.toString('utf8'))
             const data = {
               from: user.user_name + ' <' + user.user_email + '>',
@@ -56,6 +57,7 @@ exports.register = function (server, options, next) {
               html: template({ answers: fullAnswers })
             }
             mailgun.messages().send(data, (error, body) => {
+              console.log('After sent: ', data, error, body)
               reply({ success: !error, data: body })
             })
           })
