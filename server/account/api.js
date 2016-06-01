@@ -21,7 +21,7 @@ module.exports = (Schema) => {
         return acc
       }, {})
 
-// code below to be altered in the future to prevent complete deletion of user account
+      // code below to be altered in the future to prevent complete deletion of user account
 
       if (data.delete) {
         Schema.models.User.remove({
@@ -54,6 +54,7 @@ module.exports = (Schema) => {
           confirm_clinic_email: Joi.any().valid(Joi.ref('clinic_email')),
           clinic_number: Joi.string().alphanum(),
           confirm_clinic_number: Joi.any().valid(Joi.ref('clinic_number')),
+          delete: Joi.boolean(),
           action: Joi.any(),
           submit: Joi.any()
         }
