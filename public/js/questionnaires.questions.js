@@ -17,16 +17,16 @@
     scrollToId('prev-' + nextNodeId)
   }
 
-  $('[id^=prev-]').each((i, element) => {
-    $(element).click((e) => {
+  $('[id^=prev-]').each(function (i, element) {
+    $(element).click(function (e) {
       e.preventDefault()
       const current = e.target.closest('.arrow').id.slice(5)
       scrollPrev(current)
     })
   })
 
-  $('[id^=next-]').each((i, element) => {
-    $(element).click((e) => {
+  $('[id^=next-]').each(function (i, element) {
+    $(element).click(function (e) {
       e.preventDefault()
       const current = e.target.closest('.arrow').id.slice(5)
       scrollNext(current)
