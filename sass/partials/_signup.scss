@@ -1,4 +1,5 @@
-textarea:focus:not([readonly]) {
-    border-bottom: 1px solid $primary-light;
-    box-shadow: 0 1px 0 0 $primary-lighter;
+#signup-form {
+  .row {
+    margin-bottom: 0;
+  }
 }
