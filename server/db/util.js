@@ -51,7 +51,7 @@ exports.getQuestionsByQuestionnaire = function (Schema, quID) {
   return (
     exports.getCategoriesByQuestionnaire(Schema, quID)
       .then((categories) => {
-        return exports.getQuestionsByCategories(Schema, categories.map((cat) => cat.id))
+        return exports.getQuestionsByCategories(Schema, categories.map((cat) => cat.cat_id))
       })
   )
 }
