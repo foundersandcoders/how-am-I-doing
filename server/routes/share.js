@@ -5,7 +5,7 @@ const util = require('../db/util.js')
 const fs = require('fs')
 const path = require('path')
 const mailgun = require('mailgun-js')({
-  apiKey: process.env.API_KEY,
+  apiKey: process.env.MAILGUN_API_KEY,
   domain: process.env.MAILGUN_DOMAIN
 })
 
