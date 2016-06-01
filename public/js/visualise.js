@@ -61,9 +61,8 @@ const createData = function (dateArr, sumArr) {
 const formatDate = d3.time.format('%a %d/%m/%Y')
 
 const margin = { top: 20, right: 30, bottom: 30, left: 40 },
-  width = window.innerWidth - margin.left - margin.right,
-  height = window.innerHeight / 2 - margin.top - margin.bottom
-
+  width = Math.min(window.innerWidth, 800) - margin.left - margin.right,
+  height = Math.min(window.innerHeight, 800) / 2 - margin.top - margin.bottom
 
 const createBarChart = function (data) {
   const inFunc = {}
