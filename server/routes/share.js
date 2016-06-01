@@ -38,17 +38,16 @@ exports.register = function (server, options, next) {
         })
 
         Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
-          console.log('User model callback', errDB, user)
           if (errDB || !user)
-            return reply({ success: false, data: 'User not found' })
-          console.log('No DB error')
+            return reply({ success: false, error: null, body: 'User not found' })
+
           if (!user.clinic_email)
-            return reply({ success: false, data: 'No clinician email found' })
-          console.log('No clinician email error')
+            return reply({ success: false, error: null, body: 'No clinician email found' })
+
           fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
             if (err || !contents)
-              return reply({ success: false, data: 'Couldn\'t read e-mail template' })
-            console.log('No file read error')
+              return reply({ success: false, error: null, body: 'Couldn\'t read e-mail template' })
+
             const template = Handlebars.compile(contents.toString('utf8'))
             const data = {
               from: user.user_name + ' <' + user.user_email + '>',
@@ -57,8 +56,7 @@ exports.register = function (server, options, next) {
               html: template({ answers: fullAnswers })
             }
             mailgun.messages().send(data, (error, body) => {
-              console.log('After sent: ', data, error, body)
-              reply({ success: !error, data: body })
+              reply({ success: !error, error, body })
             })
           })
         })
@@ -73,7 +71,8 @@ exports.register = function (server, options, next) {
           if (!isCompleted) {
             return reply({
               success: false,
-              data: 'Questionnaire' + request.params.QUID + 'marked completed'
+              error: null,
+              body: 'Questionnaire' + request.params.QUID + 'marked completed'
             })
           }
 
@@ -85,7 +84,8 @@ exports.register = function (server, options, next) {
           if (!isAuthorised) {
             return reply({
               success: false,
-              data: 'User ' + request.auth.credentials.name +
+              error: null,
+              body: 'User ' + request.auth.credentials.name +
                     ' does not own questionnaire ' + request.params.QUID
             })
           }
