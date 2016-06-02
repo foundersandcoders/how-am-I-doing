@@ -19,48 +19,65 @@ exports.register = function (server, options, next) {
     handler: (request, reply) => {
       let answers
 
-      util.getAnswersByQuestionnaire(Schema, request.params.QUID)
-      .then((results) => {
+      const cats = util.getCategoriesByQuestionnaire(Schema, request.params.QUID)
+      const answ = util.getAnswersByQuestionnaire(Schema, request.params.QUID)
+      const quest = util.promisifyQuery(Schema, 'Questionnaire', 'findById', request.params.QUID)
+
+      const qus = answ.then((results) => {
         answers = results
         const qIDs = answers.map((answer) => answer.question_id)
         return util.getQuestionsById(Schema, qIDs)
       })
-      .then((questions) => {
-        const fullAnswers = answers.map((answer) => {
-          const q = questions.filter((question) => question.id === answer.question_id)
-          return {
-            question_text: q[0].question_text,
-            never: answer.answer === 0,
-            sometimes: answer.answer === 1,
-            often: answer.answer === 2,
-            always: answer.answer === 3
-          }
-        })
 
-        Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
-          if (errDB || !user)
-            return reply({ success: false, error: null, body: 'User not found' })
+      const catObjs = cats.then((cat) => {
+        const c = cat.map((a) => a.cat_id)
+        return util.promisifyQuery(Schema, 'Category', 'find', { where: { cat_id: { in: c } } })
+      })
 
-          if (!user.clinic_email)
-            return reply({ success: false, error: null, body: 'No clinician email found' })
+      Promise.all([catObjs, qus, quest])
+        .then((results) => {
+          const categories = results[0].map((c) => c.cat_name)
+          const questions = results[1]
+          const questionnaire = results[2]
 
-          fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
-            if (err || !contents)
-              return reply({ success: false, error: null, body: 'Couldn\'t read e-mail template' })
+          const fullAnswers = answers
+            .map((answer) => {
+              const q = questions.filter((question) => question.id === answer.question_id)
+              return {
+                text: q[0].question_text,
+                id: q[0].id,
+                answer: answer.answer,
+              }
+            })
 
-            const template = Handlebars.compile(contents.toString('utf8'))
-            const data = {
-              from: user.user_name + ' <' + user.user_email + '>',
-              to: user.clinic_email,
-              subject: 'RCADS data for ' + user.user_name,
-              html: template({ answers: fullAnswers })
-            }
-            mailgun.messages().send(data, (error, body) => {
-              reply({ success: !error, error, body })
+          Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
+            if (errDB || !user)
+              return reply({ success: false, error: null, body: 'User not found' })
+
+            if (!user.clinic_email)
+              return reply({ success: false, error: null, body: 'No clinician email found' })
+
+            fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
+              if (err || !contents)
+                return reply({ success: false, error: null, body: 'Error reading e-mail template' })
+
+              const template = Handlebars.compile(contents.toString('utf8'))
+              const data = {
+                from: user.user_name + ' <' + user.user_email + '>',
+                to: user.clinic_email,
+                subject: 'RCADS data for ' + user.user_name,
+                html: template({
+                  answers: fullAnswers,
+                  categories: categories,
+                  date: questionnaire.questionnaire_date.toDateString()
+                })
+              }
+              mailgun.messages().send(data, (error, body) => {
+                reply({ success: !error, error, body })
+              })
             })
           })
         })
-      })
     }
   })
 

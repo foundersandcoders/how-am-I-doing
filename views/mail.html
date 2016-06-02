@@ -1,32 +1,63 @@
-<h1>Hi there. Here are my results!</h1>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>RCADS results</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+  <body>
+    <p>Hello,</p>
 
-<ul>
-  {{#each answers}}
-    <li>
-      <section class="answer card">
-        <div class="card-content">
-          <p class="question-text">{{question_text}}</p>
+    <p>
+      The user {{user_name}} has asked the <a href="https://howamidoing.herokuapp.com">How Am I Doing?</a> app to share some RCADs results with you. Please find these results presented below.
+    </p>
 
-          <span>You answered:</span>
+    <table>
+      <tr>
+        <th>
+          Date Completed
+        </th>
+        <th>
+          Categories
+        </th>
+      </tr>
+      <tr>
+        <td>
+          {{date}}
+        </td>
+        <td>
+          {{categories}}
+        </td>
+      </tr>
+    </table>
 
-          {{#if never}}
-            <span>Never</span>
+    <table>
+      <tr>
+        <th>
+          Question ID
+        </th>
+        <th>
+          Question Text
+        </th>
+        <th>
+          Answer
+        </th>
+      </tr>
 
-          {{else if sometimes}}
-            <span>Sometimes</span>
+      {{#each answers}}
+        <tr>
+          <td>
+            {{this.id}}
+          </td>
+          <td>
+            {{this.text}}
+          </td>
+          <td>
+            {{this.answer}}
+          </td>
+        </tr>
+      {{/each}}
+    </table>
 
-          {{else if often}}
-            <span>Often</span>
-
-          {{else if always}}
-            <span>Always</span>
-
-          {{else}}
-            <span>Unrecognised</span>
-
-          {{/if}}
-        </div>
-      </section>
-    </li>
-  {{/each}}
-</ul>
+  </body>
+</html>
