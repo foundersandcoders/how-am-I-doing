@@ -2,22 +2,25 @@
 
 const Caminte = require('caminte')
 
-let connection
-
-if (process.env.ENV_PRODUCTION === 'true') {
-  connection = {
+const connectionOpts = {
+  production: {
     url: process.env.DATABASE_URL + '?ssl=true'
-  }
-
-} else {
-  connection = {
+  },
+  development: {
+    host: 'localhost',
+    port: 5432,
+    pool: true,
+    database: 'dev'
+  },
+  testing: {
     host: 'localhost',
     port: 5432,
     pool: true,
     database: 'test'
   }
-
 }
+
+const connection = connectionOpts[process.env.NODE_ENV]
 
 module.exports = () => {
   const Schema = new Caminte.Schema(process.env.DB_DRIVER, connection)
