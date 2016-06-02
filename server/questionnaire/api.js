@@ -21,7 +21,7 @@ module.exports = (Schema) => {
             const qs = questionnaireAnswers.map((answers, i) => {
               return {
                 id: questionnaires[i].id,
-                date: questionnaires[i].questionnaire_date.toDateString(),
+                date: questionnaires[i].questionnaire_date.valueOf(),
                 answers: answers,
                 score: answers.reduce((a, b) => a + b.answer, 0)
               }

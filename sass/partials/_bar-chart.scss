@@ -1,9 +1,5 @@
 // bar chart
 
-.bar {
-  fill: steelblue;
-}
-
 .axis text {
   font: 1em $font-main;
   color: white;
@@ -16,8 +12,12 @@
   shape-rendering: crispEdges;
 }
 
-.x.axis.bar path {
+.x.axis.bar-axis path {
   display: none;
+}
+
+.dot, .bar {
+  fill: steelblue;
 }
 
 .line {
