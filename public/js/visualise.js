@@ -43,55 +43,55 @@ var createBarChart = function (data) {
   var qDates = dateCreator(data)
 
   inFunc.x = d3.scale.ordinal()
-  .rangeRoundBands([0, width], 0.1)
-  .domain(qDates)
+    .rangeRoundBands([0, width], 0.1)
+    .domain(qDates)
 
   inFunc.y = d3.scale.linear()
-  .range([height, 0])
-  .domain([0, d3.max(sum)])
+    .range([height, 0])
+    .domain([0, d3.max(sum)])
 
   inFunc.render = function () {
     var chart = d3.select('.chart')
-    .append('svg')
-    .attr('width', width + margin.left + margin.right)
-    .attr('height', height + margin.top + margin.bottom)
-    .append('g')
-    .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
+      .append('svg')
+      .attr('width', width + margin.left + margin.right)
+      .attr('height', height + margin.top + margin.bottom)
+      .append('g')
+      .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')')
 
     var xAxis = d3.svg.axis()
-    .scale(inFunc.x)
-    .orient('bottom')
-    .tickFormat(function (d) {
-      return formatDate(new Date(d))
-    })
-    .ticks(4)
+      .scale(inFunc.x)
+      .orient('bottom')
+      .tickFormat(function (d) {
+        return formatDate(new Date(d))
+      })
+      .ticks(4)
 
     var yAxis = d3.svg.axis()
-    .scale(inFunc.y)
-    .orient('left')
+      .scale(inFunc.y)
+      .orient('left')
 
     chart.append('g')
-    .attr('class', 'x axis bar-axis')
-    .attr('transform', 'translate(0,' + height + ')')
-    .call(xAxis)
+      .attr('class', 'x axis bar-axis')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis)
 
     chart.append('g')
-    .attr('class', 'y axis')
-    .call(yAxis)
-    .append('text')
-    .attr('y', -21)
-    .attr('dy', '.71em')
-    .style('text-anchor', 'end')
-    .text('Total')
+      .attr('class', 'y axis')
+      .call(yAxis)
+      .append('text')
+      .attr('y', -21)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('Total')
 
     chart.selectAll('.chart')
-    .data(createData(qDates, sum))
-    .enter().append('rect')
-    .attr('class', 'bar')
-    .attr('x', function (d) {return inFunc.x(d.date)})
-    .attr('y', function (d) {return inFunc.y(d.val)})
-    .attr('height', function (d) {return height - inFunc.y(d.val)})
-    .attr('width', inFunc.x.rangeBand())
+      .data(createData(qDates, sum))
+      .enter().append('rect')
+      .attr('class', 'bar')
+      .attr('x', function (d) {return inFunc.x(d.date)})
+      .attr('y', function (d) {return inFunc.y(d.val)})
+      .attr('height', function (d) {return height - inFunc.y(d.val)})
+      .attr('width', inFunc.x.rangeBand())
 
   }
   return inFunc
@@ -107,12 +107,12 @@ var createLineChart = function (data) {
   var datei = createData(qDates, sum)
 
   inFunc.x = d3.scale.ordinal()
-      .domain(datei.map(function (d, i) {return i}))
-      .rangePoints([0, width])
+    .domain(datei.map(function (d, i) {return i}))
+    .rangePoints([0, width])
 
   inFunc.y = d3.scale.linear()
-      .domain([0, d3.max(datei, function (d) {return d.val})])
-      .range([height, 0])
+    .domain([0, d3.max(datei, function (d) {return d.val})])
+    .range([height, 0])
 
   var line = d3.svg.line()
     .x(function (d, i) {return inFunc.x(i)})
@@ -138,31 +138,31 @@ var createLineChart = function (data) {
       .orient('left')
 
     chart.append('g')
-        .attr('class', 'x axis')
-        .attr('transform', 'translate(0,' + height + ')')
-        .call(xAxis)
+      .attr('class', 'x axis')
+      .attr('transform', 'translate(0,' + height + ')')
+      .call(xAxis)
 
     chart.append('g')
-        .attr('class', 'y axis')
-        .call(yAxis)
-        .append('text')
-        .attr('y', -21)
-        .attr('dy', '.71em')
-        .style('text-anchor', 'end')
-        .text('Total')
+      .attr('class', 'y axis')
+      .call(yAxis)
+      .append('text')
+      .attr('y', -21)
+      .attr('dy', '.71em')
+      .style('text-anchor', 'end')
+      .text('Total')
 
     chart.append('path')
-        .attr('class', 'line')
-        .attr('d', line(datei))
+      .attr('class', 'line')
+      .attr('d', line(datei))
 
     chart.selectAll('.dot')
-        .data(datei)
-        .enter().append('circle')
-        .attr('class', 'dot')
-        .attr('cx', line.x())
-        .attr('cy', line.y())
-        .attr('r', 3.5)
-        .attr('color')
+      .data(datei)
+      .enter().append('circle')
+      .attr('class', 'dot')
+      .attr('cx', line.x())
+      .attr('cy', line.y())
+      .attr('r', 3.5)
+      .attr('color')
   }
   return inFunc
 }
@@ -185,32 +185,32 @@ function tabulate (data, columns) {
 
     // append the header row
     thead.append('tr')
-        .selectAll('th')
-        .data(columns)
-        .enter()
-        .append('th')
-            .text(function (column) {return column})
+      .selectAll('th')
+      .data(columns)
+      .enter()
+      .append('th')
+      .text(function (column) {return column})
 
     // create a row for each object in the data
     var rows = tbody.selectAll('tr')
-        .data(datei)
-        .enter()
-        .append('tr')
+      .data(datei)
+      .enter()
+      .append('tr')
 
     // create a cell in each row for each column
-    var cells = rows.selectAll('td')
-        .data(function (row) {
-          return columns.map(function (column) {
-            var colmap = { Date: 'date', Score: 'val' }
-            return { column: column, value: row[colmap[column]] }
-          })
+    rows.selectAll('td')
+      .data(function (row) {
+        return columns.map(function (column) {
+          var colmap = { Date: 'date', Score: 'val' }
+          return { column: column, value: row[colmap[column]] }
         })
-        .enter()
-        .append('td')
-        .html(function (d) {
-          if (d.column === 'Date') return formatDate(d.value)
-          return d.value
-        })
+      })
+      .enter()
+      .append('td')
+      .html(function (d) {
+        if (d.column === 'Date') return formatDate(d.value)
+        return d.value
+      })
 
   }
   return inFunc
