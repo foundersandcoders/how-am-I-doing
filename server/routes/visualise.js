@@ -9,7 +9,7 @@ exports.register = function (server, options, next) {
       reply.view('visualise', {
         heading: 'Visualise',
         scripts: [
-          'http://d3js.org/d3.v3.min.js',
+          'https://d3js.org/d3.v3.min.js',
           '/js/visualise.js'
         ]
       })
