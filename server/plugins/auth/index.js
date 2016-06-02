@@ -15,7 +15,7 @@ exports.register = (server, options, next) => {
 
   server.state('token', {
     ttl: null, // Session cookie (deleted when browser closed)
-    isSecure: process.env.ENV_PRODUCTION === 'true',
+    isSecure: process.env.NODE_ENV === 'production',
     isHttpOnly: true,
     domain: process.env.DOMAIN,
     encoding: 'none',
