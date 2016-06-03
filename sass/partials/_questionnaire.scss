@@ -16,20 +16,19 @@ p.body {
 #rcads-questions {
   margin-bottom: 2em;
   text-align: center;
-
-  li {
-    height: 80vh;
-  }
 }
 
 #rcads-answers {
   margin-bottom: 2em;
 }
 
+.question-container {
+  height: 100vh;
+}
 
 .question {
   background-color: $primary-light;
-  margin: 25vh 0;
+  margin: 20vh 0 20vh 0;
   .radio {
     display: inline-block;
   }

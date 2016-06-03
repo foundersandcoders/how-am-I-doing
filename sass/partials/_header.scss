@@ -1,4 +1,10 @@
 header {
+  background-color: $primary-dark;
+  width: 100%;
+  position: fixed;
+  top: 0px;
+  z-index: 999;
+
   h4 {
     display: inline-block;
     font-size: 2em;
