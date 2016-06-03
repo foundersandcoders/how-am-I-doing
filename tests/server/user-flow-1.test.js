@@ -13,7 +13,7 @@ describe('User flow 1 async waterfall tests', () => {
 
   before((done) => {
     server = require('../../server/server.js')
-    server.app.Schema.adapter.autoupdate(done)
+    server.app.Schema.adapter.automigrate(done)
   })
 
   after((done) => {
@@ -67,11 +67,11 @@ function userSignUp (next, username) {
     response.headers['set-cookie'][0].indexOf('token').should.be.at.least(0)
     response.headers.location.should.equal('/dashboard')
 
-    server.app.User.findById(1, (err, user) => {
+    server.app.User.find({ where: { user_name: username } }, (err, users) => {
       if (err)
         throw err
 
-      user.user_name.should.equal('tom')
+      users[0].user_name.should.equal(username)
       next()
     })
   })
@@ -165,23 +165,32 @@ function postFilledOutQuToAnswers (QUID, next) {
 
 function imposter (QUID, next) {
   console.log(QUID, typeof next)
-  userSignUp(next, 'paddy')
-  server.inject({
-    method: 'POST',
-    url: '/questionnaires/'+QUID+'/answers',
-    headers: {
-      cookie: cookie.paddy
-    }
+  userSignUp(() => {
+    util.getQuestionsByQuestionnaire(server.app.Schema, QUID).then((questions) => {
+      const payObj = questions
+        .map((el) => {return el.question_id})
+        .reduce((acc, curr) => {
+          acc['answer-' + curr] = random(0, 4)
+          return acc
+        }, {})
 
-  }, (response) => {
-    response.statusCode.should.equal(302)
-    console.log(response)
-    next()
+      server.inject({
+        method: 'POST',
+        url: '/questionnaires/' + QUID + '/answers',
+        headers: {
+          cookie: cookie.paddy
+        },
+        payload: payObj
+      }, (response) => {
+        response.statusCode.should.equal(302)
+        response.raw.res._headers.location.should.equal('/questionnaires/new')
+        next()
 
-
-          .catch((err) => {
-            console.log('Error', err)
-            next(err)
-          })
-  })
+        .catch((err) => {
+          console.log('Error', err)
+          next(err)
+        })
+      })
+    })
+  }, 'paddy')
 }
