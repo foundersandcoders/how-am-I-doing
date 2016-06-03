@@ -2,12 +2,14 @@
 
 (function () {
   'use strict'
+  var padding = $('header').height()
+  $('html, body').scrollTop(padding)
+
   function scrollToId (qID) {
     var target = document.getElementById(qID)
     if (!target)
       target = document.querySelector('input[type=submit]')
 
-    var padding = $('header').height()
     $('html, body').animate({ scrollTop: target.offsetTop - padding }, 1000)
   }
 
@@ -18,7 +20,8 @@
 
   function scrollPrev (currentNode) {
     var nextNodeId = +currentNode - 1
-    scrollToId('prev-' + nextNodeId)
+    if (nextNodeId > -1)
+      scrollToId('prev-' + nextNodeId)
   }
 
   $('[id^=prev-]').each(function (i, element) {
