@@ -190,6 +190,7 @@ function tabulate (data, columns) {
       .enter()
       .append('th')
       .text(function (column) {return column})
+      .attr('color')
 
     // create a row for each object in the data
     var rows = tbody.selectAll('tr')
