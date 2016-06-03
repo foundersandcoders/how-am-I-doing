@@ -25,7 +25,7 @@ module.exports = (Schema) => {
 
         reply.view('questionnaire-new', {
           categories,
-          heading: 'New Questionnaire',
+          heading: 'Questionnaire',
           scripts: ['/js/questionnaires.new.js']
         })
       })

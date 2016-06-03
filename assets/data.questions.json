@@ -5,15 +5,15 @@
     "cat_id": 4
   }, {
     "question_id": 2,
-    "question_text": "I feel sad or empty....",
+    "question_text": "I feel sad or empty",
     "cat_id": 6
   }, {
     "question_id": 3,
-    "question_text": "When I have a problem, I get a funny feeling in my stomach......",
+    "question_text": "When I have a problem, I get a funny feeling in my stomach",
     "cat_id": 2
   }, {
     "question_id": 4,
-    "question_text": "I worry when I think I have done poorly at something........",
+    "question_text": "I worry when I think I have done poorly at something",
     "cat_id": 1
   }, {
     "question_id": 5,
@@ -21,7 +21,7 @@
     "cat_id": 3
   }, {
     "question_id": 6,
-    "question_text": "Nothing is much fun anymore.....",
+    "question_text": "Nothing is much fun anymore",
     "cat_id": 6
   }, {
     "question_id": 7,
@@ -29,7 +29,7 @@
     "cat_id": 1
   }, {
     "question_id": 8,
-    "question_text": "I feel worried when I think someone is angry with me.........",
+    "question_text": "I feel worried when I think someone is angry with me",
     "cat_id": 1
   }, {
     "question_id": 9,
@@ -37,11 +37,11 @@
     "cat_id": 3
   }, {
     "question_id": 10,
-    "question_text": "I get bothered by bad or silly thoughts or pictures in my mind.......",
+    "question_text": "I get bothered by bad or silly thoughts or pictures in my mind",
     "cat_id": 5
   }, {
     "question_id": 11,
-    "question_text": "I have trouble sleeping......",
+    "question_text": "I have trouble sleeping",
     "cat_id": 6
   }, {
     "question_id": 12,
@@ -49,39 +49,39 @@
     "cat_id": 1
   }, {
     "question_id": 13,
-    "question_text": "I worry that something awful will happen to someone in my family.....",
+    "question_text": "I worry that something awful will happen to someone in my family",
     "cat_id": 4
   }, {
     "question_id": 14,
-    "question_text": "I suddenly feel as if I can't breathe when there is no reason for this...........",
+    "question_text": "I suddenly feel as if I can't breathe when there is no reason for this",
     "cat_id": 2
   }, {
     "question_id": 15,
-    "question_text": "I have problems with my appetite....",
+    "question_text": "I have problems with my appetite",
     "cat_id": 6
   }, {
     "question_id": 16,
-    "question_text": " I have to keep checking that I have done things right (like the switch is off, or the door is locked)........",
+    "question_text": " I have to keep checking that I have done things right (like the switch is off, or the door is locked)",
     "cat_id": 5
   }, {
     "question_id": 17,
-    "question_text": "I feel scared if I have to sleep on my own.. ",
+    "question_text": "I feel scared if I have to sleep on my own ",
     "cat_id": 3
   }, {
     "question_id": 18,
-    "question_text": "I have trouble going to school in the mornings because I feel nervous or afraid........",
+    "question_text": "I have trouble going to school in the mornings because I feel nervous or afraid",
     "cat_id": 3
   }, {
     "question_id": 19,
-    "question_text": "I have no energy for things..... ",
+    "question_text": "I have no energy for things ",
     "cat_id": 6
   }, {
     "question_id": 20,
-    "question_text": "I worry I might look foolish.....",
+    "question_text": "I worry I might look foolish",
     "cat_id": 1
   }, {
     "question_id": 21,
-    "question_text": "I am tired a lot......",
+    "question_text": "I am tired a lot",
     "cat_id": 6
   }, {
     "question_id": 22,
@@ -89,19 +89,19 @@
     "cat_id": 4
   }, {
     "question_id": 23,
-    "question_text": "I can't seem to get bad or silly thoughts out of my head........... ",
+    "question_text": "I can't seem to get bad or silly thoughts out of my head ",
     "cat_id": 5
   },  {
     "question_id": 24,
-    "question_text": "When I have a problem, my heart beats really fast........",
+    "question_text": "When I have a problem, my heart beats really fast",
     "cat_id": 2
   }, {
     "question_id": 25,
-    "question_text": "I cannot think clearly....... ",
+    "question_text": "I cannot think clearly ",
     "cat_id": 6
   }, {
     "question_id": 26,
-    "question_text": "I suddenly start to tremble or shake when there is no reason for this....... ",
+    "question_text": "I suddenly start to tremble or shake when there is no reason for this ",
     "cat_id": 2
   }, {
     "question_id": 27,
@@ -109,83 +109,83 @@
     "cat_id": 4
   }, {
     "question_id": 28,
-    "question_text": "When I have a problem, I feel shaky...",
+    "question_text": "When I have a problem, I feel shaky",
     "cat_id": 2
   }, {
     "question_id": 29,
-    "question_text": "I feel worthless........",
+    "question_text": "I feel worthless",
     "cat_id": 6
   }, {
     "question_id": 30,
-    "question_text": "I worry about making mistakes.... ",
+    "question_text": "I worry about making mistakes ",
     "cat_id": 1
   }, {
     "question_id": 31,
-    "question_text": "I have to think of special thoughts (like numbers or words) to stop bad things from happening.......",
+    "question_text": "I have to think of special thoughts (like numbers or words) to stop bad things from happening",
     "cat_id": 5
   }, {
     "question_id": 32,
-    "question_text": "I worry what other people think of me...",
+    "question_text": "I worry what other people think of me",
     "cat_id": 1
   }, {
     "question_id": 33,
-    "question_text": "I am afraid of being in crowded places (like shopping centers, the movies, buses, busy playgrounds)......... ",
+    "question_text": "I am afraid of being in crowded places (like shopping centers, the movies, buses, busy playgrounds) ",
     "cat_id": 3
   }, {
     "question_id": 34,
-    "question_text": "All of a sudden I feel really scared for no reason at all........... ",
+    "question_text": "All of a sudden I feel really scared for no reason at all ",
     "cat_id": 2
   }, {
     "question_id": 35,
-    "question_text": "I worry about what is going to happen...",
+    "question_text": "I worry about what is going to happen",
     "cat_id": 4
   }, {
     "question_id": 36,
-    "question_text": "I suddenly become dizzy or faint when there is no reason for this........ ",
+    "question_text": "I suddenly become dizzy or faint when there is no reason for this ",
     "cat_id": 2
   }, {
     "question_id": 37,
-    "question_text": "I think about death.......",
+    "question_text": "I think about death",
     "cat_id": 4
   }, {
     "question_id": 38,
-    "question_text": "I feel afraid if I have to talk in front of my class....",
+    "question_text": "I feel afraid if I have to talk in front of my class",
     "cat_id": 1
   }, {
     "question_id": 39,
-    "question_text": "My heart suddenly starts to beat too quickly for no reason.......... ",
+    "question_text": "My heart suddenly starts to beat too quickly for no reason ",
     "cat_id": 2
   }, {
     "question_id": 40,
-    "question_text": "I feel like I don’t want to move....",
+    "question_text": "I feel like I don’t want to move",
     "cat_id": 6
   }, {
     "question_id": 41,
-    "question_text": "I worry that I will suddenly get a scared feeling when there is nothing to be afraid of... ",
+    "question_text": "I worry that I will suddenly get a scared feeling when there is nothing to be afraid of ",
     "cat_id": 2
   }, {
     "question_id": 42,
-    "question_text": "I have to do some things over and over again (like washing my hands, cleaning or putting things in a certain order)...... ",
+    "question_text": "I have to do some things over and over again (like washing my hands, cleaning or putting things in a certain order) ",
     "cat_id": 5
   }, {
     "question_id": 43,
-    "question_text": "I feel afraid that I will make a fool of myself in front of people......",
+    "question_text": "I feel afraid that I will make a fool of myself in front of people",
     "cat_id": 1
   }, {
     "question_id": 44,
-    "question_text": "I have to do some things in just the right way to stop bad things from happening.... ",
+    "question_text": "I have to do some things in just the right way to stop bad things from happening ",
     "cat_id": 5
   }, {
     "question_id": 45,
-    "question_text": "I worry when I go to bed at night.... ",
+    "question_text": "I worry when I go to bed at night ",
     "cat_id": 3
   }, {
     "question_id": 46,
-    "question_text": "I would feel scared if I had to stay away from home overnight......",
+    "question_text": "I would feel scared if I had to stay away from home overnight",
     "cat_id": 3
   }, {
     "question_id": 47,
-    "question_text": "I feel restless.......",
+    "question_text": "I feel restless",
     "cat_id": 6
   }
 ]

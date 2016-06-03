@@ -30,7 +30,7 @@ module.exports = (Schema) => {
           reply.view('questionnaire-question', {
             questions,
             QUID: request.params.QUID,
-            heading: 'Questionnaire ' + request.params.QUID,
+            heading: 'Questions',
             scripts: ['/js/questionnaires.questions.js']
           })
         })

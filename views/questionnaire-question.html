@@ -3,7 +3,7 @@
   <form id="rcads-questions" class="container" action="/questionnaires/{{QUID}}/answers" method="post">
     <ul>
       {{#each questions}}
-        <li>
+        <li class="question-container">
           {{> question this}}
         </li>
       {{/each}}

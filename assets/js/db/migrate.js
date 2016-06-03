@@ -20,16 +20,22 @@ const raw = {
 }
 
 const insertData = process.argv.slice(2).indexOf('-p') === -1
+const isVerbose = process.argv.slice(2).indexOf('-v') > -1
 
-console.log('Arguments: ', process.argv.slice(2))
+function log (msg) {
+  if (isVerbose)
+    console.log(msg)
+}
 
-console.log('Starting Migration')
+log('Arguments: ', process.argv.slice(2))
+
+log('Starting Migration')
 
 Schema.adapter.automigrate(() => {
-  console.log('Initialisation complete')
+  log('Initialisation complete')
 
   if (insertData) {
-    console.log('Inserting Categories: -----------------')
+    log('Inserting Categories: -----------------')
 
     const cats = raw.categories.map((cat) => {
       return new Promise((resolve, reject) => {
@@ -37,13 +43,13 @@ Schema.adapter.automigrate(() => {
           if (err)
             return reject(err)
 
-          console.log('Created category ' + cat.cat_name)
+          log('Created category ' + cat.cat_name)
           resolve()
         })
       })
     })
 
-    console.log('Inserting Questions: -----------------')
+    log('Inserting Questions: -----------------')
 
     const quests = raw.questions.map((question) => {
       return new Promise((resolve, reject) => {
@@ -51,13 +57,13 @@ Schema.adapter.automigrate(() => {
           if (err)
             return reject(err)
 
-          console.log('Created question ' + question.question_id)
+          log('Created question ' + question.question_id)
           resolve()
         })
       })
     })
 
-    console.log('Inserting test user: -----------------')
+    log('Inserting test user: -----------------')
 
     const users = new Promise((resolve, reject) => {
       Schema.models.User.create({
@@ -70,15 +76,15 @@ Schema.adapter.automigrate(() => {
         if (err || !user)
           return reject(err)
 
-        console.log('Created user: ' + user.user_name)
+        log('Created user: ' + user.user_name)
         resolve()
       })
     })
 
     Promise.all(cats.concat(quests).concat(users))
       .then(() => {
-        console.log('Migration completed successfully')
-        console.log('Disconnecting')
+        log('Migration completed successfully')
+        log('Disconnecting')
         Schema.client.end()
       })
       .catch((err) => {throw err})

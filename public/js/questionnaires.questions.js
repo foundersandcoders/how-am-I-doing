@@ -3,8 +3,12 @@
 (function () {
   'use strict'
   function scrollToId (qID) {
-    var target = document.getElementById(qID).offsetTop
-    $('html, body').animate({ scrollTop: target }, 1000)
+    var target = document.getElementById(qID)
+    if (!target)
+      target = document.querySelector('input[type=submit]')
+
+    var padding = $('header').height()
+    $('html, body').animate({ scrollTop: target.offsetTop - padding }, 1000)
   }
 
   function scrollNext (currentNode) {
