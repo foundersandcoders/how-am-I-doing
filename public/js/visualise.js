@@ -29,9 +29,9 @@ var createData = function (dateArr, sumArr) {
 
 var formatDate = d3.time.format('%d/%m/%Y')
 
-var margin = { top: 20, right: 40, bottom: 30, left: 40 },
-  width = Math.min(window.innerWidth, 800) - margin.left - margin.right,
-  height = Math.min(window.innerHeight, 800) / 2 - margin.top - margin.bottom
+var margin = { top: 40, right: 40, bottom: 80, left: 40 },
+  width = Math.min(window.innerWidth, 700) - margin.left - margin.right,
+  height = Math.min(window.innerHeight, 2000) / 2 - margin.top - margin.bottom
 
 
 var createBarChart = function (data) {
@@ -74,6 +74,13 @@ var createBarChart = function (data) {
       .attr('class', 'x axis bar-axis')
       .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis)
+      .selectAll('text')
+      .style('text-anchor', 'end')
+      .attr('dx', '-.8em')
+      .attr('dy', '.15em')
+      .attr('transform', function () {
+        return 'rotate(-65)'
+      })
 
     chart.append('g')
       .attr('class', 'y axis')
@@ -141,6 +148,13 @@ var createLineChart = function (data) {
       .attr('class', 'x axis')
       .attr('transform', 'translate(0,' + height + ')')
       .call(xAxis)
+      .selectAll('text')
+      .style('text-anchor', 'end')
+      .attr('dx', '-.8em')
+      .attr('dy', '.15em')
+      .attr('transform', function () {
+        return 'rotate(-65)'
+      })
 
     chart.append('g')
       .attr('class', 'y axis')
