@@ -24,15 +24,11 @@ p.body {
 
 .question-container {
   height: 100vh;
-
-  &:first-child {
-    margin-top: 12vh;
-  }
 }
 
 .question {
   background-color: $primary-light;
-  margin: 20vh 0 25vh 0;
+  margin: 20vh 0 20vh 0;
   .radio {
     display: inline-block;
   }
