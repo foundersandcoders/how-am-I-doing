@@ -17,11 +17,14 @@ module.exports = (Schema) => {
     path: '/questionnaires/new',
     handler: (request, reply) => {
       Schema.models.Category.all((err, categories) => {
+
         if (err)
           return reply(Boom.badImplementation('DB Error'))
 
+
         if (! categories || categories.length < 1)
           return reply(Boom.badImplementation('No categories'))
+
 
         reply.view('questionnaire-new', {
           categories,
