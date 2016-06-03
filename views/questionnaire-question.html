@@ -1,6 +1,6 @@
 {{> header}}
-<main>
-  <form id="rcads-questions" class="container" action="/questionnaires/{{QUID}}/answers" method="post">
+<main class="container">
+  <form id="rcads-questions" action="/questionnaires/{{QUID}}/answers" method="post">
     <ul>
       {{#each questions}}
         <li class="question-container">
