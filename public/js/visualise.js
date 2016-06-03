@@ -162,7 +162,6 @@ var createLineChart = function (data) {
       .attr('cx', line.x())
       .attr('cy', line.y())
       .attr('r', 3.5)
-      .attr('color')
   }
   return inFunc
 }
@@ -190,6 +189,7 @@ function tabulate (data, columns) {
       .enter()
       .append('th')
       .text(function (column) {return column})
+      .attr('color')
 
     // create a row for each object in the data
     var rows = tbody.selectAll('tr')
