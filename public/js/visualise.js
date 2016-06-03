@@ -162,7 +162,6 @@ var createLineChart = function (data) {
       .attr('cx', line.x())
       .attr('cy', line.y())
       .attr('r', 3.5)
-      .attr('color')
   }
   return inFunc
 }
