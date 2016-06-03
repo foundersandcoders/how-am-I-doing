@@ -1,6 +1,7 @@
 'use strict'
 
 const util = require('../db/util.js')
+const Boom = require('boom')
 
 exports.register = function (server, options, next) {
 
@@ -18,26 +19,25 @@ exports.register = function (server, options, next) {
 
   server.route(routes)
 
-  server.ext('onRequest', (request, reply) => {
-    if (/\/questionnaires\/\d+\/\w+/.test(request.path)) {
-      util.isQuestionnaireCompleted(server.app.Schema, request.params.QUID)
-        .then((isCompleted) => {
-          if (isCompleted)
-            return reply.redirect('/questionnaires/new')
+  server.ext('onPreHandler', (request, reply) => {
+    if (! /\/questionnaires\/\d+\/\w+/.test(request.path))
+      return reply.continue()
 
-          return util.isQuestionnaireCreatedByUser(
-            server.app.Schema, request.params.QUID, request.auth.credentials.id
-          )
-        })
-        .then((isAuthorised) => {
-          if (!isAuthorised)
-            return reply.redirect('/questionnaires/new')
+    const isCompleted = util.isQuestionnaireCompleted(
+        server.app.Schema, request.params.QUID
+      )
 
-          return reply.continue()
-        })
-    }
+    const isAuthorised = util.isQuestionnaireCreatedByUser(
+        server.app.Schema, request.params.QUID, request.auth.credentials.id
+      )
 
-    reply.continue()
+    Promise.all([isCompleted, isAuthorised]).then((results) => {
+      if (results[0] || !results[1])
+        return reply.redirect('/questionnaires/new')
+
+      return reply.continue()
+    })
+    .catch((err) => reply(Boom.badImplementation('DB error', err)))
   })
 
   next()
