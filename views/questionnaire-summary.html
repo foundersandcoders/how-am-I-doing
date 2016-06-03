@@ -16,8 +16,12 @@
     </ul>
 
     <div class="center">
-      <a href="/questionnaires/{{QUID}}/questions" class="btn">Back</a>
-      <input type="submit" class="btn" name="submit" value="Save" />
+      {{#if completed}}
+        <a href="/questionnaires/history" class="btn">History</a>
+      {{else}}
+        <a href="/questionnaires/{{QUID}}/questions" class="btn">Back</a>
+        <input type="submit" class="btn" name="submit" value="Save" />
+      {{/if}}
     </div>
 
   </form>

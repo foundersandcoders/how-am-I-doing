@@ -32,6 +32,9 @@ exports.register = function (server, options, next) {
       )
 
     Promise.all([isCompleted, isAuthorised]).then((results) => {
+      if (results[0] && results[1] && /\/questionnaires\/\d+\/summary/.test(request.path))
+        return reply.continue()
+
       if (results[0] || !results[1])
         return reply.redirect('/questionnaires/new')
 
