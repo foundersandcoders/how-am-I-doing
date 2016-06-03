@@ -1,11 +1,20 @@
 footer {
   background-color: $primary-light;
-}
 
-.footer-img {
-  padding: 0.5em;
-}
+  .footer-img {
+    padding: 0.5em;
+  }
 
-.footer-copyright {
-  padding: 0.5em;
+  .footer-copyright {
+    padding: 0.5em;
+  }
+
+  .material-icons {
+    font-size: 19px;
+  }
+
+  .container {
+    margin-bottom: 1em;
+  }
+
 }
