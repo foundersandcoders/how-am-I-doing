@@ -19,13 +19,23 @@ module.exports = (Schema) => {
     method: 'POST',
     path: '/questionnaires/{QUID}/complete',
     handler: (request, reply) => {
-      Schema.models.Questionnaire.update({
-        where: { id: request.params.QUID }
-      }, { completed: true }, (err, questionnaire) => {
-        if (err || !questionnaire)
-          return reply(Boom.badRequest('Cannot update questionnaire', err))
+      Schema.models.QuestionnaireAnswers.find({
+        where: { questionnaire_id: request.params.QUID }
+      }, (errAns, answers) => {
+        if (errAns)
+          return reply(Boom.badImplementation('DB error', errAns))
 
-        reply.redirect('/dashboard')
+        if (answers && answers.length === 0)
+          return reply.redirect('/dashboard')
+
+        Schema.models.Questionnaire.update({
+          where: { id: request.params.QUID }
+        }, { completed: true }, (err, questionnaire) => {
+          if (err || !questionnaire)
+            return reply(Boom.badRequest('Cannot update questionnaire', err))
+
+          reply.redirect('/dashboard')
+        })
       })
     }
   }
