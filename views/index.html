@@ -1,13 +1,19 @@
-<main>
-  <section id="splash">
+<main class="container splash">
+  <section class="center">
     <div id="logo-background">
       <div id="logo"></div>
     </div>
-    <h5>Hello, how are you feeling today? Get started below!</h5>
+    <h5>
+      Hello, how are you feeling today? Get started below or <a href="/about">find out more</a>
+    </h5>
   </section>
-  <section class="col l6 s12 center splash-buttons">
-    <a href="/login" class="waves-effect waves-light btn-large login">Login</a>
-    <a href="/signup" class="waves-effect waves-light btn-large signup">Sign Up</a>
+  <section class="row center">
+    <div class="col s6">
+      <a href="/login" class="waves-effect waves-light btn-large">Login</a>
+    </div>
+    <div class="col s6">
+      <a href="/signup" class="waves-effect waves-light btn-large">Sign Up</a>
+    </div>
   </section>
 </main>
 {{> footer}}
