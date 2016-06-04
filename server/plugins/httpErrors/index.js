@@ -4,8 +4,10 @@ exports.register = (server, options, next) => {
 
   server.ext('onPreResponse', (request, reply) => {
 
-    if (request.response.isBoom)
+    if (request.response.isBoom) {
+      console.error(request.response)
       return reply.redirect('/error/' + request.response.output.statusCode)
+    }
 
     reply.continue()
 

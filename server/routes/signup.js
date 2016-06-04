@@ -15,7 +15,7 @@ exports.register = function (server, options, next) {
     method: 'GET',
     path: '/signup',
     handler: (request, reply) => {
-      reply.view('signup', { heading: 'Sign up', toIndex: true })
+      reply.view('signup', { heading: 'Sign up' })
     },
     config: { auth: false }
   }, {
@@ -25,9 +25,9 @@ exports.register = function (server, options, next) {
       server.app.User.create({
         user_name: request.payload.username,
         user_secret: encrypt(request.payload.password),
-        user_email: request.payload.user_email,
-        clinic_email: request.payload.clinic_email,
-        clinic_number: request.payload.clinic_number
+        user_email: request.payload.user_email || '',
+        clinic_email: request.payload.clinic_email || '',
+        clinic_number: request.payload.clinic_number || ''
       }, (err) => {
         if (err)
           return reply(Boom.badImplementation('DB Error'))
@@ -47,9 +47,9 @@ exports.register = function (server, options, next) {
           username: Joi.string().alphanum().min(3).max(30).required(),
           password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
           confirm_password: Joi.any().valid(Joi.ref('password')).required(),
-          user_email: Joi.string().email().required(),
-          clinic_email: Joi.string().email().required(),
-          clinic_number: Joi.string().alphanum().required(),
+          user_email: Joi.string().email().allow(''),
+          clinic_email: Joi.string().email().allow(''),
+          clinic_number: Joi.string().alphanum().allow(''),
           action: Joi.any()
         }
       }

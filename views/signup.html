@@ -19,28 +19,28 @@
         <label for="confirm_password">Confirm Password *</label>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="input-field col s12">
         <input id="email" type="email" class="validate" name="user_email" required>
         <label for="email">Email *</label>
       </div>
-    </div>
+    </div> -->
     <div class="row">
       <div class="input-field col s12">
-        <input id="email" type="email" class="validate" name="clinic_email" required>
-        <label for="email">Clinician's Email *</label>
+        <input id="email" type="email" class="validate" name="clinic_email">
+        <label for="email">Clinician's Email</label>
       </div>
     </div>
-    <div class="row">
+    <!-- <div class="row">
       <div class="input-field col s12">
         <input id="number" type="number" class="validate" name="clinic_number">
         <label for="number">Clinician's Phone Number</label>
       </div>
-    </div>
+    </div> -->
     <button class="btn waves-effect waves-light" type="submit" name="action">Submit
       <i class="material-icons right">send</i>
     </button>
   </form>
 </main>
 
-{{> footer}}
+{{> footer toIndex=true}}
