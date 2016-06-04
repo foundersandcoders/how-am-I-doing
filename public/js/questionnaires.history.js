@@ -4,7 +4,7 @@
   'use strict'
   $('.history').each(function (i, el) {
     $(el).click(function (e) {
-      var QUID = e.target.closest('.history').id
+      var QUID = $(e.target).closest('.history').attr('id')
 
       if (e.target.classList.contains('share')) {
         if (!e.target.disabled) {
