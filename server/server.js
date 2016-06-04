@@ -29,6 +29,7 @@ server.app.DIR_VIEWS = path.resolve(__dirname, '..', 'views')
 server.app.DIR_PUBLIC = path.resolve(__dirname, '..', 'public')
 
 const routes = [
+  'about',
   'dashboard',
   'error',
   'home',

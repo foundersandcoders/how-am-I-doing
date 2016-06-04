@@ -1,0 +1,31 @@
+{{> header toIndex=true}}
+<main class="container">
+  <h4>
+    Welcome to the How Am I Doing? app.
+  </h4>
+
+  <p>
+    This app has been developed to help young people using Mental Health Services to control the data that they generate through the completion of mental health questionnaires.
+  </p>
+
+  <p>
+    In particular, this initial prototype will allow users to keep track of their RCADS outcomes data over the course of their therapy, in order to see how they are progressing. Users will be able to see this progress through several simple visualisations, and be able to share the data with their clinician via e-mail if they choose to.
+  </p>
+
+  <h4>
+    Data Governance
+  </h4>
+
+  <p>
+    Currently, this app is hosted on <a href="https://heroku.com">heroku</a>, also using their datastore services. The only data required to set up a user account is an anonymous username and password. Users may optionally store their clinician's email address if they wish to share their RCADS outcomes data with their clinician. RCADS outcomes data is stored for each user to allow them to track their progress.
+  </p>
+
+  <p>
+    All data is stored securely on a password-protected database. Database connections use <a href="#">SSL</a>, and the app content is served over <a href="#">HTTPS</a>. Users may delete their accounts and all associated data at any time via the account page on the user dashboard. This data is permantently deleted and unrecoverable.
+  </p>
+
+  <p>
+    Only the app developers have full access to the database, purely for diagnostic and maintenance purposes.
+  </p>
+</main>
+{{> footer toIndex=true}}
