@@ -6,7 +6,7 @@ exports.register = (server, options, next) => {
     method: 'GET',
     path: '/',
     handler: (request, reply) => {
-      reply.view('index')
+      reply.view('index', { toIndex: true })
     },
     config: { auth: false }
   })

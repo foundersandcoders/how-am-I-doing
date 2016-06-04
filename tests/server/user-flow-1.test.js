@@ -48,7 +48,6 @@ describe('User flow 1 async waterfall tests', () => {
 })
 
 function userSignUp (next, username) {
-  console.log(username, typeof next)
   server.inject({
     method: 'POST',
     url: '/api/signup',
