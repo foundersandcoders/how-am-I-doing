@@ -1,24 +1,16 @@
 'use strict'
 
-const Joi = require('joi')
-const Boom = require('boom')
 const Bcrypt = require('bcrypt')
-const Jwt = require('jsonwebtoken')
+const Boom = require('boom')
+const Joi = require('joi')
+const jwt = require('jsonwebtoken')
 
 function encrypt (pw) {
   return Bcrypt.hashSync(pw, 10)
 }
 
-exports.register = function (server, options, next) {
-
-  server.route([{
-    method: 'GET',
-    path: '/signup',
-    handler: (request, reply) => {
-      reply.view('signup', { heading: 'Sign up' })
-    },
-    config: { auth: false }
-  }, {
+module.exports = (server) => {
+  return {
     method: 'POST',
     path: '/api/signup',
     handler: function (request, reply) {
@@ -32,10 +24,7 @@ exports.register = function (server, options, next) {
         if (err)
           return reply(Boom.badImplementation('DB Error'))
 
-        const token = Jwt.sign({
-          username: request.payload.username,
-          password: request.payload.password
-        }, process.env.JWT_KEY)
+        const token = jwt.sign(request.payload, process.env.JWT_KEY)
 
         reply.redirect('/dashboard').state('token', token)
       })
@@ -45,7 +34,7 @@ exports.register = function (server, options, next) {
       validate: {
         payload: {
           username: Joi.string().alphanum().min(3).max(30).required(),
-          password: Joi.string().regex(/^[a-zA-Z0-9]{3,30}$/).required(),
+          password: Joi.string().regex(/^.{8,}$/).required(),
           confirm_password: Joi.any().valid(Joi.ref('password')).required(),
           user_email: Joi.string().email().allow(''),
           clinic_email: Joi.string().email().allow(''),
@@ -54,13 +43,5 @@ exports.register = function (server, options, next) {
         }
       }
     }
-  }])
-
-  next()
-}
-
-exports.register.attributes = {
-  pkg: {
-    name: 'signup'
   }
 }

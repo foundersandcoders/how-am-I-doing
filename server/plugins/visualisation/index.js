@@ -20,6 +20,6 @@ exports.register = function (server, options, next) {
 
 exports.register.attributes = {
   pkg: {
-    name: 'visualise'
+    name: 'visualisation'
   }
 }

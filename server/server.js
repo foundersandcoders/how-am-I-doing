@@ -2,18 +2,9 @@
 require('env2')('./config.env')
 
 const Hapi = require('hapi')
-const Inert = require('inert')
-const Vision = require('vision')
 const Handlebars = require('handlebars')
-const Jwt2 = require('hapi-auth-jwt2')
 const path = require('path')
-
-const DB = require('./db/index.js')
-const Auth = require('./plugins/auth/index.js')
-const httpErrors = require('./plugins/httpErrors/index.js')
-const questionnaires = require('./questionnaire/index.js')
-const account = require('./account/index.js')
-const noIdle = require('./plugins/noIdle/index.js')
+const load = require('modload')
 
 const server = new Hapi.Server({
   connections: {
@@ -25,26 +16,28 @@ const server = new Hapi.Server({
 
 server.app.DIR_ROOT = path.resolve(__dirname, '..')
 server.app.DIR_SERVER = __dirname
+server.app.DIR_PLUGINS = path.resolve(__dirname, 'plugins')
 server.app.DIR_VIEWS = path.resolve(__dirname, '..', 'views')
 server.app.DIR_PUBLIC = path.resolve(__dirname, '..', 'public')
 
-const routes = [
-  'about',
-  'dashboard',
-  'error',
-  'home',
-  'login',
-  'resources',
-  'share',
-  'signup',
-  'visualise',
-].map((fname) => path.join(__dirname, 'routes', fname + '.js'))
-.map(require)
+const preload = load.asArray({
+  dir: server.app.DIR_PLUGINS,
+  include: /db/,
+  stopfile: /index.js/,
+  modules: [
+    'inert',
+    'vision',
+    'hapi-auth-jwt2',
+  ]
+})
 
-const plugins = [
-  Inert, Vision, Jwt2, DB, Auth, httpErrors,
-  questionnaires, account, noIdle
-].concat(routes)
+const postload = load.asArray({
+  dir: server.app.DIR_PLUGINS,
+  exclude: /db/,
+  stopfile: /index.js/
+})
+
+const plugins = preload.concat(postload)
 
 server.connection({
   port: process.env.PORT || 8000

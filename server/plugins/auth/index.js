@@ -24,20 +24,15 @@ exports.register = (server, options, next) => {
     path: '/'
   })
 
-  server.ext('onRequest', (request, reply) => {
-    if (process.env.NODE_ENV === 'production') {
-      const httpOrigin = request.headers.origin
-      const httpForward = request.headers['x-forwarded-proto']
+  const routes = [
+    'login',
+    'signup',
+    'api/login',
+    'api/signup',
+    'api/logout',
+  ].map((route) => require('./' + route + '.js')(server))
 
-      if (httpForward && httpForward === 'http')
-        return reply.redirect('https://' + request.headers.host + request.url.path)
-
-      if (httpOrigin && httpOrigin.search('http://') === 0)
-        return reply.redirect('https://' + request.headers.host + request.url.path)
-    }
-
-    reply.continue()
-  })
+  server.route(routes)
 
   next()
 }

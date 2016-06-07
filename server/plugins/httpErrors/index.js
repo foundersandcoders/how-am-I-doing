@@ -13,6 +13,8 @@ exports.register = (server, options, next) => {
 
   })
 
+  server.route(require('./error.js'))
+
   next()
 }
 
