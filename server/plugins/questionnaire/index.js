@@ -14,7 +14,6 @@ exports.register = function (server, options, next) {
     'quid.complete',
     'quid.questions',
     'quid.summary',
-    'single',
   ].map((el) => require('./' + el + '.js')(server.app.Schema))
 
   server.route(routes)
