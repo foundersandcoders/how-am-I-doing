@@ -10,6 +10,10 @@ exports.register = function (server, options, next) {
         heading: 'Visualise',
         scripts: [
           'https://d3js.org/d3.v3.min.js',
+          '/js/visualise.base.js',
+          '/js/visualise.barchart.js',
+          '/js/visualise.linechart.js',
+          '/js/visualise.table.js',
           '/js/visualise.js'
         ]
       })
