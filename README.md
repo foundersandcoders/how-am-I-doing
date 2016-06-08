@@ -51,63 +51,10 @@ Young People and their families using Mental Health Services should be in contro
   * Improving the user experience
   * Generalising the backend to allow the project to be deployed with different sets of questionnaires (other than RCADS)
 
+### Sponsors
+With thanks to the Anna Freud Centre for funding the initial development sprint
+
+![annafreud](http://www.annafreud.org/media/1035/afc-logo-top.png?width=250&heightratio=0.40&format=png)
 
 ## Development
-Development guidelines for the project.
-
-### Project Rules
-1. Don't break the build
-2. Link all pull requests to one or more issues
-3. Pull requests should not contain incomplete features
-
-### Coding Standards
-Coding standards are defined by the `.eslintrc.json` in the project root. To check for linter errors, run:
-```
-$ npm run lint
-```
-If you are using atom, install the `linter-eslint` package. Similar packages exist for other text editors.
-
-### Tests
-```
-$ npm test
-```
-
-### Travis
-The travis build is [here](https://travis-ci.org/foundersandcoders/How-Am-I-Doing). Don't break it! It runs tests and checks for linter errors.
-
-### Getting Started
-Make sure you have the following installed:
-* SASS
-* PostgreSQL
-
-Install the npm modules
-```
-$ npm i
-```
-
-Migrate the database:
-```
-$ npm run db:migrate
-```
-
-Then run either:
-```
-$ npm start
-```
-or
-```
-$ npm run watch
-```
-
-### Style Guide
-#### Colours
-<img alt="Colours" src="./assets/img/colours.png" width="400" />
-
-#### Font
-Ubuntu Mono
-
-### Data Model
-In flux. TBD.
-
-### Dependencies
-This project uses **caminte** for ORM. Read the documentation [here](http://www.camintejs.com/en/guide).
+Development guidelines for the project live in the [wiki](https://github.com/foundersandcoders/How-Am-I-Doing/wiki)
