@@ -3,7 +3,7 @@
 const validator = require('./validate.js')
 const jwt = require('jsonwebtoken')
 
-module.exports = (server) => {
+module.exports = (Schema) => {
   return {
     method: 'GET',
     path: '/login',
@@ -11,7 +11,7 @@ module.exports = (server) => {
       if (! request.state.token)
         return reply.view('login')
 
-      const validate = validator(server.app.Schema)
+      const validate = validator(Schema)
       const isVerified = jwt.verify(request.state.token, process.env.JWT_KEY)
 
       if (! isVerified)

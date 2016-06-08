@@ -9,12 +9,12 @@ function encrypt (pw) {
   return Bcrypt.hashSync(pw, 10)
 }
 
-module.exports = (server) => {
+module.exports = (Schema) => {
   return {
     method: 'POST',
     path: '/api/signup',
     handler: function (request, reply) {
-      server.app.User.create({
+      Schema.models.User.create({
         user_name: request.payload.username,
         user_secret: encrypt(request.payload.password),
         user_email: request.payload.user_email || '',

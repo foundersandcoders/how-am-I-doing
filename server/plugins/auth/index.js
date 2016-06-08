@@ -30,7 +30,7 @@ exports.register = (server, options, next) => {
     'api/login',
     'api/signup',
     'api/logout',
-  ].map((route) => require('./' + route + '.js')(server))
+  ].map((route) => require('./' + route + '.js')(server.app.Schema))
 
   server.route(routes)
 

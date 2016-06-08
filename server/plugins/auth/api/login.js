@@ -4,12 +4,12 @@ const Joi = require('joi')
 const jwt = require('jsonwebtoken')
 const validator = require('../validate.js')
 
-module.exports = (server) => {
+module.exports = (Schema) => {
   return {
     method: 'POST',
     path: '/api/login',
     handler: (request, reply) => {
-      const validate = validator(server.app.Schema)
+      const validate = validator(Schema)
 
       validate(request.payload, request, (err, isValid) => {
         if (err || !isValid) {
