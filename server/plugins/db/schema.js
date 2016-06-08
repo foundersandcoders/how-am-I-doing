@@ -17,6 +17,12 @@ const connectionOpts = {
     port: 5432,
     pool: true,
     database: 'test'
+  },
+  test: {
+    host: 'localhost',
+    port: 5432,
+    pool: true,
+    database: 'test'
   }
 }
 
