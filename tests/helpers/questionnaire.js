@@ -12,7 +12,7 @@ module.exports = (server, header) => {
       },
 
       questions: (opts, cb) => {
-        const defaults = { QUID: 1 }
+        const defaults = {}
         const options = Object.assign({}, defaults, opts)
 
         server.inject({
@@ -23,7 +23,7 @@ module.exports = (server, header) => {
       },
 
       summary: (opts, cb) => {
-        const defaults = { QUID: 1 }
+        const defaults = {}
         const options = Object.assign({}, defaults, opts)
 
         server.inject({
@@ -69,7 +69,7 @@ module.exports = (server, header) => {
         server.inject({
           method: 'POST',
           url: '/questionnaires/' + QUID + '/complete',
-          header: header,
+          headers: header,
         }, cb)
       }
     }
