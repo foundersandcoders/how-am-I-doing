@@ -36,9 +36,7 @@ module.exports = (server, header) => {
 
     post: {
       register: (opts, cb) => {
-        const defaults = {
-          categories: JSON.stringify([1, 2])
-        }
+        const defaults = {}
         const payload = Object.assign({}, defaults, opts)
 
         server.inject({
@@ -53,7 +51,7 @@ module.exports = (server, header) => {
         const QUID = opts.QUID ? opts.QUID : 1
         delete opts.QUID
 
-        const defaults = { 'answer-1': 0 }
+        const defaults = {}
         const payload = Object.assign({}, defaults, opts)
 
         server.inject({
