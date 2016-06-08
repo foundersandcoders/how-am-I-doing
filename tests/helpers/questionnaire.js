@@ -17,7 +17,8 @@ module.exports = (server, header) => {
 
         server.inject({
           method: 'GET',
-          url: '/questionnaires/' + options.QUID + '/questions'
+          url: '/questionnaires/' + options.QUID + '/questions',
+          headers: header
         }, cb)
       },
 
@@ -27,7 +28,8 @@ module.exports = (server, header) => {
 
         server.inject({
           method: 'GET',
-          url: '/questionnaires/' + options.QUID + '/summary'
+          url: '/questionnaires/' + options.QUID + '/summary',
+          headers: header
         }, cb)
       },
     },
