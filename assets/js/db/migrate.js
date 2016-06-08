@@ -6,10 +6,6 @@
 require('env2')('./config.env')
 const Bcrypt = require('bcrypt')
 
-const Schema = require('../../../server/db/schema.js')()
-
-require('../../../server/db/relations.js')(Schema)
-
 function encrypt (pw) {
   return Bcrypt.hashSync(pw, 10)
 }
@@ -29,68 +25,80 @@ function log (msg) {
 
 log('Arguments: ', process.argv.slice(2))
 
-log('Starting Migration')
+const migrate = module.exports = function (cb) {
+  log('Starting Migration')
 
-Schema.adapter.automigrate(() => {
-  log('Initialisation complete')
+  const Schema = require('../../../server/plugins/db/schema.js')()
+  require('../../../server/plugins/db/relations.js')(Schema)
 
-  if (insertData) {
-    log('Inserting Categories: -----------------')
+  Schema.adapter.automigrate(() => {
+    log('Initialisation complete')
 
-    const cats = raw.categories.map((cat) => {
-      return new Promise((resolve, reject) => {
-        Schema.models.Category.create(cat, (err) => {
-          if (err)
+    if (insertData) {
+      log('Inserting Categories: -----------------')
+
+      const cats = raw.categories.map((cat) => {
+        return new Promise((resolve, reject) => {
+          Schema.models.Category.create(cat, (err) => {
+            if (err)
+              return reject(err)
+
+            log('Created category ' + cat.cat_name)
+            resolve()
+          })
+        })
+      })
+
+      log('Inserting Questions: -----------------')
+
+      const quests = raw.questions.map((question) => {
+        return new Promise((resolve, reject) => {
+          Schema.models.Question.create(question, (err) => {
+            if (err)
+              return reject(err)
+
+            log('Created question ' + question.question_id)
+            resolve()
+          })
+        })
+      })
+
+      log('Inserting test user: -----------------')
+
+      const users = new Promise((resolve, reject) => {
+        Schema.models.User.create({
+          user_name: 'test',
+          user_email: 'a@a.com',
+          user_secret: encrypt('password'),
+          clinic_email: 'b@b.com',
+          clinic_number: '12345678901'
+        }, (err, user) => {
+          if (err || !user)
             return reject(err)
 
-          log('Created category ' + cat.cat_name)
+          log('Created user: ' + user.user_name)
           resolve()
         })
       })
-    })
 
-    log('Inserting Questions: -----------------')
-
-    const quests = raw.questions.map((question) => {
-      return new Promise((resolve, reject) => {
-        Schema.models.Question.create(question, (err) => {
-          if (err)
-            return reject(err)
-
-          log('Created question ' + question.question_id)
-          resolve()
+      Promise.all(cats.concat(quests).concat(users))
+        .then(() => {
+          log('Migration completed successfully')
+          log('Disconnecting')
+          Schema.client.end()
+          if (cb)
+            cb()
         })
-      })
-    })
+        .catch((err) => {throw err})
+    } else {
 
-    log('Inserting test user: -----------------')
+      Schema.client.end()
+      if (cb)
+        cb()
 
-    const users = new Promise((resolve, reject) => {
-      Schema.models.User.create({
-        user_name: 'test',
-        user_email: 'a@a.com',
-        user_secret: encrypt('password'),
-        clinic_email: 'b@b.com',
-        clinic_number: '12345678901'
-      }, (err, user) => {
-        if (err || !user)
-          return reject(err)
+    }
+  })
+}
 
-        log('Created user: ' + user.user_name)
-        resolve()
-      })
-    })
-
-    Promise.all(cats.concat(quests).concat(users))
-      .then(() => {
-        log('Migration completed successfully')
-        log('Disconnecting')
-        Schema.client.end()
-      })
-      .catch((err) => {throw err})
-  } else {
-
-    Schema.client.end()
-
-  }
-})
+if (require.main === module)
+  migrate()
