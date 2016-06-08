@@ -34,7 +34,7 @@ module.exports = (Schema) => {
             return reply(Boom.badRequest('Invalid categories'))
 
           insertQuestionnaireCategories(Schema, questionnaire.id, catIDs)
-            .then(() => reply.redirect('/questionnaires/' + questionnaire.id + '/questions/'))
+            .then(() => reply.redirect('/questionnaires/' + questionnaire.id + '/questions'))
             .catch(() => reply(Boom.badImplementation('Unknown error')))
         })
       })
