@@ -191,7 +191,8 @@ describe('Happy path integration tests', () => {
           })
         }
         questions.display.forEach((question) => {
-          response.result.indexOf(question.question_text).should.be.at.least(0)
+          const text = question.question_text.replace('\'', '&#x27;')
+          response.result.indexOf(text).should.be.at.least(0)
         })
 
         questions.nodisplay.forEach((question) => {
@@ -210,11 +211,11 @@ describe('Happy path integration tests', () => {
 
         const payload = Object.assign(answers, { QUID })
         helpers.questionnaire.post.answer(payload, (response) => {
-          next(null, QUID, answers, response)
+          next(null, QUID, questions, answers, response)
         })
       },
       // 2.5.1 Assertions
-      (QUID, answers, response, next) => {
+      (QUID, questions, answers, response, next) => {
         response.statusCode.should.equal(302)
         response.headers.location.should.equal('/questionnaires/' + QUID + '/summary')
 
@@ -228,6 +229,55 @@ describe('Happy path integration tests', () => {
           dbAnswers.forEach((dbAns) => {
             answers['answer-' + dbAns.question_id].should.equal(dbAns.answer)
           })
+          next(null, QUID, questions, dbAnswers)
+        })
+      },
+
+      // 2.6.0 Get summary
+      (QUID, questions, answers, next) => {
+        helpers.questionnaire.get.summary({ QUID }, (response) => {
+          next(null, QUID, questions, answers, response)
+        })
+      },
+      // 2.6.1 Assertions
+      (QUID, questions, answers, response, next) => {
+        response.statusCode.should.equal(200)
+
+        const answerMap = { 0: 'Never', 1: 'Sometimes', 2: 'Often', 3: 'Always' }
+        const summary = questions
+          .sort((a, b) => a.id - b.id)
+          .map((question) => {
+            question.answer = answers.filter((a) => a.question_id === question.question_id)[0]
+            question.answer = answerMap[question.answer.answer]
+            return question
+          })
+
+        const summaryElements = response.result.split('<li>').slice(1, -1)
+        summaryElements.forEach((qSummary, i) => {
+          const text = summary[i].question_text.replace('\'', '&#x27;')
+          qSummary.indexOf(text).should.be.at.least(0)
+          qSummary.indexOf(summary[i].answer).should.be.at.least(0)
+        })
+
+        next(null, QUID)
+      },
+
+      // 2.7.0 Mark questionnaire as complete
+      (QUID, next) => {
+        helpers.questionnaire.post.complete({ QUID }, (response) => {
+          next(null, QUID, response)
+        })
+      },
+      // 2.7.1 Assertions
+      (QUID, response, next) => {
+        response.statusCode.should.equal(302)
+        response.headers.location.should.equal('/dashboard')
+
+        Schema.models.Questionnaire.findById(QUID, (err, questionnaire) => {
+          if (err)
+            next(err)
+
+          questionnaire.completed.should.equal(true)
           next()
         })
       }
