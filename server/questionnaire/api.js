@@ -6,30 +6,42 @@ const util = require('../db/util.js')
 module.exports = (Schema) => {
   return {
     method: 'GET',
-    path: '/api/questionnaires/scores',
+    path: '/api/questionnaires',
     handler: (request, reply) => {
-      Schema.models.Questionnaire.find({
-        where: { user_id: request.auth.credentials.id }
-      }, (err, questionnaires) => {
-        if (err || !questionnaires)
-          return reply(Boom.badRequest('Could not get questionnaires', err))
+      if (request.query.cat_id) {
+        let dbQuestionnaires
 
-        Promise.all(questionnaires.map((questionnaire) => {
-          return util.getAnswersByQuestionnaire(Schema, questionnaire.id)
-        }))
-          .then((questionnaireAnswers) => {
-            const qs = questionnaireAnswers.map((answers, i) => {
-              return {
-                id: questionnaires[i].id,
-                date: questionnaires[i].questionnaire_date.valueOf(),
-                answers: answers,
-                score: answers.reduce((a, b) => a + b.answer, 0)
-              }
-            })
-
-            reply(qs)
+        util.promisifyQuery(Schema, 'QuestionnaireCategories', 'find', {
+          where: { cat_id: +request.query.cat_id }
+        })
+        .then((qCats) => {
+          const QUIDs = qCats.map((c) => c.questionnaire_id)
+          return util.promisifyQuery(Schema, 'Questionnaire', 'find', {
+            where: { user_id: request.auth.credentials.id, id: { in: QUIDs } }
           })
-      })
+        })
+        .then((questionnaires) => {
+          dbQuestionnaires = questionnaires
+          return Promise.all(questionnaires.map((questionnaire) => {
+            return util.getAnswersByQuestionnaire(Schema, questionnaire.id)
+          }))
+        })
+        .then((qAnswers) => {
+          const qs = qAnswers.map((answers, i) => {
+            return {
+              id: dbQuestionnaires[i].id,
+              date: dbQuestionnaires[i].questionnaire_date.valueOf(),
+              answers: answers,
+              score: answers.reduce((a, b) => a + b.answer, 0)
+            }
+          })
+
+          reply(qs)
+        })
+        .catch((err) => Boom.badImplementation('Oops', err))
+      } else {
+        reply({})
+      }
     }
   }
 }
