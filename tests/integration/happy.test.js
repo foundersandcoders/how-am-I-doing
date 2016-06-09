@@ -4,7 +4,8 @@ const should = require('chai').should()
 const waterfall = require('async-waterfall')
 const utils = require('../helpers/utils.js')
 const migrate = require('../../assets/js/db/migrate.js')
-const helpers = {}
+const setupHelpers = require('../helpers/index.js')
+let helpers
 const raw = {
   questions: require('../../assets/data.questions.json'),
   categories: require('../../assets/data.categories.json'),
@@ -13,18 +14,12 @@ const raw = {
 let server = null
 let Schema = null
 
-function setupHelpers (serverObj, header) {
-  helpers.public = require('../helpers/public.js')(serverObj)
-  helpers.auth = require('../helpers/auth.js')(serverObj)
-  helpers.questionnaire = require('../helpers/questionnaire.js')(serverObj, header)
-}
-
 describe('Happy path integration tests', () => {
   before((done) => {
     migrate(() => {
       server = require('../../server/server.js')
       Schema = server.app.Schema
-      setupHelpers(server)
+      helpers = setupHelpers(server)
       done()
     })
   })
@@ -115,7 +110,7 @@ describe('Happy path integration tests', () => {
         cookieParts.indexOf('Path=/').should.be.at.least(0)
 
         header.cookie = cookieParts[0]
-        setupHelpers(server, header)
+        helpers = setupHelpers(server, header)
 
         Schema.models.User.find({
           where: { user_name: user.username }
