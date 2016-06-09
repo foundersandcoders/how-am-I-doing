@@ -3,8 +3,15 @@
 <main class="container">
 
   <p>
-    Click on the charts to cycle through the available visualisations
+    Please select which category of completed questionnaires you would like to visualise. Then click on the charts to cycle through the available visualisations.
   </p>
+
+  <form id="cat-form">
+    {{#each categories}}
+      <input type="radio" name="category" value="{{this.cat_name}}" id="{{this.cat_id}}">
+      <label for="{{this.cat_id}}">{{this.cat_name}}</label>
+    {{/each}}
+  </form>
 
   {{> bar-chart}}
 
