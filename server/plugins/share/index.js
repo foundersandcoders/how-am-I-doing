@@ -37,6 +37,13 @@ exports.register = function (server, options, next) {
           const questions = results[1]
           const questionnaire = results[2]
 
+          if (! questionnaire.completed) {
+            return reply({
+              success: false,
+              error: null,
+              body: 'Questionnaire with ID=' + request.params.QUID + ' must be marked completed'
+            })
+          }
           const fullAnswers = answers
             .map((answer) => {
               const q = questions.filter((question) => question.id === answer.question_id)
