@@ -27,6 +27,12 @@
     })
   })
 
+  container.addEventListener('click', function () {
+    container.innerHTML = ''
+    displaying = nextChart[displaying]
+    renderers[displaying]()
+  })
+
   function drawVisualisation (query) {
     var url = query ? '/api/questionnaires?' + query : '/api/questionnaires'
     $.get(url)
@@ -43,12 +49,6 @@
         V.Table.init(data)
 
         renderers[displaying]()
-
-        container.addEventListener('click', function () {
-          container.innerHTML = ''
-          displaying = nextChart[displaying]
-          renderers[displaying]()
-        })
       })
       .fail(function (_, __, err) {
         console.error(err)
