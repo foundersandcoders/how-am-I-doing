@@ -1,13 +1,9 @@
 'use strict'
 
-const Bcrypt = require('bcrypt')
 const Boom = require('boom')
 const Joi = require('joi')
 const jwt = require('jsonwebtoken')
-
-function encrypt (pw) {
-  return Bcrypt.hashSync(pw, 10)
-}
+const encrypt = require('../encrypt.js')
 
 module.exports = (Schema) => {
   return {

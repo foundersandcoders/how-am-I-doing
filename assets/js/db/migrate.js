@@ -4,11 +4,7 @@
 'use strict'
 
 require('env2')('./config.env')
-const Bcrypt = require('bcrypt')
-
-function encrypt (pw) {
-  return Bcrypt.hashSync(pw, 10)
-}
+const encrypt = require('../../../server/plugins/auth/encrypt.js')
 
 const raw = {
   questions: require('../../data.questions.json'),
