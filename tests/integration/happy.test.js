@@ -277,7 +277,127 @@ describe('Happy path integration tests', () => {
         })
       }
     ], (err) => {
-      if (err) throw err
+      if (err)
+        throw err
+      done()
+    })
+  })
+
+  it('3. Share questionnaire data', (done) => {
+    const user = {}
+    user.username = utils.randstr(5)
+    user.password = utils.randstr(8)
+    user.confirm_password = user.password
+
+    const headers = { cookie: null }
+
+    waterfall([
+      // Create user
+      (next) => {
+        helpers.auth.signup(user, (response) => {
+          response.statusCode.should.equal(302)
+          response.headers.location.should.equal('/dashboard')
+          next()
+        })
+      },
+
+      // Login as user
+      (next) => {
+        helpers.auth.login({ username: user.username, password: user.password }, (response) => {
+          response.statusCode.should.equal(302)
+          response.headers.location.should.equal('/dashboard')
+
+          const cookieParts = response.headers['set-cookie'][0]
+            .split(';')
+            .map((a) => a.trim())
+          cookieParts[0].search('token=').should.equal(0)
+          cookieParts.indexOf('HttpOnly').should.be.at.least(0)
+          cookieParts.indexOf('Domain=localhost').should.be.at.least(0)
+          cookieParts.indexOf('Path=/').should.be.at.least(0)
+
+          headers.cookie = cookieParts[0]
+          helpers = setupHelpers(server, headers)
+          next()
+        })
+      },
+
+      // Register new questionnaire
+      (next) => {
+        const categoryIDs = [utils.randnum(1, 6)]
+        const QUID = 2
+        helpers.questionnaire.post.register({
+          categories: JSON.stringify(categoryIDs)
+        }, (response) => {
+          response.statusCode.should.equal(302)
+          response.headers.location.should.equal('/questionnaires/' + QUID + '/questions')
+          next(null, QUID, categoryIDs)
+        })
+      },
+
+      // Answer questions
+      (QUID, categoryIDs, next) => {
+        const questions = raw.questions.filter((question) => {
+          return categoryIDs.indexOf(question.cat_id) > -1
+        })
+
+        const payload = questions.reduce((acc, curr) => {
+          acc['answer-' + curr.question_id] = utils.randnum(0, 3)
+          return acc
+        }, {})
+        payload.QUID = QUID
+
+        helpers.questionnaire.post.answer(payload, (response) => {
+          response.statusCode.should.equal(302)
+          response.headers.location.should.equal('/questionnaires/' + QUID + '/summary')
+          next(null, QUID)
+        })
+      },
+
+      // Complete questionnaire
+      (QUID, next) => {
+        helpers.questionnaire.post.complete({ QUID }, (response) => {
+          response.statusCode.should.equal(302)
+          response.headers.location.should.equal('/dashboard')
+          next(null, QUID)
+        })
+      },
+
+      // Try to share questionnaire
+      (QUID, next) => {
+        helpers.share({ QUID }, (response) => {
+          const payload = JSON.parse(response.payload)
+          payload.success.should.equal(false)
+          should.equal(payload.error, null)
+          next(null, QUID)
+        })
+      },
+
+      // Add clinician email
+      (QUID, next) => {
+        helpers.account({
+          clinic_email: 'example@boom.com',
+          confirm_clinic_email: 'example@boom.com',
+        }, (response) => {
+          response.statusCode.should.equal(302)
+          response.headers.location.should.equal('/account')
+          next(null, QUID)
+        })
+      },
+
+      // Try to share again
+      (QUID, next) => {
+        helpers.share({ QUID }, (response) => {
+          response.statusCode.should.equal(200)
+          const payload = JSON.parse(response.payload)
+          payload.success.should.equal(true)
+          should.equal(payload.error, null)
+          payload.body.should.equal('Stubbed response')
+          next()
+        })
+      }
+    ], (err) => {
+      if (err)
+        throw err
       done()
     })
   })
