@@ -78,7 +78,7 @@ exports.register = function (server, options, next) {
     }
   })
 
-  server.ext('onRequest', (request, reply) => {
+  server.ext('onPreHandler', (request, reply) => {
     if (/\/share\/\d+/.test(request.path)) {
       util.isQuestionnaireCompleted(server.app.Schema, request.params.QUID)
         .then((isCompleted) => {
