@@ -17,7 +17,7 @@ module.exports = (Schema) => {
         .then((qCats) => {
           const QUIDs = qCats.map((c) => c.questionnaire_id)
           return util.promisifyQuery(Schema, 'Questionnaire', 'find', {
-            where: { user_id: request.auth.credentials.id, id: { in: QUIDs } }
+            where: { user_id: request.auth.credentials.id, id: { in: QUIDs }, completed: true }
           })
         })
         .then((questionnaires) => {
