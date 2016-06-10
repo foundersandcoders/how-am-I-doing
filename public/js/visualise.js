@@ -19,11 +19,21 @@
     table: 'bar',
   }
 
-  $('input[type=radio]').each(function (i, el) {
+  $('.card').each(function (i, el) {
     $(el).click(function (e) {
+      var cat_id = $(e.target).closest('.card').attr('id')
       container.innerHTML = ''
-      var query = 'cat_id=' + e.target.id
-      drawVisualisation(query)
+
+      if (cat_id && /\d+/.test(cat_id)) {
+        drawVisualisation('cat_id=' + cat_id)
+      } else {
+        container.innerHTML = '' +
+          '<span>' +
+            'There was an error: ' +
+            'No category ID attached to radio button.' +
+            'Please try again.' +
+          '<span>'
+      }
     })
   })
 

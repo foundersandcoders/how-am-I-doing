@@ -7,10 +7,15 @@
   </p>
 
   <form id="cat-form">
-    {{#each categories}}
-      <input type="radio" name="category" value="{{this.cat_name}}" id="{{this.cat_id}}">
-      <label for="{{this.cat_id}}">{{this.cat_name}}</label>
-    {{/each}}
+    <div class="row">
+      {{#each categories}}
+        <div class="col s6">
+          <div id="{{this.cat_id}}" class="card waves-effect {{this.cat_name}}">
+            <span>{{this.cat_name}}</spam>
+          </div>
+        </div>
+      {{/each}}
+    </div>
   </form>
 
   {{> bar-chart}}
