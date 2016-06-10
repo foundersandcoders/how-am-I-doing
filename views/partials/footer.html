@@ -1,10 +1,19 @@
 <footer class="footer">
   <div class="footer-copyright">
     <div class="container">
-      <a class="left" href="{{#if toIndex}}/{{else}}/dashboard{{/if}}">
-        <i class="material-icons">home</i>
-      </a>
-      <a class="right" href="https://github.com/foundersandcoders/How-Am-I-Doing">&copy; 2016 Founders &amp; Coders</a>
+      <div class="row">
+        <div class="col s5">
+          <a href="/about">About</a>
+        </div>
+        <div class="col s2">
+          <a href="{{#if toIndex}}/{{else}}/dashboard{{/if}}">
+            <i class="material-icons">home</i>
+          </a>
+        </div>
+        <div class="col s5">
+          <a class="right" href="https://github.com/foundersandcoders/How-Am-I-Doing">&copy; 2016 FAC</a>
+        </div>
+      </div>
     </div>
   </div>
 </footer>
