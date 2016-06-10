@@ -3,8 +3,20 @@
 <main class="container">
 
   <p>
-    Click on the charts to cycle through the available visualisations
+    Please select which category of completed questionnaires you would like to visualise. Then click on the charts to cycle through the available visualisations.
   </p>
+
+  <form id="cat-form">
+    <div class="row">
+      {{#each categories}}
+        <div class="col s6">
+          <div id="{{this.cat_id}}" class="card waves-effect {{this.cat_name}}">
+            <span>{{this.cat_name}}</spam>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+  </form>
 
   {{> bar-chart}}
 

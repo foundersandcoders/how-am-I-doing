@@ -5,6 +5,21 @@
   stroke: white;
 }
 
+#cat-form {
+  .card {
+    overflow: auto;
+    background-color: $primary-light;
+    padding: 0.2em 0;
+    width: 100%;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 0.2rem;
+  }
+
+  .active {
+    background-color: $primary-lighter;
+  }
+}
 
 .axis path ,
 .axis line {
