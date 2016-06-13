@@ -1,4 +1,4 @@
-# How Am I Doing
+# [How Am I Doing](https://howamidoing.herokuapp.com)
 
 ## Project
 
@@ -55,6 +55,9 @@ Young People and their families using Mental Health Services should be in contro
 With thanks to the Anna Freud Centre for funding the initial development sprint
 
 ![annafreud](http://www.annafreud.org/media/1035/afc-logo-top.png?width=250&heightratio=0.40&format=png)
+
+## Usage
+To use this app, simply visit [https://howamidoing.herokuapp.com](https://howamidoing.herokuapp.com) and sign up for an account. On mobile or tablet, you may also be able to add the app to your home screen for quicker access. See [here](www.howtogeek.com/196087/how-to-add-websites-to-the-home-screen-on-any-smartphone-or-tablet) for instructions on how to do this.
 
 ## Development
 Development guidelines for the project live in the [wiki](https://github.com/foundersandcoders/How-Am-I-Doing/wiki)
