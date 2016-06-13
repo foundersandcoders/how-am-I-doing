@@ -7,7 +7,7 @@
 
 #cat-form {
   .card {
-    overflow: auto;
+    overflow: hidden;
     background-color: $primary-light;
     padding: 0.2em 0;
     width: 100%;
@@ -21,7 +21,7 @@
   }
 }
 
-.axis path ,
+.axis path,
 .axis line {
   fill: none;
   stroke: white;
