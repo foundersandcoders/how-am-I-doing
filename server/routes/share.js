@@ -61,11 +61,13 @@ exports.register = function (server, options, next) {
               if (err || !contents)
                 return reply({ success: false, error: null, body: 'Error reading e-mail template' })
 
+              const clinic_num = user.clinic_number ? user.clinic_number : 'Unknown clinician'
+
               const template = Handlebars.compile(contents.toString('utf8'))
               const data = {
                 from: user.user_name + ' <' + user.user_email + '>',
                 to: user.clinic_email,
-                subject: 'RCADS data for ' + user.user_name,
+                subject: 'RCADS data from ' + user.user_name + ' for clinician: ' + clinic_num,
                 html: template({
                   answers: fullAnswers,
                   categories: categories,
