@@ -51,15 +51,21 @@ exports.register = function (server, options, next) {
             })
 
           Schema.models.User.findById(request.auth.credentials.id, (errDB, user) => {
-            if (errDB || !user)
+            if (errDB || !user) {
+              console.log({ success: false, error: null, body: 'User not found' })
               return reply({ success: false, error: null, body: 'User not found' })
+            }
 
-            if (!user.clinic_email)
+            if (!user.clinic_email) {
+              console.log({ success: false, error: null, body: 'No clinician email found' })
               return reply({ success: false, error: null, body: 'No clinician email found' })
+            }
 
             fs.readFile(path.join(server.app.DIR_VIEWS, 'mail.html'), (err, contents) => {
-              if (err || !contents)
+              if (err || !contents) {
+                console.log({ success: false, error: null, body: 'Error reading e-mail template' })
                 return reply({ success: false, error: null, body: 'Error reading e-mail template' })
+              }
 
               const clinic_num = user.clinic_number ? user.clinic_number : 'Unknown clinician'
 
@@ -75,6 +81,8 @@ exports.register = function (server, options, next) {
                 })
               }
               mailgun.messages().send(data, (error, body) => {
+                if (error)
+                  console.error('Mailgun error', error)
                 reply({ success: !error, error, body })
               })
             })
@@ -88,6 +96,7 @@ exports.register = function (server, options, next) {
       util.isQuestionnaireCompleted(server.app.Schema, request.params.QUID)
         .then((isCompleted) => {
           if (!isCompleted) {
+            console.error('[ERR]: ', 'Questionnaire' + request.params.QUID + 'marked completed')
             return reply({
               success: false,
               error: null,
@@ -101,6 +110,7 @@ exports.register = function (server, options, next) {
         })
         .then((isAuthorised) => {
           if (!isAuthorised) {
+            console.error('[ERR]: ', 'Auth error on Qu: ' + request.params.QUID)
             return reply({
               success: false,
               error: null,
