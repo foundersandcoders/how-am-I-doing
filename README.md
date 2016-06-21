@@ -59,5 +59,8 @@ With thanks to the Anna Freud Centre for funding the initial development sprint
 ## Usage
 To use this app, simply visit [https://howamidoing.herokuapp.com](https://howamidoing.herokuapp.com) and sign up for an account. On mobile or tablet, you may also be able to add the app to your home screen for quicker access. See [here](www.howtogeek.com/196087/how-to-add-websites-to-the-home-screen-on-any-smartphone-or-tablet) for instructions on how to do this.
 
+#### Caveats
+Because of a lack of a maintenance budget, the app uses the free tier of the [Mailgun](https://mailgun.com) e-mail service. If you would like to use the e-mail sharing feature, please contact the developers through [Github issues](https://github.com/foundersandcoders/How-Am-I-Doing/issues) to check for available capacity.
+
 ## Development
 Development guidelines for the project live in the [wiki](https://github.com/foundersandcoders/How-Am-I-Doing/wiki)
